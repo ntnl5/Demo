@@ -6,6 +6,55 @@
 <title>Ironside Roofing &amp; Slating | Glasgow's Trusted Roofers Since 2009</title>
 <meta name="description" content="Ironside Roofing &amp; Slating, Glasgow roofers since 2009. Repairs, replacements, slating, flat roofs, emergency callout. NFRC &amp; TrustMark accredited. 4.9★ from 300+ reviews. Free drone survey." />
 
+<!-- ============================================================
+     DEMO ONLY: keep this out of search results. DELETE this line
+     when the site goes live on the client's real domain.
+     ============================================================ -->
+<meta name="robots" content="noindex, nofollow" />
+
+<!-- VERIFY / PRODUCTION: set to the client's real live URL before launch -->
+<link rel="canonical" href="https://www.example.co.uk/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Ironside Roofing &amp; Slating | Glasgow's Trusted Roofers" />
+<meta property="og:description" content="Glasgow roofers since 2009. Repairs, replacements, slating and flat roofs. Free drone survey, no obligation." />
+<meta property="og:url" content="https://www.example.co.uk/" />
+<!-- VERIFY: add a real 1200x630 share image at /og-image.jpg before launch -->
+<meta property="og:image" content="https://www.example.co.uk/og-image.jpg" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#101318" />
+
+<!-- inline SVG favicon (copper roof mark) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23c9772e'/%3E%3Cpath d='M8 22 L20 11 L32 22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 22 V30 H29 V22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E" />
+
+<!-- ============================================================
+     LocalBusiness structured data — biggest SEO win for "more calls".
+     VERIFY every value below against the REAL business before launch.
+     Only include aggregateRating if the reviews are genuine.
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "name": "Ironside Roofing & Slating",
+  "image": "https://www.example.co.uk/og-image.jpg",
+  "url": "https://www.example.co.uk/",
+  "telephone": "+441414960132",
+  "priceRange": "££",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Unit 12, Dalmarnock Trade Park, Swanston Street",
+    "addressLocality": "Glasgow",
+    "postalCode": "G40 4HA",
+    "addressCountry": "GB"
+  },
+  "areaServed": ["Glasgow", "East Dunbartonshire", "North Lanarkshire"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "14:00" }
+  ]
+}
+</script>
+
 <!-- ============================ FONTS ============================ -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -549,9 +598,43 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   .trust-track{animation:none;}
   [data-reveal],[data-stagger]>*{opacity:1 !important;transform:none !important;}
 }
+/* ---- accessible form validation states ---- */
+.field input[aria-invalid="true"],.field select[aria-invalid="true"],.field textarea[aria-invalid="true"]{
+  border-color:#e2913a;box-shadow:0 0 0 3px rgba(226,145,58,.22);
+}
+.field-error{display:none;margin-top:6px;font-size:.8rem;font-weight:600;color:#f4ad55;}
+.field-error.show{display:block;}
+.form-status{margin:0 0 14px;font-size:.9rem;font-weight:700;color:#f4ad55;min-height:0;}
+.form-status:empty{margin:0;}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 </style>
 </head>
 <body>
+<!-- ================================================================
+     PERSONALISE & VERIFY BEFORE SENDING / LAUNCHING
+     ----------------------------------------------------------------
+     Nothing below is true until you confirm it with THIS client.
+     Only keep a claim if the client actually holds/does it:
+       [ ] Accreditations: NFRC, CompetentRoofer, TrustMark,
+           Which? Trusted Trader, Checkatrade  (hero + trustbar + footer)
+       [ ] Review score & count (4.9 / 300+)  and the 5 named reviews
+       [ ] "Since 2009" year established
+       [ ] "2,400+ roofs completed" figure
+       [ ] 12-month workmanship guarantee wording
+       [ ] 24/7 emergency callout claim
+       [ ] "Flexible finance" — offering consumer finance is FCA-
+           regulated. Remove this card unless the client is authorised.
+     Replace before DNS goes live:
+       [ ] Phone numbers (currently Ofcom fictional-range demo numbers)
+       [ ] Email (footer mailto)
+       [ ] Address / postcode
+       [ ] Real photos into the "Your ... photo here" placeholders
+       [ ] Real Turnstile site key + script (see form section)
+       [ ] Form endpoint (see form section)
+       [ ] Canonical / og:url / og:image in <head>
+       [ ] Delete the noindex meta in <head>
+       [ ] privacy.html / terms.html filled in with a real notice
+     ================================================================ -->
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ==================== HEADER ==================== -->
@@ -1004,6 +1087,8 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
       </div>
       <div class="gtee-card">
         <div class="gtee-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20" stroke-linecap="round"/><path d="M6 15h4" stroke-linecap="round"/></svg></div>
+        <!-- VERIFY/FCA: offering or advertising consumer finance is regulated.
+             Remove this card unless the client is FCA-authorised or uses an authorised broker. -->
         <h3>Flexible Finance</h3>
         <p>Spread the cost of a bigger job with flexible finance options. Ask us for a plan that suits your budget.</p>
       </div>
@@ -1090,6 +1175,8 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           🛡️ Cloudflare Turnstile widget to prevent spam
         </div>
 
+        <p class="form-status" id="formStatus" role="alert" aria-live="assertive"></p>
+
         <button type="submit" class="btn btn-primary btn-block btn-lg">
           Request my free quote
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1157,7 +1244,8 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Swanston Street, Glasgow, G40 4HA<br>
           <a href="tel:01414960132" class="big-phone">0141 496 0132</a>
           Emergency: <a href="tel:07700900118">07700 900118</a><br>
-          <a href="/cdn-cgi/l/email-protection#82eae7eeeeedc2ebf0edecf1ebe6e7f0edede4ebece5ace1edacf7e9"><span class="__cf_email__" data-cfemail="b2dad7dededdf2dbc0dddcc1dbd6d7c0ddddd4dbdcd59cd1dd9cc7d9">[email&#160;protected]</span></a>
+          <!-- VERIFY: replace with the client's real email address -->
+          <a href="mailto:hello@ironsideroofing.co.uk">hello@ironsideroofing.co.uk</a>
         </div>
         <div class="foot-accreds">
           <span>NFRC</span><span>CompetentRoofer</span><span>TrustMark</span><span>Which?</span><span>Checkatrade</span>
@@ -1166,7 +1254,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     </div>
     <div class="foot-bottom">
       <div>© <span id="year"></span> Ironside Roofing &amp; Slating Ltd. Fully insured · 12-month workmanship guarantee.</div>
-      <div style="display:flex;gap:20px;"><a href="#">Privacy</a><a href="#">Terms</a><a href="#contact">Get a quote</a></div>
+      <div style="display:flex;gap:20px;"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="#contact">Get a quote</a></div>
     </div>
   </div>
 </footer>
@@ -1179,7 +1267,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   <button class="lb-nav lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function(){
   "use strict";
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1504,20 +1592,72 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
 
   /* ---------- contact form ---------- */
   var form=document.getElementById('quoteForm'), success=document.getElementById('formSuccess');
+  var formStatus=document.getElementById('formStatus');
+
+  // required fields + friendly, specific error messages
+  var required=[
+    {id:'f-name',    msg:'Please enter your name.'},
+    {id:'f-phone',   msg:'Please enter a phone number we can reach you on.'},
+    {id:'f-postcode',msg:'Please enter your postcode.'}
+  ];
+
+  // create one error element per required field, wired for screen readers
+  required.forEach(function(r){
+    var f=document.getElementById(r.id);
+    var err=document.createElement('span');
+    err.className='field-error';
+    err.id=r.id+'-error';
+    f.parentNode.appendChild(err);
+    f.setAttribute('aria-describedby',err.id);
+    // clear the error as soon as the user starts fixing it
+    f.addEventListener('input',function(){ clearError(f,err); });
+  });
+
+  function showError(f,err,message){
+    err.textContent=message; err.classList.add('show');
+    f.setAttribute('aria-invalid','true');
+  }
+  function clearError(f,err){
+    err.textContent=''; err.classList.remove('show');
+    f.removeAttribute('aria-invalid');
+  }
+
   form.addEventListener('submit',function(e){
     e.preventDefault();
-    // honeypot: if filled, silently drop
+    // honeypot: if filled, silently drop (bot)
     if(form.querySelector('#f-company').value){ return; }
-    // basic required validation
-    var ok=true;
-    ['f-name','f-phone','f-postcode'].forEach(function(id){
-      var f=document.getElementById(id);
-      if(!f.value.trim()){ f.style.borderColor='#c9772e'; ok=false; } else { f.style.borderColor=''; }
+
+    var firstInvalid=null, invalidCount=0;
+    required.forEach(function(r){
+      var f=document.getElementById(r.id);
+      var err=document.getElementById(r.id+'-error');
+      var val=f.value.trim();
+      // required, plus a light sanity check that a phone has enough digits
+      var bad = !val || (r.id==='f-phone' && (val.replace(/\D/g,'').length < 7));
+      if(bad){
+        showError(f,err, (r.id==='f-phone' && val) ? 'That doesn\u2019t look like a full phone number.' : r.msg);
+        invalidCount++; if(!firstInvalid) firstInvalid=f;
+      } else {
+        clearError(f,err);
+      }
     });
-    if(!ok) return;
-    /* --- In production, POST to your endpoint / verify Turnstile token here --- */
+
+    if(invalidCount>0){
+      formStatus.textContent = invalidCount===1
+        ? 'Please fix the highlighted field before submitting.'
+        : 'Please fix the '+invalidCount+' highlighted fields before submitting.';
+      if(firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    formStatus.textContent='';
+    /* --- In production: POST to your form endpoint (e.g. Web3Forms) and
+           verify the Cloudflare Turnstile token here before showing success. --- */
     form.style.display='none';
     success.classList.add('show');
+    // move focus to the confirmation so screen-reader users are told it worked
+    var okHeading=success.querySelector('h3');
+    if(okHeading){ okHeading.setAttribute('tabindex','-1'); okHeading.focus(); }
   });
 
   /* ---------- smooth-scroll offset for sticky header ---------- */
