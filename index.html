@@ -197,7 +197,7 @@ body.menu-open .mobile-menu a.m-link{transform:translateX(0);opacity:1;}
 /* animated roofline silhouette */
 .rooflines{position:absolute;bottom:0;left:0;right:0;height:42%;z-index:0;opacity:.9;}
 .rooflines svg{width:100%;height:100%;}
-.hero-photo{position:absolute;right:-4%;bottom:0;width:min(52vw,720px);height:82%;z-index:1;
+.hero-photo{position:absolute;right:0;bottom:0;width:clamp(520px,44vw,1100px);height:86%;z-index:1;
   border-radius:26px 26px 0 0;overflow:hidden;box-shadow:var(--shadow-lg);will-change:transform;
   border:1px solid rgba(255,255,255,.12);}
 .hero-photo .ph.warm{background:linear-gradient(155deg,#4a5568,#232c37);}
@@ -242,7 +242,9 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
   repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 12px,rgba(255,255,255,0) 12px 24px);}
 .ph .ph-label{position:absolute;left:14px;bottom:12px;font-family:ui-monospace,'SF Mono',Menlo,monospace;
   font-size:.68rem;letter-spacing:.04em;color:rgba(255,255,255,.55);background:rgba(0,0,0,.32);
-  padding:5px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.12);}
+  padding:5px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.12);z-index:1;}
+/* real photo sits on top of the gradient fallback; if the file is missing it hides (onerror) and the gradient + label show through */
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;}
 .ph.warm{background:linear-gradient(135deg,#8a5a2f,#3a2a1c);}
 .ph.slate{background:linear-gradient(135deg,#3a4655,#1c222b);}
 .ph.sky{background:linear-gradient(160deg,#4a5a6e,#26303c);}
@@ -681,7 +683,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   </div>
 
   <div class="hero-photo" aria-hidden="false">
-    <div class="ph warm"><span class="ph-label">Your roof photo here</span></div>
+    <div class="ph warm"><img src="images/hero.jpg" alt="Freshly slated Glasgow tenement roof against a clear sky" onerror="this.style.display='none'" /><span class="ph-label">images/hero.jpg</span></div>
     <div class="hero-photo-badge">
       <span class="hpb-num">2,400+</span>
       <span class="hpb-lbl">roofs completed<br>across Scotland</span>
@@ -807,11 +809,11 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
       <div class="block-label"><h3>Before &amp; after: Dennistoun re-slate</h3></div>
       <div class="ba" id="ba">
         <div class="layer">
-          <div class="ph slate" style="height:100%"><span class="ph-label">BEFORE: worn, moss-covered slate roof</span></div>
+          <div class="ph slate" style="height:100%"><img src="images/before.jpg" alt="Worn, moss-covered slate roof before repair" onerror="this.style.display='none'" /><span class="ph-label">images/before.jpg</span></div>
           <span class="ba-tag tag-before">Before</span>
         </div>
         <div class="layer after-layer">
-          <div class="ph warm" style="height:100%;background:linear-gradient(135deg,#4a5a6e,#2b3742)"><span class="ph-label">AFTER: new natural-slate roof, crisp ridge line</span></div>
+          <div class="ph warm" style="height:100%;background:linear-gradient(135deg,#4a5a6e,#2b3742)"><img src="images/after.jpg" alt="New natural-slate roof with a crisp ridge line after replacement" onerror="this.style.display='none'" /><span class="ph-label">images/after.jpg</span></div>
           <span class="ba-tag tag-after">After</span>
         </div>
         <div class="ba-handle" id="baHandle">
@@ -903,7 +905,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
         </div>
       </div>
       <div class="why-photo" data-reveal="right">
-        <div class="ph warm" style="height:100%"><span class="ph-label">IMG: Ironside crew on scaffold, branded workwear</span></div>
+        <div class="ph warm" style="height:100%"><img src="images/team.jpg" alt="Ironside roofing crew on scaffolding in branded workwear" onerror="this.style.display='none'" /><span class="ph-label">images/team.jpg</span></div>
       </div>
     </div>
   </div>
@@ -1179,7 +1181,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Swanston Street, Glasgow, G40 4HA<br>
           <a href="tel:01414960132" class="big-phone">0141 496 0132</a>
           Emergency: <a href="tel:07700900118">07700 900118</a><br>
-          <a href="/cdn-cgi/l/email-protection#6d05080101022d041f02031e0409081f02020b04030a430e02431806"><span class="__cf_email__" data-cfemail="2a424f4646456a4358454459434e4f5845454c43444d044945045f41">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#630b060f0f0c230a110c0d100a0706110c0c050a0d044d000c4d1608"><span class="__cf_email__" data-cfemail="4a222f2626250a2338252439232e2f3825252c23242d642925643f21">[email&#160;protected]</span></a>
         </div>
         <div class="foot-accreds">
           <span>NFRC</span><span>CompetentRoofer</span><span>TrustMark</span><span>Which?</span><span>Checkatrade</span>
@@ -1410,16 +1412,16 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
 
   /* ---------- gallery ---------- */
   var projects=[
-    {t:'Full re-slate',a:'Dennistoun',cat:'replacements',span:true,cls:'warm'},
-    {t:'Ridge repair',a:'Shawlands',cat:'repairs',cls:'slate'},
-    {t:'EPDM flat roof',a:'Bridgeton',cat:'flat',cls:'sky'},
-    {t:'Storm strip-down',a:'Rutherglen',cat:'storm',cls:'slate'},
-    {t:'Chimney rebuild',a:'Mount Florida',cat:'repairs',cls:'warm'},
-    {t:'New concrete tiling',a:'Bishopbriggs',cat:'replacements',cls:'sky'},
-    {t:'Garage flat roof',a:'Cambuslang',cat:'flat',cls:'slate'},
-    {t:'Gale damage repair',a:'Parkhead',cat:'storm',cls:'warm'},
-    {t:'Valley re-lead',a:'Cathcart',cat:'repairs',cls:'sky'},
-    {t:'Full tenement re-roof',a:'Govanhill',cat:'replacements',cls:'slate'}
+    {t:'Full re-slate',a:'Dennistoun',cat:'replacements',span:true,cls:'warm',img:'work-1'},
+    {t:'Ridge repair',a:'Shawlands',cat:'repairs',cls:'slate',img:'work-2'},
+    {t:'EPDM flat roof',a:'Bridgeton',cat:'flat',cls:'sky',img:'work-3'},
+    {t:'Storm strip-down',a:'Rutherglen',cat:'storm',cls:'slate',img:'work-4'},
+    {t:'Chimney rebuild',a:'Mount Florida',cat:'repairs',cls:'warm',img:'work-5'},
+    {t:'New concrete tiling',a:'Bishopbriggs',cat:'replacements',cls:'sky',img:'work-6'},
+    {t:'Garage flat roof',a:'Cambuslang',cat:'flat',cls:'slate',img:'work-7'},
+    {t:'Gale damage repair',a:'Parkhead',cat:'storm',cls:'warm',img:'work-8'},
+    {t:'Valley re-lead',a:'Cathcart',cat:'repairs',cls:'sky',img:'work-9'},
+    {t:'Full tenement re-roof',a:'Govanhill',cat:'replacements',cls:'slate',img:'work-10'}
   ];
   var gallery=document.getElementById('gallery');
   var lbData=[];
@@ -1429,7 +1431,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     d.setAttribute('data-cat',p.cat);
     d.setAttribute('data-index',i);
     d.innerHTML=
-      '<div class="ph '+p.cls+'" style="height:100%"><span class="ph-label">IMG: '+p.t+' — '+p.a+'</span></div>'+
+      '<div class="ph '+p.cls+'" style="height:100%"><img src="images/'+p.img+'.jpg" alt="'+p.t+', '+p.a+'" loading="lazy" onerror="this.style.display=&#39;none&#39;" /><span class="ph-label">images/'+p.img+'.jpg</span></div>'+
       '<div class="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6" stroke-linecap="round"/></svg></div>'+
       '<div class="cap"><span>'+catLabel(p.cat)+'</span><b>'+p.t+'</b></div>';
     gallery.appendChild(d);
@@ -1461,7 +1463,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   }
   function renderLb(){
     var p=lbData[lbVisible[lbCur]];
-    lbFrame.innerHTML='<div class="ph '+p.cls+'" style="height:100%"><span class="ph-label">IMG: '+p.t+' — '+p.a+'</span></div>'+
+    lbFrame.innerHTML='<div class="ph '+p.cls+'" style="height:100%"><img src="images/'+p.img+'.jpg" alt="'+p.t+', '+p.a+'" onerror="this.style.display=&#39;none&#39;" /><span class="ph-label">images/'+p.img+'.jpg</span></div>'+
       '<div class="lb-cap"><span>'+catLabel(p.cat)+' · '+p.a+'</span><b>'+p.t+'</b></div>';
   }
   function closeLb(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
