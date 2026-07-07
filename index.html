@@ -84,9 +84,15 @@
   --shadow-md:0 18px 40px -18px rgba(16,19,24,.35);
   --shadow-lg:0 40px 80px -30px rgba(16,19,24,.5);
   --header-h:78px;
-  --font-display:'Bricolage Grotesque',system-ui,sans-serif;
-  --font-body:'Hanken Grotesk',system-ui,sans-serif;
+  --font-display:'Bricolage Grotesque','Bricolage Fallback',system-ui,sans-serif;
+  --font-body:'Hanken Grotesk','Hanken Fallback',system-ui,sans-serif;
 }
+
+/* Metric-matched fallback fonts — sized so the system fallback occupies almost
+   the same space as the web font, so swapping in the real font causes ~no layout
+   shift (CLS). Values approximate Arial to each web font's metrics. */
+@font-face{font-family:'Bricolage Fallback';src:local('Arial');ascent-override:95%;descent-override:25%;line-gap-override:0%;size-adjust:104%;}
+@font-face{font-family:'Hanken Fallback';src:local('Arial');ascent-override:97%;descent-override:26%;line-gap-override:0%;size-adjust:100%;}
 
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -250,8 +256,8 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .ph.sky{background:linear-gradient(160deg,#4a5a6e,#26303c);}
 
 /* ============================ TRUST BAR ============================ */
-.trustbar{background:var(--copper);color:#1c1207;padding:0;overflow:hidden;position:relative;border-top:1px solid rgba(0,0,0,.1);}
-.trust-track{display:flex;gap:0;width:max-content;will-change:transform;}
+.trustbar{background:var(--copper);color:#1c1207;padding:0;overflow:hidden;position:relative;border-top:1px solid rgba(0,0,0,.1);min-height:57px;}
+.trust-track{display:flex;gap:0;width:max-content;align-items:center;min-height:57px;will-change:transform;}
 .trust-item{display:flex;align-items:center;gap:12px;padding:16px 34px;font-family:var(--font-display);font-weight:700;font-size:1.02rem;white-space:nowrap;}
 .trust-item svg{width:20px;height:20px;opacity:.8;}
 .trust-sep{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.35);align-self:center;}
@@ -1181,7 +1187,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Swanston Street, Glasgow, G40 4HA<br>
           <a href="tel:01414960132" class="big-phone">0141 496 0132</a>
           Emergency: <a href="tel:07700900118">07700 900118</a><br>
-          <a href="/cdn-cgi/l/email-protection#630b060f0f0c230a110c0d100a0706110c0c050a0d044d000c4d1608"><span class="__cf_email__" data-cfemail="4a222f2626250a2338252439232e2f3825252c23242d642925643f21">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#9ff7faf3f3f0dff6edf0f1ecf6fbfaedf0f0f9f6f1f8b1fcf0b1eaf4"><span class="__cf_email__" data-cfemail="721a171e1e1d321b001d1c011b1617001d1d141b1c155c111d5c0719">[email&#160;protected]</span></a>
         </div>
         <div class="foot-accreds">
           <span>NFRC</span><span>CompetentRoofer</span><span>TrustMark</span><span>Which?</span><span>Checkatrade</span>
