@@ -412,8 +412,9 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .emg-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(0,0,0,.12) 0 26px,transparent 26px 52px);}
 .emg-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:34px;align-items:center;}
 .emg-inner .pulse{display:inline-flex;align-items:center;gap:10px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.25);padding:7px 15px;border-radius:999px;font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
-.emg-inner .pulse .dot{width:9px;height:9px;border-radius:50%;background:#fff;animation:pulse 1.4s infinite;}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,255,255,.6);}70%{box-shadow:0 0 0 10px rgba(255,255,255,0);}100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}}
+.emg-inner .pulse .dot{position:relative;width:9px;height:9px;border-radius:50%;background:#fff;}
+.emg-inner .pulse .dot::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:2px solid rgba(255,255,255,.6);animation:pulse 1.4s infinite;will-change:transform,opacity;}
+@keyframes pulse{0%{transform:scale(1);opacity:.75;}70%{transform:scale(3.4);opacity:0;}100%{transform:scale(3.4);opacity:0;}}
 .emg-inner h2{font-size:clamp(1.9rem,4vw,3.1rem);max-width:16ch;}
 .emg-inner p{color:rgba(255,255,255,.9);margin-top:12px;font-size:1.1rem;max-width:40ch;}
 .emg-call{text-align:center;}
@@ -459,8 +460,8 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .area-map svg{width:100%;height:100%;}
 .map-pin{position:absolute;transform:translate(-50%,-100%);z-index:3;}
 .map-pin .pin-dot{width:16px;height:16px;border-radius:50%;background:var(--copper);border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.5);}
-.map-pin .pin-ring{position:absolute;top:8px;left:50%;transform:translate(-50%,-50%);width:16px;height:16px;border-radius:50%;border:2px solid var(--copper-bright);animation:ring 2.2s infinite;}
-@keyframes ring{0%{width:16px;height:16px;opacity:.9;}100%{width:70px;height:70px;opacity:0;}}
+.map-pin .pin-ring{position:absolute;top:8px;left:50%;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;border:2px solid var(--copper-bright);animation:ring 2.2s infinite;will-change:transform,opacity;}
+@keyframes ring{0%{transform:scale(1);opacity:.9;}100%{transform:scale(4.4);opacity:0;}}
 .map-pin.hq .pin-dot{background:#fff;width:20px;height:20px;}
 .map-pin .pin-lbl{position:absolute;top:-8px;left:24px;white-space:nowrap;font-size:.74rem;font-weight:700;background:rgba(0,0,0,.5);padding:3px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.14);}
 
@@ -712,15 +713,6 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
         </a>
       </div>
 
-      <div class="hero-accred" data-reveal>
-        <span>Accredited by</span>
-        <div class="accs">
-          <span class="acc-chip">NFRC</span>
-          <span class="acc-chip">CompetentRoofer</span>
-          <span class="acc-chip">TrustMark</span>
-          <span class="acc-chip">Which? Trusted Trader</span>
-          <span class="acc-chip">Checkatrade</span>
-        </div>
       </div>
     </div>
   </div>
@@ -1187,7 +1179,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Swanston Street, Glasgow, G40 4HA<br>
           <a href="tel:01414960132" class="big-phone">0141 496 0132</a>
           Emergency: <a href="tel:07700900118">07700 900118</a><br>
-          <a href="/cdn-cgi/l/email-protection#95fdf0f9f9fad5fce7fafbe6fcf1f0e7fafaf3fcfbf2bbf6fabbe0fe"><span class="__cf_email__" data-cfemail="f9919c959596b9908b96978a909d9c8b96969f90979ed79a96d78c92">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#6d05080101022d041f02031e0409081f02020b04030a430e02431806"><span class="__cf_email__" data-cfemail="2a424f4646456a4358454459434e4f5845454c43444d044945045f41">[email&#160;protected]</span></a>
         </div>
         <div class="foot-accreds">
           <span>NFRC</span><span>CompetentRoofer</span><span>TrustMark</span><span>Which?</span><span>Checkatrade</span>
@@ -1328,15 +1320,19 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   var heroGlow=document.getElementById('heroGlow'), rooflines=document.getElementById('rooflines'), emgBg=document.getElementById('emgBg');
   if(!reduce){
     var ticking=false;
+    // cache the emergency band's document offset; recompute only on resize (avoids per-frame layout reads / forced reflow)
+    var emgParent=emgBg?emgBg.parentElement:null, emgTop=0, emgH=0;
+    function measureEmg(){ if(!emgParent) return; var r=emgParent.getBoundingClientRect(); emgTop=r.top+window.scrollY; emgH=r.height; }
+    if(emgParent){ measureEmg(); window.addEventListener('resize',measureEmg,{passive:true}); window.addEventListener('load',measureEmg); }
     window.addEventListener('scroll',function(){
       if(ticking) return; ticking=true;
       requestAnimationFrame(function(){
-        var y=window.scrollY;
+        var y=window.scrollY, vh=window.innerHeight;
         if(heroGlow) heroGlow.style.transform='translate('+(y*0.06)+'px,'+(y*0.12)+'px)';
         if(rooflines) rooflines.style.transform='translateY('+(y*0.10)+'px)';
-        if(emgBg){
-          var r=emgBg.parentElement.getBoundingClientRect();
-          var prog=(window.innerHeight - r.top)/(window.innerHeight + r.height);
+        if(emgParent){
+          var top=emgTop-y; // element top relative to viewport, computed from cached offset (no layout read)
+          var prog=(vh - top)/(vh + emgH);
           emgBg.style.transform='translateY('+((prog-0.5)*60)+'px)';
         }
         ticking=false;
