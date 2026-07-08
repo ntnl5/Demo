@@ -17,7 +17,10 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="theme-color" content="#101318" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23c9772e'/%3E%3Cpath d='M8 22 L20 11 L32 22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 22 V30 H29 V22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23c9772e'/%3E%3Cpath d='M8 22 L20 11 L32 22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 22 V30 H29 V22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M17 30 V25 H23 V30' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<!-- PNG fallback for Safari + browsers/hosts that ignore SVG data-URI favicons -->
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 
 <script type="application/ld+json">
 {
@@ -307,10 +310,11 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);
   user-select:none;touch-action:pan-y;cursor:ew-resize;background:#000;}
 .ba .layer{position:absolute;inset:0;}
-.ba .after-layer{clip-path:inset(0 0 0 var(--split,50%));}
+.ba .ph-label{display:none;} /* filename hints add clutter here; the Before/After pills already label the sides */
+.ba .after-layer{clip-path:inset(0 0 0 var(--split,50%));z-index:2;}
 .ba .ba-tag{position:absolute;top:16px;font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.14em;
   text-transform:uppercase;padding:7px 13px;border-radius:999px;z-index:3;}
-.ba .tag-before{left:16px;background:rgba(0,0,0,.45);color:#fff;}
+.ba .tag-before{left:16px;background:rgba(0,0,0,.45);color:#fff;z-index:1;}
 .ba .tag-after{right:16px;background:var(--copper);color:#1c1207;}
 .ba-handle{position:absolute;top:0;bottom:0;left:var(--split,50%);width:3px;background:#fff;z-index:4;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(0,0,0,.25);}
 .ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
@@ -1187,7 +1191,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Swanston Street, Glasgow, G40 4HA<br>
           <a href="tel:01414960132" class="big-phone">0141 496 0132</a>
           Emergency: <a href="tel:07700900118">07700 900118</a><br>
-          <a href="/cdn-cgi/l/email-protection#741c1118181b341d061b1a071d1011061b1b121d1a135a171b5a011f"><span class="__cf_email__" data-cfemail="89e1ece5e5e6c9e0fbe6e7fae0edecfbe6e6efe0e7eea7eae6a7fce2">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#08606d64646748617a67667b616c6d7a67676e61666f266b67267d63"><span class="__cf_email__" data-cfemail="650d0009090a250c170a0b160c0100170a0a030c0b024b060a4b100e">[email&#160;protected]</span></a>
         </div>
         <div class="foot-accreds">
           <span>NFRC</span><span>CompetentRoofer</span><span>TrustMark</span><span>Which?</span><span>Checkatrade</span>
