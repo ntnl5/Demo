@@ -1,4 +1,12 @@
-User-agent: *
-Allow: /
+# DEMO PHASE — this build is a design preview for a sample business.
+# Crawling is disallowed site-wide so a fictional company cannot compete
+# in local search against real Glasgow roofers.
+#
+# AT LAUNCH, for a real client on their own domain, replace the block below
+# with:  User-agent: *
+#        Allow: /
+#        Sitemap: https://<client-domain>/sitemap.xml
+# and flip the robots meta tag in every .html file to "index, follow".
 
-Sitemap: https://demo-b50.pages.dev/sitemap.xml
+User-agent: *
+Disallow: /

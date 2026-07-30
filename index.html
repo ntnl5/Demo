@@ -3,19 +3,28 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Ironside Roofing &amp; Slating | Glasgow's Trusted Roofers Since 2009</title>
-<meta name="description" content="Ironside Roofing &amp; Slating, Glasgow roofers since 2009. Repairs, replacements, slating, flat roofs, emergency callout. NFRC &amp; TrustMark accredited. 4.9★ from 300+ reviews. Free drone survey." />
+<title>Ironside Roofing &amp; Slating | Design preview (sample business)</title>
+<meta name="description" content="Design preview for a Glasgow roofing website. Ironside Roofing &amp; Slating is a sample business used to demonstrate layout and build quality — not a real company." />
 
-<meta name="robots" content="index, follow" />
+<!-- ===================================================================
+     DEMO PHASE. Do not change to index,follow until the site is a real
+     client's, on its own domain, and every gate in ONBOARDING.md is met.
+     Deploy URL lives in ONE place: the DEPLOY_URL comment below. If this
+     project is renamed or moved, grep the whole repo for the old slug.
+     =================================================================== -->
+<meta name="robots" content="noindex, nofollow" />
 
-<link rel="canonical" href="https://demo-b50.pages.dev/" />
+<!-- DEPLOY_URL: https://demo-e00.pages.dev — update everywhere on redeploy -->
+<link rel="canonical" href="https://demo-e00.pages.dev/" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Ironside Roofing &amp; Slating | Glasgow's Trusted Roofers" />
-<meta property="og:description" content="Glasgow roofers since 2009. Repairs, replacements, slating and flat roofs. Free drone survey, no obligation." />
-<meta property="og:url" content="https://demo-b50.pages.dev/" />
-<meta property="og:image" content="https://demo-b50.pages.dev/og-image.jpg" />
+<meta property="og:title" content="Ironside Roofing &amp; Slating | Design preview" />
+<meta property="og:description" content="Design preview of a roofing website build. Sample business, not a real company." />
+<meta property="og:url" content="https://demo-e00.pages.dev/" />
+<meta property="og:image" content="https://demo-e00.pages.dev/og-image.jpg" />
+<meta property="og:image:alt" content="Design preview of a roofing website build." />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="theme-color" content="#101318" />
+<meta name="theme-color" content="#f6f2ea" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#101318" media="(prefers-color-scheme: dark)" />
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23c9772e'/%3E%3Cpath d='M8 22 L20 11 L32 22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 22 V30 H29 V22' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M17 30 V25 H23 V30' fill='none' stroke='%231a120a' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E" />
 <!-- PNG fallback for Safari + browsers/hosts that ignore SVG data-URI favicons -->
@@ -26,16 +35,16 @@
 {
   "@context": "https://schema.org",
   "@type": "RoofingContractor",
-  "name": "Ironside Roofing & Slating",
-  "image": "https://demo-b50.pages.dev/og-image.jpg",
-  "url": "https://demo-b50.pages.dev/",
+  "name": "Ironside Roofing & Slating (sample business — design preview)",
+  "description": "Sample data for a website design preview. Not a real company.",
+  "image": "https://demo-e00.pages.dev/og-image.jpg",
+  "url": "https://demo-e00.pages.dev/",
   "telephone": "+441414960132",
   "priceRange": "££",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "Unit 12, Dalmarnock Trade Park, Swanston Street",
+    "streetAddress": "[CLIENT STREET ADDRESS]",
     "addressLocality": "Glasgow",
-    "postalCode": "G40 4HA",
     "addressCountry": "GB"
   },
   "areaServed": ["Glasgow", "East Dunbartonshire", "North Lanarkshire"],
@@ -290,10 +299,15 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .svc-card h3{font-size:1.28rem;margin-bottom:8px;}
 .svc-card p{color:var(--ink-soft);font-size:.98rem;line-height:1.55;}
 .svc-more{display:inline-flex;align-items:center;gap:7px;margin-top:18px;color:var(--copper);font-weight:700;font-size:.9rem;
-  max-height:0;opacity:0;overflow:hidden;transition:all .45s var(--ease);}
+  max-height:0;opacity:0;overflow:hidden;transition:all .45s var(--ease);text-decoration:none;}
 .svc-more svg{width:15px;height:15px;transition:transform .35s var(--ease);}
-.svc-card:hover .svc-more{max-height:40px;opacity:1;}
-.svc-card:hover .svc-more svg{transform:translateX(4px);}
+/* Reveal on hover AND on keyboard focus — hover-only would hide a real link
+   from keyboard and touch users entirely (WCAG 2.4.7 / 2.1.1). */
+.svc-card:hover .svc-more,
+.svc-card:focus-within .svc-more{max-height:40px;opacity:1;}
+.svc-card:hover .svc-more svg,
+.svc-card:focus-within .svc-more svg{transform:translateX(4px);}
+.svc-more:hover,.svc-more:focus-visible{text-decoration:underline;}
 
 /* ============================ OUR WORK ============================ */
 .work{background:var(--slate-850);color:var(--paper);}
@@ -395,6 +409,10 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .stat::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle,rgba(226,145,58,.16),transparent 70%);}
 .stat .num{font-family:var(--font-display);font-weight:800;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--copper-bright);line-height:1;letter-spacing:-.03em;}
 .stat .num .suf{color:var(--paper);}
+/* .ph-flag is sized in em, so inside the oversized .num it would overflow the
+   card and get clipped. Pin it to an absolute size and let it wrap here. */
+.stat .num .ph-flag{font-size:.95rem;white-space:normal;line-height:1.35;
+  vertical-align:middle;text-align:center;}
 .stat .lbl{margin-top:10px;color:#bcc3cd;font-size:.98rem;font-weight:500;}
 .why-two{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:80px;}
 .why-list{display:flex;flex-direction:column;gap:18px;margin-top:8px;}
@@ -415,7 +433,7 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .step-dot svg{width:28px;height:28px;stroke:var(--copper);fill:none;stroke-width:1.7;}
 .step.on .step-dot{background:var(--copper);color:#fff;border-color:var(--copper);transform:scale(1.06);box-shadow:0 14px 30px -12px rgba(201,119,46,.7);}
 .step.on .step-dot svg{stroke:#fff;}
-.step h4{font-size:1.18rem;margin-bottom:8px;}
+.step h3{font-size:1.18rem;margin-bottom:8px;}
 .step p{color:var(--ink-soft);font-size:.94rem;}
 
 /* ============================ EMERGENCY BAND ============================ */
@@ -448,6 +466,8 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .tst-person span{color:var(--ink-soft);font-size:.88rem;}
 .tst-side{width:150px;flex:0 0 auto;text-align:center;border-right:1px solid var(--paper-line);padding-right:34px;}
 .tst-side .big{font-family:var(--font-display);font-weight:800;font-size:3.2rem;color:var(--copper);line-height:1;}
+/* The panel is sized for a short numeric score ("5.0"); a word overflows it. */
+.tst-side .big.is-text{font-size:1.3rem;letter-spacing:0;}
 .tst-side .sub{font-size:.8rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-top:6px;}
 .tst-side .ss{display:flex;gap:2px;justify-content:center;margin-top:12px;}
 .tst-side .ss svg{width:15px;height:15px;}
@@ -536,7 +556,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
 .foot-socials a{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:all .3s;}
 .foot-socials a:hover{background:var(--copper);border-color:var(--copper);color:#1c1207;transform:translateY(-3px);}
 .foot-socials svg{width:19px;height:19px;}
-.foot-col h4{font-family:var(--font-display);font-size:1.05rem;color:var(--paper);margin-bottom:18px;}
+.foot-col h3{font-family:var(--font-display);font-size:1.05rem;color:var(--paper);margin-bottom:18px;}
 .foot-col ul li{margin-bottom:11px;}
 .foot-col ul li a{font-size:.94rem;transition:color .25s;}
 .foot-col ul li a:hover{color:var(--copper-bright);}
@@ -625,10 +645,66 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
 .form-status{margin:0 0 14px;font-size:.9rem;font-weight:700;color:#f4ad55;min-height:0;}
 .form-status:empty{margin:0;}
 .visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+/* ---------------------- VISIBLE FOCUS (WCAG 2.4.7) ----------------------
+   There was no site-wide focus style, so keyboard users were relying on the
+   browser default outline over a near-black background. Copper ring plus a
+   dark contrast halo so it stays visible on both the slate and paper sections.
+   ------------------------------------------------------------------------ */
+:where(a,button,[role="slider"],[tabindex]:not([tabindex="-1"]),summary):focus-visible{
+  outline:3px solid var(--copper-bright);
+  outline-offset:2px;
+  border-radius:4px;
+}
+.ba-handle:focus-visible{outline-offset:0;}
+.ba-handle:focus-visible .ba-knob{box-shadow:0 0 0 4px rgba(201,119,46,.55);}
+
+/* ===================== TEMPLATE PLACEHOLDERS — FAIL LOUDLY =====================
+   Any value that must be verified against client evidence before launch is
+   wrapped in .ph-flag. The point is that these are impossible to mistake for
+   real content: the risk in a template business isn't inventing a claim, it's a
+   plausible-looking placeholder surviving into a live site because nobody
+   noticed. Ugly on purpose. Grep for "ph-flag" and "[" before any launch.
+   ============================================================================= */
+.ph-flag{display:inline-block;background:#b3261e;color:#fff;font-weight:800;
+  font-size:.78em;letter-spacing:.03em;padding:1px 7px;border-radius:4px;
+  text-transform:uppercase;white-space:nowrap;}
+
+/* ---------- footer statutory disclosures ---------- */
+/* No border here — .foot-grid already supplies the dividing rule above. */
+.foot-legal{padding-top:26px;}
+.foot-legal p{color:var(--slate-500);font-size:.82rem;line-height:1.7;margin:0 0 8px;}
+.foot-legal p:last-child{margin-bottom:0;}
+
+/* ============================== DEMO RIBBON ==============================
+   Visible, permanent marker that this is a preview of a sample business.
+   Fixed so it survives scrolling; kept small so it doesn't fight the design.
+   Remove ONLY when this becomes a real client's site and every gate in
+   ONBOARDING.md is met.
+   ========================================================================= */
+.demo-ribbon{position:fixed;z-index:9999;bottom:0;left:0;right:0;
+  background:#b3261e;color:#fff;text-align:center;
+  font-size:.78rem;font-weight:700;letter-spacing:.02em;
+  padding:7px 14px;line-height:1.35;
+  box-shadow:0 -2px 14px rgba(0,0,0,.28);}
+.demo-ribbon b{font-weight:800;}
+/* Drop the secondary sentence on narrow screens so the ribbon stays one or two
+   lines instead of growing tall enough to cover the footer. */
+@media (max-width:640px){
+  .demo-ribbon{font-size:.7rem;padding:6px 10px;}
+  .ribbon-more{display:none;}
+}
+/* Reserve space so the fixed ribbon never sits over the end of the page. */
+body{padding-bottom:52px;}
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
+
+<!-- Demo marker. See .demo-ribbon in the stylesheet before removing. -->
+<div class="demo-ribbon" role="note">
+  <b>Design preview</b> — sample business, not a real company.<span class="ribbon-more"> Figures, reviews and accreditations are placeholder content.</span>
+</div>
 
 <header id="header">
   <div class="wrap header-inner">
@@ -673,7 +749,8 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   <a href="#contact" class="m-link">Contact</a>
   <div class="m-foot">
     <a href="#contact" class="btn btn-primary btn-block btn-lg">Get a Free Quote</a>
-    <a href="tel:01414960132" class="btn btn-ghost btn-block">📞 0141 496 0132</a>
+    <!-- Emoji wrapped so screen readers don't announce "telephone receiver". -->
+    <a href="tel:01414960132" class="btn btn-ghost btn-block"><span aria-hidden="true">📞</span> 0141 496 0132</a>
   </div>
 </div>
 
@@ -693,7 +770,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   </div>
 
   <div class="hero-photo" aria-hidden="false">
-    <div class="ph warm"><img src="images/hero.jpg" alt="Freshly slated Glasgow tenement roof against a clear sky" onerror="this.style.display='none'" /><span class="ph-label">images/hero.jpg</span></div>
+    <div class="ph warm"><img src="images/hero.jpg" alt="Freshly slated Glasgow tenement roof against a clear sky" width="1400" height="1000" fetchpriority="high" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">images/hero.jpg</span></div>
     <div class="hero-photo-badge">
       <span class="hpb-num">2,400+</span>
       <span class="hpb-lbl">roofs completed<br>across Scotland</span>
@@ -703,9 +780,11 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   <div class="wrap hero-inner">
     <div class="hero-grid">
       <div class="hero-badge-row" data-reveal>
+        <!-- No invented rating or review count. A live rating may only be shown
+             where it matches a public, linkable profile, with the source and the
+             date it was captured stated next to it — ONBOARDING.md gate 4. -->
         <div class="rating-pill">
-          <div class="stars" id="heroStars"></div>
-          <b>4.9</b><small>300+ reviews</small>
+          <span class="ph-flag">[RATING]</span><small>from the client's verified profile</small>
         </div>
         <div class="since">Glasgow's trusted roofers since <b>2009</b></div>
       </div>
@@ -724,8 +803,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Call 0141 496 0132
         </a>
       </div>
-
-      </div>
+      <!-- Removed a stray </div> that closed one element too many here. -->
     </div>
   </div>
 
@@ -744,7 +822,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     <div class="sec-head" data-reveal>
       <span class="eyebrow">What we do</span>
       <h2>Every roofing job, one trusted team</h2>
-      <p>From a single slipped slate to a full re-roof, our NFRC-accredited team handles it end to end, with tidy sites, honest pricing and workmanship that's guaranteed.</p>
+      <p>From a single slipped slate to a full re-roof, our team handles it end to end, with tidy sites, honest pricing and workmanship that's guaranteed.</p>
     </div>
 
     <div class="services-grid" data-stagger>
@@ -752,56 +830,67 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
         <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M3 12l9-8 9 8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 10v10h14V10" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 20v-5h6v5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Roof Repairs</h3>
         <p>Slipped tiles, leaks and storm damage fixed fast, with a free assessment and a fair fixed price before we start.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for roof repairs</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 9.5V20h14V9.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 13h8M8 16.5h8" stroke-linecap="round"/></svg></div>
         <h3>Full Roof Replacements</h3>
-        <p>A complete, code-compliant re-roof with new felt, battens and flashings, built to shrug off decades of Scottish weather.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <!-- "code-compliant" is American phrasing and the wrong term here: work in
+             Scotland is governed by the Building (Scotland) Regulations and the
+             Technical Handbooks, with a building warrant for significant work. -->
+        <p>A complete re-roof that meets Scottish building standards, with new felt, battens and flashings, built to shrug off decades of Scottish weather.</p>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for full roof replacements</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16" stroke-linecap="round"/></svg></div>
         <h3>Slating &amp; Tiling</h3>
         <p>Natural slate, clay and concrete tiling laid by time-served roofers: the traditional finish tenements and villas deserve.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for slating and tiling</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="1"/><path d="M3 12h18" stroke-linecap="round"/><circle cx="8" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg></div>
         <h3>Flat &amp; EPDM Roofing</h3>
-        <p>Seamless single-ply and EPDM rubber membranes for extensions, dormers and garages. Watertight, with a 20-year lifespan.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <!-- A stated lifespan must come from the manufacturer's own published
+             figure for the specified product, and be cited. -->
+        <p>Seamless single-ply and EPDM rubber membranes for extensions, dormers and garages. Watertight, with a long service life. <span class="ph-flag">[MANUFACTURER LIFESPAN + SOURCE]</span></p>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for flat and EPDM roofing</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M6 21V8l6-5 6 5v13" stroke-linecap="round" stroke-linejoin="round"/><rect x="14" y="3" width="3" height="5"/><path d="M6 21h12" stroke-linecap="round"/></svg></div>
         <h3>Chimney &amp; Leadwork</h3>
         <p>Repointing, rebuilds and expertly-dressed lead flashings that seal the trickiest, leak-prone parts of any roof for good.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for chimney and leadwork</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M3 7h18l-2 4H5L3 7Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 11v3a2 2 0 0 0 2 2h6" stroke-linecap="round"/><path d="M13 16v4" stroke-linecap="round"/></svg></div>
         <h3>Gutters, Fascias &amp; Soffits</h3>
         <p>Full uPVC rainwater systems supplied and fitted, protecting your walls and foundations and looking sharp from the street.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for gutters, fascias and soffits</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Emergency &amp; Storm Damage</h3>
         <p>24/7 rapid response with temporary weatherproofing on the day. We'll make it safe, then sort the permanent fix.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for emergency and storm damage</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
 
       <article class="svc-card">
         <div class="svc-ico"><svg viewBox="0 0 24 24"><rect x="6" y="9" width="12" height="7" rx="1"/><path d="M12 9V5M9 5h6" stroke-linecap="round"/><circle cx="12" cy="12.5" r="1.6"/><path d="M4 20h16" stroke-linecap="round"/></svg></div>
-        <h3>Free Drone Roof Surveys</h3>
-        <p>A close-up 4K drone inspection of your whole roof, so you see exactly what we see, with a clear report and quote to match.</p>
-        <span class="svc-more">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <!-- Paid drone survey work carries CAA registration, competency and
+             insurance obligations, and the requirements have changed recently.
+             Do not restate the specifics to a client as fact — collect their
+             evidence instead (ONBOARDING.md gate 6) and let their own compliance
+             be their responsibility. Once collected it is worth advertising:
+             "CAA-registered operator, fully insured" is a real trust signal. -->
+        <h3>Drone Roof Surveys</h3>
+        <p>A close-up drone inspection of your whole roof, so you see exactly what we see, with a clear report and quote to match.</p>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> for drone roof surveys</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </article>
     </div>
   </div>
@@ -812,36 +901,53 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     <div class="sec-head center" data-reveal>
       <span class="eyebrow" style="justify-content:center">Our work</span>
       <h2>See the difference we make</h2>
-      <p>Drag, filter and explore real transformations across Glasgow, then design your own roof below.</p>
+      <!-- Not "real transformations": the gallery is styled placeholders, and on a
+           client's site these must be the client's own photos with the licence
+           confirmed and permission obtained where a property is identifiable
+           (ONBOARDING.md gate 7). Never fill this with stock or another roofer's
+           job photos — that misattributes the work and infringes copyright. -->
+      <p>Drag, filter and explore the project gallery layout, then design your own roof below.</p>
     </div>
 
     <div class="work-block" data-reveal>
       <div class="block-label"><h3>Before &amp; after: Dennistoun re-slate</h3></div>
       <div class="ba" id="ba">
         <div class="layer">
-          <div class="ph slate" style="height:100%"><img src="images/before.jpg" alt="Worn, moss-covered slate roof before repair" onerror="this.style.display='none'" /><span class="ph-label">images/before.jpg</span></div>
+          <div class="ph slate" style="height:100%"><img src="images/before.jpg" alt="Worn, moss-covered slate roof before repair" width="1200" height="800" loading="lazy" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">images/before.jpg</span></div>
           <span class="ba-tag tag-before">Before</span>
         </div>
         <div class="layer after-layer">
-          <div class="ph warm" style="height:100%;background:linear-gradient(135deg,#4a5a6e,#2b3742)"><img src="images/after.jpg" alt="New natural-slate roof with a crisp ridge line after replacement" onerror="this.style.display='none'" /><span class="ph-label">images/after.jpg</span></div>
+          <div class="ph warm" style="height:100%;background:linear-gradient(135deg,#4a5a6e,#2b3742)"><img src="images/after.jpg" alt="New natural-slate roof with a crisp ridge line after replacement" width="1200" height="800" loading="lazy" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">images/after.jpg</span></div>
           <span class="ba-tag tag-after">After</span>
         </div>
-        <div class="ba-handle" id="baHandle">
-          <div class="ba-knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <!-- Exposed as a real slider so it is operable by keyboard, not drag only.
+             Both images keep their alt text and stay in the accessibility tree
+             regardless of the clip-path, so the content is never locked behind a
+             pointer gesture. -->
+        <div class="ba-handle" id="baHandle"
+             role="slider" tabindex="0"
+             aria-label="Reveal the finished roof"
+             aria-orientation="horizontal"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+             aria-valuetext="50% revealed">
+          <div class="ba-knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         </div>
       </div>
-      <p class="ba-hint">← Drag the handle to reveal the finished roof →</p>
+      <p class="ba-hint">Drag the handle, or focus it and use the arrow keys, to reveal the finished roof</p>
     </div>
 
     <div class="work-block" data-reveal>
       <div class="block-label"><h3>Project gallery</h3></div>
+      <!-- aria-pressed communicates which filter is active; the count below is a
+           live region so a screen-reader user hears how many projects remain. -->
       <div class="filters" id="filters">
-        <button class="filter active" data-filter="all">All</button>
-        <button class="filter" data-filter="repairs">Repairs</button>
-        <button class="filter" data-filter="replacements">Replacements</button>
-        <button class="filter" data-filter="flat">Flat roofs</button>
-        <button class="filter" data-filter="storm">Storm damage</button>
+        <button class="filter active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" data-filter="repairs" aria-pressed="false">Repairs</button>
+        <button class="filter" data-filter="replacements" aria-pressed="false">Replacements</button>
+        <button class="filter" data-filter="flat" aria-pressed="false">Flat roofs</button>
+        <button class="filter" data-filter="storm" aria-pressed="false">Storm damage</button>
       </div>
+      <p class="visually-hidden" id="filterCount" role="status" aria-live="polite"></p>
       <div class="gallery" id="gallery"></div>
     </div>
 
@@ -896,11 +1002,18 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
       <p>The numbers Glasgow homeowners trust us on.</p>
     </div>
 
+    <!-- The real figure lives in .val and is the single source of truth. JS
+         animates FROM zero UP TO whatever is already in the markup, so with JS
+         off, an IntersectionObserver failure, or Reduce Motion, the band still
+         reads correctly. It previously hardcoded 0 and sourced the value from
+         data-count, which rendered a visibly broken "0/7 Emergency callout".
+         Figures below are sample content — ONBOARDING.md gates 8 and 9 require
+         documentary evidence before any of them appear on a client's site. -->
     <div class="stats-grid" id="stats" data-stagger>
-      <div class="stat"><div class="num" data-count="15" data-suffix="+"><span class="val">0</span><span class="suf">+</span></div><div class="lbl">Years roofing Glasgow</div></div>
-      <div class="stat"><div class="num" data-count="2400" data-suffix="+"><span class="val">0</span><span class="suf">+</span></div><div class="lbl">Roofs completed</div></div>
-      <div class="stat"><div class="num" data-count="4.9" data-decimals="1" data-suffix="★"><span class="val">0</span><span class="suf">★</span></div><div class="lbl">From 300+ reviews</div></div>
-      <div class="stat"><div class="num" data-count="24" data-suffix="/7"><span class="val">0</span><span class="suf">/7</span></div><div class="lbl">Emergency callout</div></div>
+      <div class="stat"><div class="num" data-animate-count><span class="val">15</span><span class="suf">+</span></div><div class="lbl">Years roofing Glasgow</div></div>
+      <div class="stat"><div class="num" data-animate-count><span class="val">2,400</span><span class="suf">+</span></div><div class="lbl">Roofs completed</div></div>
+      <div class="stat"><div class="num"><span class="ph-flag">[REVIEW SCORE]</span></div><div class="lbl">Verified customer reviews</div></div>
+      <div class="stat"><div class="num" data-animate-count><span class="val">24</span><span class="suf">/7</span></div><div class="lbl">Emergency callout</div></div>
     </div>
 
     <div class="why-two">
@@ -909,13 +1022,13 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
         <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);margin:16px 0 10px;">No surprises. Just a roof that does its job.</h2>
         <div class="why-list">
           <div class="why-li"><span class="tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Fixed, honest quotes</b><p>A clear written price before we start — no day-rate creep, no vague "extras".</p></div></div>
-          <div class="why-li"><span class="tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Fully insured &amp; accredited</b><p>NFRC, CompetentRoofer &amp; TrustMark registered, with full public liability cover.</p></div></div>
+          <div class="why-li"><span class="tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Fully insured</b><p>Public liability cover in place, with certificate and expiry available on request. <span class="ph-flag">[CLIENT ACCREDITATIONS]</span></p></div></div>
           <div class="why-li"><span class="tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>12-month workmanship guarantee</b><p>Every job is backed in writing — if something's not right, we come back.</p></div></div>
           <div class="why-li"><span class="tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Tidy sites, respectful crews</b><p>We protect your property, clear up daily and leave the place as we found it.</p></div></div>
         </div>
       </div>
       <div class="why-photo" data-reveal="right">
-        <div class="ph warm" style="height:100%"><img src="images/team.jpg" alt="Ironside roofing crew on scaffolding in branded workwear" onerror="this.style.display='none'" /><span class="ph-label">images/team.jpg</span></div>
+        <div class="ph warm" style="height:100%"><img src="images/team.jpg" alt="Ironside roofing crew on scaffolding in branded workwear" width="1200" height="900" loading="lazy" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">images/team.jpg</span></div>
       </div>
     </div>
   </div>
@@ -931,22 +1044,22 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     <div class="steps" id="steps">
       <div class="step">
         <div class="step-dot"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h4>1. Get in touch</h4>
+        <h3>1. Get in touch</h3>
         <p>Call or send the form. Tell us what's going on and we'll book a visit fast, often same week.</p>
       </div>
       <div class="step">
         <div class="step-dot"><svg viewBox="0 0 24 24"><rect x="6" y="9" width="12" height="7" rx="1"/><path d="M12 9V5M9 5h6M4 20h16" stroke-linecap="round"/></svg></div>
-        <h4>2. Free drone survey</h4>
+        <h3>2. Free drone survey</h3>
         <p>We inspect your whole roof by drone and hand you a clear report and a fixed written quote.</p>
       </div>
       <div class="step">
         <div class="step-dot"><svg viewBox="0 0 24 24"><path d="M14 2l6 6-9 9-6 1 1-6 8-8Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4l6 6" stroke-linecap="round"/></svg></div>
-        <h4>3. The work</h4>
+        <h3>3. The work</h3>
         <p>Our accredited crew arrives on schedule, protects your property and does the job properly.</p>
       </div>
       <div class="step">
         <div class="step-dot"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h4>4. Sign-off &amp; guarantee</h4>
+        <h3>4. Sign-off &amp; guarantee</h3>
         <p>We walk you through the finished work, clear the site and issue your 12-month guarantee.</p>
       </div>
     </div>
@@ -976,10 +1089,50 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     <div class="sec-head center" data-reveal>
       <span class="eyebrow" style="justify-content:center">Reviews</span>
       <h2>Glasgow homeowners, in their words</h2>
-      <p>4.9★ average across Checkatrade, Which? Trusted Trader and Google.</p>
+      <!-- Third-party platform names removed: attributing an aggregate score to
+           named platforms that never produced it is a separate problem from the
+           invented score itself. Reinstate only with a linkable profile URL and
+           a capture date — ONBOARDING.md gate 4. -->
+      <p>Sample reviews, shown to demonstrate the layout.</p>
     </div>
+    <!-- Slides are authored here rather than injected by JS: this is a primary
+         conversion element and it previously rendered completely empty in the
+         served HTML. Attribution is deliberately placeholder — a testimonial may
+         only carry a real name with that customer's written permission
+         (ONBOARDING.md gate 4). The star rows are decorative and stay JS-filled. -->
     <div class="tst-viewport" data-reveal>
-      <div class="tst-track" id="tstTrack"></div>
+      <div class="tst-track" id="tstTrack">
+        <div class="tst-slide"><div class="tst-card">
+          <div class="tst-side"><div><div class="big is-text">Sample</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true"></div></div>
+          <div><div class="tst-stars" aria-hidden="true"></div>
+          <p class="tst-quote">"Came out the same day our roof started leaking in a storm and had it watertight within hours. Proper professionals — can't fault them."</p>
+          <div class="tst-person"><div class="tst-ava" aria-hidden="true">S</div><div><b>Sample review</b><span>Placeholder text — not a real customer</span></div></div>
+          </div></div></div>
+        <div class="tst-slide"><div class="tst-card">
+          <div class="tst-side"><div><div class="big is-text">Sample</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true"></div></div>
+          <div><div class="tst-stars" aria-hidden="true"></div>
+          <p class="tst-quote">"Re-slated our whole tenement roof. Tidy, on time, and the drone survey meant we knew exactly what we were paying for. Highly recommend."</p>
+          <div class="tst-person"><div class="tst-ava" aria-hidden="true">S</div><div><b>Sample review</b><span>Placeholder text — not a real customer</span></div></div>
+          </div></div></div>
+        <div class="tst-slide"><div class="tst-card">
+          <div class="tst-side"><div><div class="big is-text">Sample</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true"></div></div>
+          <div><div class="tst-stars" aria-hidden="true"></div>
+          <p class="tst-quote">"Honest quote, no hidden extras, and the crew were sound with the neighbours too. The new flat roof on our extension is spot on."</p>
+          <div class="tst-person"><div class="tst-ava" aria-hidden="true">S</div><div><b>Sample review</b><span>Placeholder text — not a real customer</span></div></div>
+          </div></div></div>
+        <div class="tst-slide"><div class="tst-card">
+          <div class="tst-side"><div><div class="big is-text">Sample</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true"></div></div>
+          <div><div class="tst-stars" aria-hidden="true"></div>
+          <p class="tst-quote">"After the January gales took half our ridge tiles off, the team sorted it fast and dealt with the insurance paperwork. Total lifesavers."</p>
+          <div class="tst-person"><div class="tst-ava" aria-hidden="true">S</div><div><b>Sample review</b><span>Placeholder text — not a real customer</span></div></div>
+          </div></div></div>
+        <div class="tst-slide"><div class="tst-card">
+          <div class="tst-side"><div><div class="big is-text">Sample</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true"></div></div>
+          <div><div class="tst-stars" aria-hidden="true"></div>
+          <p class="tst-quote">"Best tradesmen we've had in the house in years. Turned up when they said, cleaned up every day, and the guarantee gave us real peace of mind."</p>
+          <div class="tst-person"><div class="tst-ava" aria-hidden="true">S</div><div><b>Sample review</b><span>Placeholder text — not a real customer</span></div></div>
+          </div></div></div>
+      </div>
     </div>
     <div class="tst-ctrl">
       <button class="tst-arrow" id="tstPrev" aria-label="Previous review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -1037,17 +1190,27 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
       <div class="gtee-card">
         <div class="gtee-ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>12-Month Guarantee</h3>
-        <p>Every job comes with a written 12-month workmanship guarantee. If it's not right, we put it right, no quibbles.</p>
+        <p>Every job comes with a written 12-month workmanship guarantee. If it's not right, we put it right, no quibbles. This guarantee is in addition to your statutory rights under the Consumer Rights Act 2015 and does not affect them.</p>
       </div>
       <div class="gtee-card">
         <div class="gtee-ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg></div>
         <h3>Fully Insured</h3>
-        <p>Comprehensive public liability cover on every project, so you and your home are completely protected throughout.</p>
+        <p>Public liability cover on every project. <span class="ph-flag">[INSURER + POLICY NO. + EXPIRY]</span></p>
       </div>
+      <!-- FINANCE BLOCK REMOVED FOR THE DEMO.
+           The previous copy ("Spread the cost of a bigger job with flexible
+           finance options. Ask us for a plan that suits your budget.") is an offer
+           to introduce customers to a lender. That is a regulated activity, and a
+           financial promotion generally has to be made or approved by an
+           authorised firm — so this section cannot be published for a client who
+           has not given us their FCA Firm Reference Number. ONBOARDING.md gate 5
+           treats the FRN as a hard requirement: no FRN, no finance section.
+           Replaced with a non-regulated equivalent that still answers the
+           "can I afford this?" objection. -->
       <div class="gtee-card">
-        <div class="gtee-ico"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20" stroke-linecap="round"/><path d="M6 15h4" stroke-linecap="round"/></svg></div>
-        <h3>Flexible Finance</h3>
-        <p>Spread the cost of a bigger job with flexible finance options. Ask us for a plan that suits your budget.</p>
+        <div class="gtee-ico"><svg viewBox="0 0 24 24"><path d="M4 7h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 7l2-3h12l2 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12h6" stroke-linecap="round"/></svg></div>
+        <h3>Clear Fixed Quotes</h3>
+        <p>A written, itemised quote before any work starts, so you know the full cost up front. No hidden extras and no pressure to decide on the day.</p>
       </div>
     </div>
   </div>
@@ -1119,8 +1282,18 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           <input type="text" id="f-company" name="company" tabindex="-1" autocomplete="off" />
         </div>
 
+        <!-- Inert placeholder. This previously rendered the literal instruction
+             "Cloudflare Turnstile widget mounts here — drop in your site key…"
+             to every visitor, which reads as an unfinished site to a prospect.
+             TO ENABLE, add to <head>:
+               <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+             replace this div with:
+               <div class="cf-turnstile" data-sitekey="YOUR_SITE_KEY"></div>
+             and verify the token server-side before treating a submission as real.
+             Cloudflare's always-passes test key is 1x00000000000000000000AA if you
+             want the real widget UI in a demo. -->
         <div class="turnstile-slot" aria-hidden="true">
-          🛡️ Cloudflare Turnstile widget mounts here — drop in your site key to enable spam protection
+          Spam protection
         </div>
 
         <p class="form-status" id="formStatus" role="alert" aria-live="assertive"></p>
@@ -1129,13 +1302,21 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           Request my free quote
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <p class="form-note">By submitting you agree to be contacted about your enquiry. We never share your details.</p>
+        <!-- "We never share your details" was inaccurate the moment a hosted form
+             provider is wired in, because submissions are shared with it as a
+             processor. Name the provider in the privacy notice and keep this line
+             narrow. See ONBOARDING.md gate 11. -->
+        <p class="form-note">We'll only use these details to respond to your enquiry. Our form provider processes submissions on our behalf — see our <a href="/privacy.html">Privacy Policy</a>.</p>
       </form>
 
+      <!-- DEMO: the form has no action and no endpoint — nothing is transmitted or
+           stored. It previously showed an unqualified "request received!", which
+           tells anyone testing the demo their enquiry was sent when it was not.
+           Restore the real confirmation wording once an endpoint is wired in. -->
       <div class="form-success" id="formSuccess">
         <div class="ok-ico"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Thanks — request received!</h3>
-        <p>We'll be in touch within one working day to arrange your free survey. Need us sooner? Call <a href="tel:01414960132" style="color:var(--copper-bright);font-weight:700;">0141 496 0132</a>.</p>
+        <h3>This is where the confirmation appears</h3>
+        <p>Validation and the success state are fully built. This is a design preview, so nothing was sent and no details were stored — on a live site this is where the client's confirmation message would show.</p>
       </div>
     </div>
   </div>
@@ -1154,16 +1335,16 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
           </svg>
           <span class="logo-txt"><b style="color:var(--paper)">Ironside</b><span>Roofing &amp; Slating</span></span>
         </a>
-        <p>Glasgow's trusted roofers since 2009. Repairs, replacements, slating and flat roofing across the East End, Southside and beyond.</p>
-        <div class="foot-socials">
-          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H7v3h3v6h3v-6h3l1-3h-4v-2c0-.6.4-1 1-1Z"/></svg></a>
-          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-          <a href="#" aria-label="Checkatrade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <p>Repairs, replacements, slating and flat roofing across the East End, Southside and beyond.</p>
+        <!-- Social icons removed for the demo: href="#" gives no destination, so
+             they fail WCAG 2.4.4 and read as a broken site to a prospect. Restore
+             only with the client's real profile URLs. -->
+        <div class="foot-socials" hidden>
         </div>
       </div>
 
       <div class="foot-col">
-        <h4>Services</h4>
+        <h3>Services</h3>
         <ul>
           <li><a href="#services">Roof repairs</a></li>
           <li><a href="#services">Roof replacements</a></li>
@@ -1175,7 +1356,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
       </div>
 
       <div class="foot-col">
-        <h4>Opening hours</h4>
+        <h3>Opening hours</h3>
         <ul>
           <li>Mon–Fri &nbsp; 8am – 6pm</li>
           <li>Saturday &nbsp; 9am – 2pm</li>
@@ -1185,21 +1366,47 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
       </div>
 
       <div class="foot-col">
-        <h4>Get in touch</h4>
+        <h3>Get in touch</h3>
         <div class="foot-nap">
-          Unit 12, Dalmarnock Trade Park,<br>
-          Swanston Street, Glasgow, G40 4HA<br>
+          <span class="ph-flag">[CLIENT ADDRESS]</span><br>
+          Glasgow<br>
           <a href="tel:01414960132" class="big-phone">0141 496 0132</a>
           Emergency: <a href="tel:07700900118">07700 900118</a><br>
-          <a href="/cdn-cgi/l/email-protection#08606d64646748617a67667b616c6d7a67676e61666f266b67267d63"><span class="__cf_email__" data-cfemail="650d0009090a250c170a0b160c0100170a0a030c0b024b060a4b100e">[email&#160;protected]</span></a>
+          <!-- Plain mailto, deliberately not obfuscated. Cloudflare Scrape Shield's
+               Email Address Obfuscation had been baked into this file as
+               /cdn-cgi/l/email-protection markup, which hides the address without
+               JS. Turn that setting off for the zone; if processed HTML is ever
+               re-downloaded from Cloudflare, do not commit it back as source. -->
+          <a href="mailto:hello@example.com">hello@example.com</a>
         </div>
+        <!-- Accreditation logos/names removed — see trustItems comment in the JS. -->
         <div class="foot-accreds">
-          <span>NFRC</span><span>CompetentRoofer</span><span>TrustMark</span><span>Which?</span><span>Checkatrade</span>
+          <span class="ph-flag">[CLIENT ACCREDITATIONS]</span>
         </div>
       </div>
     </div>
+    <!-- Statutory trading disclosures. A company using "Ltd" has to publish its
+         registered name, company number, place of registration and registered
+         office on its website (plus VAT number if registered). Sole traders and
+         partnerships need the trading name, proprietor's name and an address for
+         service. Collect these before launch — ONBOARDING.md gate 1. -->
+    <div class="foot-legal">
+      <p>
+        <span class="ph-flag">[REGISTERED COMPANY NAME]</span>.
+        Registered in <span class="ph-flag">[SCOTLAND / ENGLAND &amp; WALES]</span>,
+        company no. <span class="ph-flag">[SC000000]</span>.
+        Registered office: <span class="ph-flag">[REGISTERED OFFICE ADDRESS]</span>.
+        VAT no. <span class="ph-flag">[GB000000000]</span>.
+      </p>
+      <p>
+        The 12-month workmanship guarantee is in addition to your statutory rights
+        under the Consumer Rights Act 2015 and does not affect them.
+      </p>
+    </div>
     <div class="foot-bottom">
-      <div>© <span id="year"></span> Ironside Roofing &amp; Slating Ltd. Fully insured · 12-month workmanship guarantee.</div>
+      <!-- Year hardcoded at build time. It had been injected by JS, so the footer
+           rendered "©  Ironside…" with a blank year whenever the script didn't run. -->
+      <div>© 2026 Ironside Roofing &amp; Slating (sample business — design preview).</div>
       <div style="display:flex;gap:20px;"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="#contact">Get a quote</a></div>
     </div>
   </div>
@@ -1212,13 +1419,12 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   <button class="lb-nav lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function(){
   "use strict";
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- year ---------- */
-  document.getElementById('year').textContent = new Date().getFullYear();
+  /* Year is now hardcoded in the footer markup — see the foot-bottom comment. */
 
   /* ---------- star helper ---------- */
   function star(){ return '<svg viewBox="0 0 24 24" fill="#f2b134"><path d="M12 2l3 6.5 7 .8-5.2 4.7 1.4 6.9L12 17.6 5.4 20.9l1.4-6.9L1.6 9.3l7-.8L12 2Z"/></svg>'; }
@@ -1255,9 +1461,15 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.body.classList.contains('menu-open')) toggleMenu(false); });
 
   /* ---------- trust bar (marquee) ---------- */
+  /* DEMO: no third-party scheme names or logos here. Reproducing marks such as
+     NFRC, CompetentRoofer, TrustMark, Which? Trusted Trader or Checkatrade is a
+     trade mark issue that a "this is a demo" label does not cure — and each one
+     needs a membership number and expiry on file before it can ever go live.
+     See ONBOARDING.md gate 2. Figures stay bracketed until evidence exists. */
   var trustItems=[
-    'NFRC Accredited','CompetentRoofer','TrustMark Registered','Which? Trusted Trader','Checkatrade Verified',
-    'Fully Insured','12-Month Workmanship Guarantee','2,400+ Roofs Completed','4.9★ from 300+ Reviews','Free Drone Surveys'
+    '[CLIENT ACCREDITATION]','[CLIENT ACCREDITATION]','[INSURANCE COVER]',
+    '12-Month Workmanship Guarantee','[JOBS COMPLETED]','[REVIEW SCORE]',
+    'Drone Roof Surveys','Free No-Obligation Quotes'
   ];
   var check='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   var tt=document.getElementById('trustTrack');
@@ -1355,24 +1567,29 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   /* ---------- count-up stats ---------- */
   function animateCount(el){
     if(el.getAttribute('data-counted')) return;
-    el.setAttribute('data-counted','1');
-    var target=parseFloat(el.getAttribute('data-count'));
-    var dec=parseInt(el.getAttribute('data-decimals')||'0',10);
     var valEl=el.querySelector('.val');
+    if(!valEl) return;
+    // Target is read from the markup, which stays the source of truth. If it
+    // isn't a number, leave the text exactly as authored (e.g. a placeholder).
+    var target=parseFloat(valEl.textContent.replace(/,/g,''));
+    if(isNaN(target)) return;
+    el.setAttribute('data-counted','1');
+    var dec=(valEl.textContent.indexOf('.')>-1) ? 1 : 0;
+    function render(n){ valEl.textContent = dec? n.toFixed(dec) : Math.floor(n).toLocaleString('en-GB'); }
+    // Reduce Motion: the value is already correct in the DOM, so do nothing.
+    if(reduce) return;
     var dur=1600, start=null;
-    if(reduce){ valEl.textContent=target.toFixed(dec); return; }
     function step(ts){
       if(!start) start=ts;
       var p=Math.min((ts-start)/dur,1);
-      var eased=1-Math.pow(1-p,3);
-      var cur=target*eased;
-      valEl.textContent = dec? cur.toFixed(dec) : Math.floor(cur).toLocaleString('en-GB');
+      render(target*(1-Math.pow(1-p,3)));
       if(p<1) requestAnimationFrame(step);
-      else valEl.textContent = dec? target.toFixed(dec) : target.toLocaleString('en-GB');
+      else render(target);
     }
+    render(0);
     requestAnimationFrame(step);
   }
-  var statNums=document.querySelectorAll('[data-count]');
+  var statNums=document.querySelectorAll('[data-animate-count]');
   if('IntersectionObserver' in window){
     var sio=new IntersectionObserver(function(entries){
       entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); sio.unobserve(e.target); } });
@@ -1403,12 +1620,34 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   /* ---------- before / after slider ---------- */
   var ba=document.getElementById('ba'), handle=document.getElementById('baHandle');
   if(ba){
-    var dragging=false;
+    var dragging=false, split=50;
+    function applySplit(pct){
+      split=Math.max(2,Math.min(98,pct));
+      ba.style.setProperty('--split',split+'%');
+      if(handle){
+        var rounded=Math.round(split);
+        handle.setAttribute('aria-valuenow',rounded);
+        handle.setAttribute('aria-valuetext',rounded+'% revealed');
+      }
+    }
     function setSplit(clientX){
       var r=ba.getBoundingClientRect();
-      var pct=((clientX-r.left)/r.width)*100;
-      pct=Math.max(2,Math.min(98,pct));
-      ba.style.setProperty('--split',pct+'%');
+      applySplit(((clientX-r.left)/r.width)*100);
+    }
+    // Keyboard support: arrows nudge, Home/End jump to either end.
+    if(handle){
+      handle.addEventListener('keydown',function(e){
+        var step = (e.shiftKey?10:4), next=null;
+        switch(e.key){
+          case 'ArrowLeft': case 'ArrowDown': next=split-step; break;
+          case 'ArrowRight': case 'ArrowUp':  next=split+step; break;
+          case 'Home': next=0; break;
+          case 'End':  next=100; break;
+          default: return;
+        }
+        applySplit(next);
+        e.preventDefault();
+      });
     }
     function down(e){ dragging=true; ba.style.cursor='grabbing'; setSplit((e.touches?e.touches[0]:e).clientX); e.preventDefault(); }
     function move(e){ if(!dragging) return; setSplit((e.touches?e.touches[0]:e).clientX); }
@@ -1441,7 +1680,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
     d.setAttribute('data-cat',p.cat);
     d.setAttribute('data-index',i);
     d.innerHTML=
-      '<div class="ph '+p.cls+'" style="height:100%"><img src="images/'+p.img+'.jpg" alt="'+p.t+', '+p.a+'" loading="lazy" onerror="this.style.display=&#39;none&#39;" /><span class="ph-label">images/'+p.img+'.jpg</span></div>'+
+      '<div class="ph '+p.cls+'" style="height:100%"><img src="images/'+p.img+'.jpg" alt="'+p.t+', '+p.a+'" width="1200" height="900" loading="lazy" decoding="async" onerror="this.style.display=&#39;none&#39;" /><span class="ph-label">images/'+p.img+'.jpg</span></div>'+
       '<div class="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6" stroke-linecap="round"/></svg></div>'+
       '<div class="cap"><span>'+catLabel(p.cat)+'</span><b>'+p.t+'</b></div>';
     gallery.appendChild(d);
@@ -1450,15 +1689,27 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   function catLabel(c){ return {repairs:'Repair',replacements:'Replacement',flat:'Flat roof',storm:'Storm damage'}[c]||c; }
 
   var filters=document.getElementById('filters');
+  var filterCount=document.getElementById('filterCount');
   filters.addEventListener('click',function(e){
     var b=e.target.closest('.filter'); if(!b) return;
-    filters.querySelectorAll('.filter').forEach(function(f){ f.classList.remove('active'); });
+    filters.querySelectorAll('.filter').forEach(function(f){
+      f.classList.remove('active');
+      f.setAttribute('aria-pressed','false');
+    });
     b.classList.add('active');
+    b.setAttribute('aria-pressed','true');
     var cat=b.getAttribute('data-filter');
+    var shown=0;
     gallery.querySelectorAll('.gitem').forEach(function(it){
       var show = cat==='all' || it.getAttribute('data-cat')===cat;
       it.classList.toggle('hide',!show);
+      if(show) shown++;
     });
+    // Announce the result count — a purely visual filter leaves screen-reader
+    // users with no feedback that anything changed.
+    if(filterCount){
+      filterCount.textContent = shown+(shown===1?' project':' projects')+' shown for '+b.textContent.trim()+'.';
+    }
   });
 
   /* ---------- lightbox ---------- */
@@ -1535,10 +1786,13 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   var patEl=document.getElementById('tilePat'), ridgeEl=document.getElementById('ridge'), vizMat=document.getElementById('vizMat'), vizCol=document.getElementById('vizCol'), vizNote=document.getElementById('vizNote');
   var curMat=0, curCol=0;
   function renderViz(){
-    matRow.innerHTML=materials.map(function(m,i){ return '<button class="mat-btn'+(i===curMat?' active':'')+'" data-m="'+i+'">'+m.name+'</button>'; }).join('');
+    // aria-pressed for the selected state; the colour swatches carry an explicit
+    // aria-label because colour alone conveys nothing to a screen reader (1.4.1)
+    // and title attributes are not reliably announced.
+    matRow.innerHTML=materials.map(function(m,i){ return '<button class="mat-btn'+(i===curMat?' active':'')+'" data-m="'+i+'" aria-pressed="'+(i===curMat)+'">'+m.name+'</button>'; }).join('');
     var cols=materials[curMat].colors;
     if(curCol>=cols.length) curCol=0;
-    swatches.innerHTML=cols.map(function(c,i){ return '<button class="swatch'+(i===curCol?' active':'')+'" data-c="'+i+'" title="'+c.name+'" style="background:'+c.hex+'"></button>'; }).join('');
+    swatches.innerHTML=cols.map(function(c,i){ return '<button class="swatch'+(i===curCol?' active':'')+'" data-c="'+i+'" aria-pressed="'+(i===curCol)+'" aria-label="Colour: '+c.name+'" title="'+c.name+'" style="background:'+c.hex+'"></button>'; }).join('');
     var col=cols[curCol], m=materials[curMat];
     var pat=tilePattern(m.id,col.hex);
     if(patEl){ patEl.setAttribute('width',pat.w); patEl.setAttribute('height',pat.h); patEl.innerHTML=pat.inner; }
@@ -1553,27 +1807,20 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
   renderViz();
 
   /* ---------- testimonials carousel ---------- */
-  var reviews=[
-    {q:"Came out the same day our roof started leaking in a storm and had it watertight within hours. Proper professionals — can't fault them.",n:"Claire",a:"Dennistoun, G31",big:"5.0"},
-    {q:"Re-slated our whole tenement roof. Tidy, on time, and the drone survey meant we knew exactly what we were paying for. Highly recommend.",n:"David",a:"Shawlands, G41",big:"5.0"},
-    {q:"Honest quote, no hidden extras, and the crew were sound with the neighbours too. The new flat roof on our extension is spot on.",n:"Aisha",a:"Bishopbriggs, G64",big:"5.0"},
-    {q:"After the January gales took half our ridge tiles off, Ironside sorted it fast and dealt with the insurance paperwork. Total lifesavers.",n:"Stuart",a:"Rutherglen, G73",big:"5.0"},
-    {q:"Best tradesmen we've had in the house in years. Turned up when they said, cleaned up every day, and the guarantee gave us real peace of mind.",n:"Morag",a:"Cathcart, G44",big:"5.0"}
-  ];
   var tstTrack=document.getElementById('tstTrack'), tstDots=document.getElementById('tstDots');
-  tstTrack.innerHTML=reviews.map(function(r){
-    var initial=r.n.charAt(0);
-    return '<div class="tst-slide"><div class="tst-card">'+
-      '<div class="tst-side"><div><div class="big">'+r.big+'</div><div class="sub">Rating</div></div><div class="ss">'+stars(5)+'</div></div>'+
-      '<div><div class="tst-stars">'+stars(5)+'</div>'+
-      '<p class="tst-quote">"'+r.q+'"</p>'+
-      '<div class="tst-person"><div class="tst-ava">'+initial+'</div><div><b>'+r.n+'</b><span>'+r.a+'</span></div></div>'+
-      '</div></div></div>';
-  }).join('');
-  tstDots.innerHTML=reviews.map(function(_,i){ return '<button class="tst-dot'+(i===0?' active':'')+'" data-i="'+i+'" aria-label="Go to review '+(i+1)+'"></button>'; }).join('');
+  // Slides come from the markup — see the comment on .tst-track.
+  var tstSlides=tstTrack.querySelectorAll('.tst-slide');
+  var tstCount=tstSlides.length;
+  // Fill the decorative star rows that the markup leaves empty.
+  tstTrack.querySelectorAll('.ss,.tst-stars').forEach(function(el){ el.innerHTML=stars(5); });
+  var dotHtml='';
+  for(var di=0; di<tstCount; di++){
+    dotHtml+='<button class="tst-dot'+(di===0?' active':'')+'" data-i="'+di+'" aria-label="Go to review '+(di+1)+'"></button>';
+  }
+  tstDots.innerHTML=dotHtml;
   var tstCur=0, tstTimer=null;
   function goTst(i){
-    tstCur=(i+reviews.length)%reviews.length;
+    tstCur=(i+tstCount)%tstCount;
     tstTrack.style.transform='translateX(-'+(tstCur*100)+'%)';
     tstDots.querySelectorAll('.tst-dot').forEach(function(d,j){ d.classList.toggle('active',j===tstCur); });
   }
