@@ -26,8 +26,10 @@ publishing, and a launch checklist covering the repo, the Cloudflare account
 settings, and verification.
 
 Short version: values that need verifying are wrapped in `.ph-flag` and render as
-bright red uppercase tags. **Never replace one with a realistic-looking default** —
-replace it with confirmed client information, or remove the claim.
+`[BRACKETED]` monospace text in a dashed outline. **Never replace one with a
+realistic-looking default** — replace it with confirmed client information, or
+remove the claim. The safeguard at launch is the `grep` in `ONBOARDING.md`, not
+the styling, so keep the class on anything unverified even if you restyle it.
 
 ## Two workflow rules
 

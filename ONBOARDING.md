@@ -84,11 +84,15 @@ for their solicitor, not something you draft.
 ## Two structural rules
 
 **1. Make the template fail loudly.**
-Every unverified value is wrapped in `.ph-flag`, which renders as a bright red
-uppercase tag. They are ugly on purpose. The risk in a template business isn't
-that you'd invent a claim — it's that a *plausible-looking* placeholder survives
-into a live site because nobody noticed it was a placeholder. Never replace a
-placeholder with a realistic-looking default.
+Every unverified value is wrapped in `.ph-flag`, which renders as `[BRACKETED]`
+monospace text in a dashed outline — clearly unfinished, but quiet enough not to
+pull a prospect's attention off the design.
+
+The risk in a template business isn't that you'd invent a claim — it's that a
+*plausible-looking* placeholder survives into a live site because nobody noticed
+it was a placeholder. So the rule is about the **class**, not the colour: keep
+`.ph-flag` on anything unverified, and never replace a placeholder with a
+realistic-looking default. The grep below is what actually catches them.
 
 Before any launch:
 
