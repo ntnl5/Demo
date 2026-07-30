@@ -1,29 +1,28 @@
-# Ironside Roofing & Slating
+# Ironside Roofing & Slating — DESIGN PREVIEW (sample business)
 
-Glasgow's trusted roofers since 2009. Repairs, replacements, slating & tiling,
-flat/EPDM roofing, chimney & leadwork, gutters/fascias/soffits, emergency &
-storm-damage callout, and free drone roof surveys across Glasgow and central
-Scotland. NFRC, CompetentRoofer, TrustMark, Which? Trusted Trader and
-Checkatrade accredited. Fully insured, 12-month workmanship guarantee.
-4.9★ from 300+ reviews, 2,400+ roofs completed.
+This is a website design preview. "Ironside Roofing & Slating" is not a real
+company. All names, figures, accreditations, reviews and contact details on
+this site are sample content used to demonstrate layout and build quality.
+Nothing here should be treated as factual information about a real business,
+reproduced, or presented to users as a genuine trader.
+
+Phone numbers use Ofcom ranges reserved for drama and demonstration
+(0141 496 0132, 07700 900118) and cannot connect to a real subscriber.
 
 ## Contact
-- Phone: [0141 496 0132](tel:01414960132)
-- Emergency (24/7): [07700 900118](tel:07700900118)
-- Email: [hello@ironsideroofing.co.uk](mailto:hello@ironsideroofing.co.uk)
-- Address: Unit 12, Dalmarnock Trade Park, Swanston Street, Glasgow, G40 4HA
+Not applicable — sample business. No real contact details are published.
 
 ## Pages & sections
-- [Home](https://demo-b50.pages.dev/)
-- [Services](https://demo-b50.pages.dev/#services)
-- [Our Work](https://demo-b50.pages.dev/#work)
-- [Why Choose Us](https://demo-b50.pages.dev/#why)
-- [How It Works](https://demo-b50.pages.dev/#process)
-- [Reviews](https://demo-b50.pages.dev/#reviews)
-- [Service Areas](https://demo-b50.pages.dev/#area)
-- [Get a Free Quote](https://demo-b50.pages.dev/#contact)
+- [Home](https://demo-e00.pages.dev/)
+- [Services](https://demo-e00.pages.dev/#services)
+- [Our Work](https://demo-e00.pages.dev/#work)
+- [Why Choose Us](https://demo-e00.pages.dev/#why)
+- [How It Works](https://demo-e00.pages.dev/#process)
+- [Reviews](https://demo-e00.pages.dev/#reviews)
+- [Service Areas](https://demo-e00.pages.dev/#area)
+- [Get a Free Quote](https://demo-e00.pages.dev/#contact)
 
-## Services
+## Services demonstrated in this layout
 - Roof repairs
 - Full roof replacements
 - Slating & tiling
@@ -31,13 +30,11 @@ Checkatrade accredited. Fully insured, 12-month workmanship guarantee.
 - Chimney & leadwork
 - Gutters, fascias & soffits
 - Emergency & storm-damage callout
-- Free drone roof surveys
+- Drone roof surveys
 
 ## Service areas
-Glasgow East End, Glasgow Southside, East Dunbartonshire, North Lanarkshire.
+Sample content: Glasgow East End, Glasgow Southside, East Dunbartonshire,
+North Lanarkshire.
 
 ## Opening hours
-- Monday to Friday: 8am – 6pm
-- Saturday: 9am – 2pm
-- Sunday: closed
-- 24/7 emergency callout
+Sample content only.
