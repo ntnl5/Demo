@@ -1,0 +1,288 @@
+{
+  "site": {
+    "baseUrl": "https://kelvinside-roofing.pages.dev"
+  },
+  "meta": {
+    "description": "Design preview for a Glasgow roofing website. Kelvinside Roofing Co. is a sample business used to demonstrate layout and build quality — not a real company.",
+    "ogDescription": "Design preview of a roofing website build. Sample business, not a real company.",
+    "ogImageAlt": "Design preview of a roofing website build.",
+    "noindex": true
+  },
+  "brand": {
+    "colors": {
+      "slate900": "#101318",
+      "slate850": "#151920",
+      "slate800": "#191e26",
+      "slate700": "#232a34",
+      "slate600": "#333c48",
+      "slate500": "#868f9e",
+      "paper": "#f6f2ea",
+      "paper2": "#ece5d8",
+      "paperLine": "#ddd3c2",
+      "ink": "#1a1d23",
+      "inkSoft": "#4c5361",
+      "accent": "#c9772e",
+      "accentBright": "#e2913a",
+      "accentGlow": "#f4ad55",
+      "accentInk": "#7a4a17",
+      "star": "#f2b134",
+      "ok": "#3f9d6d"
+    }
+  },
+  "business": {
+    "name": "Kelvinside Roofing Co.",
+    "logoLine1": "Kelvinside",
+    "logoLine2": "Roofing Co.",
+    "phoneDisplay": "0141 496 0132",
+    "phoneIntl": null,
+    "emergencyPhoneDisplay": "07700 900118",
+    "email": "hello@example.com",
+    "foundedYear": 2009,
+    "address": "Glasgow",
+    "streetAddress": null,
+    "areasCovered": [
+      "Glasgow East End",
+      "Glasgow Southside",
+      "East Dunbartonshire",
+      "North Lanarkshire"
+    ],
+    "hqLabel": "HQ · Dalmarnock G40",
+    "hours": {
+      "weekdayOpen": "08:00",
+      "weekdayClose": "18:00",
+      "saturdayOpen": "09:00",
+      "saturdayClose": "14:00"
+    }
+  },
+  "hero": {
+    "titleLine1": "Roofs built to last",
+    "titleAccent": "Scottish weather",
+    "subheading": "Repairs, replacements, slating and flat roofing across Glasgow and beyond. Done right, fully insured, and backed by a 12-month workmanship guarantee. Free drone survey, no obligation.",
+    "image": {
+      "src": "images/hero.jpg",
+      "alt": "Freshly slated Glasgow tenement roof against a clear sky"
+    }
+  },
+  "stats": {
+    "yearsRoofing": 15,
+    "jobsCompleted": 2400
+  },
+  "services": [
+    {
+      "title": "Roof Repairs",
+      "srLabel": "for roof repairs",
+      "description": "Slipped tiles, leaks and storm damage fixed fast, with a free assessment and a fair fixed price before we start.",
+      "iconSvg": "<path d=\"M3 12l9-8 9 8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5 10v10h14V10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M9 20v-5h6v5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+    },
+    {
+      "title": "Full Roof Replacements",
+      "srLabel": "for full roof replacements",
+      "description": "A complete re-roof that meets Scottish building standards, with new felt, battens and flashings, built to shrug off decades of Scottish weather.",
+      "iconSvg": "<path d=\"M3 11l9-7 9 7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5 9.5V20h14V9.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M8 13h8M8 16.5h8\" stroke-linecap=\"round\"/>"
+    },
+    {
+      "title": "Slating & Tiling",
+      "srLabel": "for slating and tiling",
+      "description": "Natural slate, clay and concrete tiling laid by time-served roofers: the traditional finish tenements and villas deserve.",
+      "iconSvg": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"1\"/><path d=\"M3 9h18M3 14h18M9 4v16M15 4v16\" stroke-linecap=\"round\"/>"
+    },
+    {
+      "title": "Flat & EPDM Roofing",
+      "srLabel": "for flat and EPDM roofing",
+      "description": "Seamless single-ply and EPDM rubber membranes for extensions, dormers and garages. Watertight, with a long service life.",
+      "iconSvg": "<rect x=\"3\" y=\"7\" width=\"18\" height=\"10\" rx=\"1\"/><path d=\"M3 12h18\" stroke-linecap=\"round\"/><circle cx=\"8\" cy=\"12\" r=\"1.3\" fill=\"currentColor\" stroke=\"none\"/>"
+    },
+    {
+      "title": "Chimney & Leadwork",
+      "srLabel": "for chimney and leadwork",
+      "description": "Repointing, rebuilds and expertly-dressed lead flashings that seal the trickiest, leak-prone parts of any roof for good.",
+      "iconSvg": "<path d=\"M6 21V8l6-5 6 5v13\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"14\" y=\"3\" width=\"3\" height=\"5\"/><path d=\"M6 21h12\" stroke-linecap=\"round\"/>"
+    },
+    {
+      "title": "Gutters, Fascias & Soffits",
+      "srLabel": "for gutters, fascias and soffits",
+      "description": "Full uPVC rainwater systems supplied and fitted, protecting your walls and foundations and looking sharp from the street.",
+      "iconSvg": "<path d=\"M3 7h18l-2 4H5L3 7Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M5 11v3a2 2 0 0 0 2 2h6\" stroke-linecap=\"round\"/><path d=\"M13 16v4\" stroke-linecap=\"round\"/>"
+    },
+    {
+      "title": "Emergency & Storm Damage",
+      "srLabel": "for emergency and storm damage",
+      "description": "24/7 rapid response with temporary weatherproofing on the day. We'll make it safe, then sort the permanent fix.",
+      "iconSvg": "<path d=\"M13 2 4 14h7l-1 8 9-12h-7l1-8Z\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>"
+    },
+    {
+      "title": "Drone Roof Surveys",
+      "srLabel": "for drone roof surveys",
+      "description": "A close-up drone inspection of your whole roof, so you see exactly what we see, with a clear report and quote to match.",
+      "iconSvg": "<rect x=\"6\" y=\"9\" width=\"12\" height=\"7\" rx=\"1\"/><path d=\"M12 9V5M9 5h6\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"12.5\" r=\"1.6\"/><path d=\"M4 20h16\" stroke-linecap=\"round\"/>"
+    }
+  ],
+  "usps": {
+    "trustBar": [
+      "12-Month Workmanship Guarantee",
+      "Drone Roof Surveys",
+      "Free No-Obligation Quotes"
+    ],
+    "whyUs": [
+      {
+        "title": "Fixed, honest quotes",
+        "description": "A clear written price before we start — no day-rate creep, no vague \"extras\"."
+      },
+      {
+        "title": "Fully insured",
+        "description": "Public liability cover in place, with certificate and expiry available on request. <span class=\"ph-flag\">[CLIENT ACCREDITATIONS]</span>"
+      },
+      {
+        "title": "12-month workmanship guarantee",
+        "description": "Every job is backed in writing — if something's not right, we come back."
+      },
+      {
+        "title": "Tidy sites, respectful crews",
+        "description": "We protect your property, clear up daily and leave the place as we found it."
+      }
+    ]
+  },
+  "testimonials": [
+    {
+      "quote": "Came out the same day our roof started leaking in a storm and had it watertight within hours. Proper professionals — can't fault them.",
+      "name": "Sample review",
+      "attribution": "Placeholder text — not a real customer",
+      "ratingLabel": "Sample",
+      "source": "Sample content — not a real customer testimonial"
+    },
+    {
+      "quote": "Re-slated our whole tenement roof. Tidy, on time, and the drone survey meant we knew exactly what we were paying for. Highly recommend.",
+      "name": "Sample review",
+      "attribution": "Placeholder text — not a real customer",
+      "ratingLabel": "Sample",
+      "source": "Sample content — not a real customer testimonial"
+    },
+    {
+      "quote": "Honest quote, no hidden extras, and the crew were sound with the neighbours too. The new flat roof on our extension is spot on.",
+      "name": "Sample review",
+      "attribution": "Placeholder text — not a real customer",
+      "ratingLabel": "Sample",
+      "source": "Sample content — not a real customer testimonial"
+    },
+    {
+      "quote": "After the January gales took half our ridge tiles off, the team sorted it fast and dealt with the insurance paperwork. Total lifesavers.",
+      "name": "Sample review",
+      "attribution": "Placeholder text — not a real customer",
+      "ratingLabel": "Sample",
+      "source": "Sample content — not a real customer testimonial"
+    },
+    {
+      "quote": "Best tradesmen we've had in the house in years. Turned up when they said, cleaned up every day, and the guarantee gave us real peace of mind.",
+      "name": "Sample review",
+      "attribution": "Placeholder text — not a real customer",
+      "ratingLabel": "Sample",
+      "source": "Sample content — not a real customer testimonial"
+    }
+  ],
+  "gallery": [
+    {
+      "title": "Full re-slate",
+      "area": "Dennistoun",
+      "category": "replacements",
+      "span": true,
+      "style": "warm",
+      "image": "work-1"
+    },
+    {
+      "title": "Ridge repair",
+      "area": "Shawlands",
+      "category": "repairs",
+      "style": "slate",
+      "image": "work-2"
+    },
+    {
+      "title": "EPDM flat roof",
+      "area": "Bridgeton",
+      "category": "flat",
+      "style": "sky",
+      "image": "work-3"
+    },
+    {
+      "title": "Storm strip-down",
+      "area": "Rutherglen",
+      "category": "storm",
+      "style": "slate",
+      "image": "work-4"
+    },
+    {
+      "title": "Chimney rebuild",
+      "area": "Mount Florida",
+      "category": "repairs",
+      "style": "warm",
+      "image": "work-5"
+    },
+    {
+      "title": "New concrete tiling",
+      "area": "Bishopbriggs",
+      "category": "replacements",
+      "style": "sky",
+      "image": "work-6"
+    },
+    {
+      "title": "Garage flat roof",
+      "area": "Cambuslang",
+      "category": "flat",
+      "style": "slate",
+      "image": "work-7"
+    },
+    {
+      "title": "Gale damage repair",
+      "area": "Parkhead",
+      "category": "storm",
+      "style": "warm",
+      "image": "work-8"
+    },
+    {
+      "title": "Valley re-lead",
+      "area": "Cathcart",
+      "category": "repairs",
+      "style": "sky",
+      "image": "work-9"
+    },
+    {
+      "title": "Full tenement re-roof",
+      "area": "Govanhill",
+      "category": "replacements",
+      "style": "slate",
+      "image": "work-10"
+    }
+  ],
+  "beforeAfter": {
+    "title": "Dennistoun re-slate",
+    "before": {
+      "src": "images/before.jpg",
+      "alt": "Worn, moss-covered slate roof before repair"
+    },
+    "after": {
+      "src": "images/after.jpg",
+      "alt": "New natural-slate roof with a crisp ridge line after replacement"
+    }
+  },
+  "team": {
+    "image": {
+      "src": "images/team.jpg",
+      "alt": "Kelvinside roofing crew on scaffolding in branded workwear"
+    }
+  },
+  "accreditations": [],
+  "reviews": null,
+  "finance": null,
+  "forms": {
+    "endpoint": null,
+    "turnstileSiteKey": null
+  },
+  "social": [],
+  "legal": {
+    "registeredName": null,
+    "jurisdiction": null,
+    "companyNumber": null,
+    "registeredOffice": null,
+    "vatNumber": null,
+    "year": null
+  }
+}
