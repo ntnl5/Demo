@@ -17,6 +17,8 @@ templates/
   terms.template.html
   404.template.html
   robots.template.txt      generated from meta.noindex, never static
+  sitemap.template.xml     <loc> derived from site.baseUrl
+  llms.template.txt        AI-crawler disclosure that this is a sample business
   static/                  copied verbatim into every build
     _headers
     favicon.png            brand defaults; a client's own assets/ overrides these
@@ -83,6 +85,10 @@ item and unprefixed paths still read the document root.
 
 `{{#unless @last}}, {{/unless}}` is the separator idiom — used in the schema.org
 `areaServed` array and the two inline JS arrays.
+
+**In the plain-text templates (`robots`, `llms`) use `{{{triple}}}` throughout.** Double
+braces HTML-escape, which is right for `.html` and `.xml` and wrong for `.txt` — it would
+render a business called "Roofing & Slating" as `Roofing &amp; Slating`.
 
 **Optional sections wrap their own container.** An empty `accreditations` array removes
 the whole badge row, not just its contents, so nothing renders as an empty box.

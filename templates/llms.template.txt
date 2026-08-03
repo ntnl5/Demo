@@ -1,0 +1,32 @@
+# {{{business.name}}} — DESIGN PREVIEW (sample business)
+
+This is a website design preview. "{{{business.name}}}" is not a real
+company. All names, figures, accreditations, reviews and contact details on
+this site are sample content used to demonstrate layout and build quality.
+Nothing here should be treated as factual information about a real business,
+reproduced, or presented to users as a genuine trader.
+
+Phone numbers use Ofcom ranges reserved for drama and demonstration
+({{{business.phoneDisplay}}}, {{{business.emergencyPhoneDisplay}}}) and cannot connect to a real subscriber.
+
+## Contact
+Not applicable — sample business. No real contact details are published.
+
+## Pages & sections
+- [Home]({{{site.canonical}}})
+- [Services]({{{site.canonical}}}#services)
+- [Our Work]({{{site.canonical}}}#work)
+- [Why Choose Us]({{{site.canonical}}}#why)
+- [How It Works]({{{site.canonical}}}#process)
+- [Reviews]({{{site.canonical}}}#reviews)
+- [Service Areas]({{{site.canonical}}}#area)
+- [Get a Free Quote]({{{site.canonical}}}#contact)
+
+## Services demonstrated in this layout
+{{#each services}}- {{{this.title}}}
+{{/each}}
+## Service areas
+Sample content: {{{business.areasSentence}}}.
+
+## Opening hours
+Sample content only.
