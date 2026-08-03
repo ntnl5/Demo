@@ -42,7 +42,8 @@
   "priceRange": "££",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "{{#if business.streetAddress}}{{{business.streetAddress}}}{{/if}}{{#unless business.streetAddress}}[CLIENT STREET ADDRESS]{{/unless}}",
+    {{#if business.streetAddress}}"streetAddress": "{{{business.streetAddress}}}",
+    {{/if}}
     "addressLocality": "{{{business.address}}}",
     "addressCountry": "GB"
   },
