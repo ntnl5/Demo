@@ -1228,8 +1228,11 @@ body{padding-bottom:52px;}{{/if}}
      Each feature registers a reader that works from those cached numbers and returns a
      function holding its writes. Every reader runs before any write, so no write can
      invalidate a measurement taken later in the same frame. */
-  var vpY=0, vpH=window.innerHeight;
-  window.addEventListener('resize',function(){ vpH=window.innerHeight; },{passive:true});
+  // Neither of these is read at startup. vpY comes from the scroll listener, vpH is
+  // refreshed only alongside the parallax's own cached measurement, which already needs a
+  // layout read and only happens on resize, load and font swap. Reading either during
+  // initial script execution forces a layout on a page that has not been laid out yet.
+  var vpY=0, vpH=0;
 
   var scrollReaders=[];
   function runScrollFrame(){
@@ -1246,7 +1249,8 @@ body{padding-bottom:52px;}{{/if}}
     vpY=window.scrollY;
     queueScrollFrame();
   },{passive:true});
-  afterPaint(function(){ vpY=window.scrollY; runScrollFrame(); });
+  // No initial pass. At the top of a page there is nothing to apply, and a page restored
+  // mid-scroll corrects itself on the first scroll event.
 
   /* ---------- header scroll ---------- */
   var header=document.getElementById('header');
@@ -1297,14 +1301,23 @@ body{padding-bottom:52px;}{{/if}}
     var track=tt, viewport=tt.parentElement;
     var pos=0, half=0, paused=false, dragging=false, lastX=0, prevTs=0, moved=false;
     var SPEED=0.035; // px per ms ≈ 35px/s, calm and readable
+    /* The track's width is delivered by a ResizeObserver rather than measured. The entry
+       carries the box the browser has already computed, so nothing forces a layout, and
+       it covers all three cases that used to need separate handling: the initial size,
+       the resize, and the width change when webfonts swap in.
+
+       Reading scrollWidth here was the last layout read left at startup, right after the
+       line above writes the track's innerHTML, which is the worst place to take one. */
     function measure(){ half=(track.scrollWidth/2)||0; }
-    // The line above writes the track's innerHTML; reading scrollWidth straight after
-    // would force a layout mid-load. The marquee starts at 0 and frame() no-ops until
-    // half is known, so nothing needs it before paint.
-    afterPaint(measure);
-    // Re-measure once webfonts swap in: the track's width changes with them.
-    if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(measure); }
-    window.addEventListener('resize',measure,{passive:true});
+    if('ResizeObserver' in window){
+      new ResizeObserver(function(entries){
+        half=((entries[0].contentRect.width)/2)||0;
+      }).observe(track);
+    } else {
+      afterPaint(measure);
+      if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(measure); }
+      window.addEventListener('resize',measure,{passive:true});
+    }
     function wrapPos(x){ if(half<=0) return 0; while(x<0) x+=half; while(x>=half) x-=half; return x; }
     function apply(){ track.style.transform='translate3d('+(-pos)+'px,0,0)'; }
     function frame(ts){
@@ -1367,13 +1380,13 @@ body{padding-bottom:52px;}{{/if}}
     scrollReaders.push(function(vp){
       if(emgParent&&emgStale){
         var er=emgParent.getBoundingClientRect();
-        emgTop=er.top+vp.y; emgH=er.height; emgStale=false;
+        emgTop=er.top+vp.y; emgH=er.height; vpH=window.innerHeight; emgStale=false;
       }
       return function(){
         if(rooflines) rooflines.style.transform='translateY('+(vp.y*0.10)+'px)';
         if(emgParent){
           var top=emgTop-vp.y; // viewport-relative, from the cached offset
-          var prog=(vp.vh - top)/(vp.vh + emgH);
+          var prog=(vpH - top)/(vpH + emgH);
           emgBg.style.transform='translateY('+((prog-0.5)*60)+'px)';
         }
       };
