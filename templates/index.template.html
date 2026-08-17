@@ -139,9 +139,6 @@ ul{margin:0;padding:0;list-style:none;}
    as before. The hero is excluded: it is above the fold and must never be skipped. */
 .section{content-visibility:auto;contain-intrinsic-size:auto 900px;}
 
-/* grain texture overlay */
-.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
 
 /* --- Buttons --- */
 .btn{
@@ -222,7 +219,7 @@ body.menu-open .mobile-menu a.m-link{transform:translateX(0);opacity:1;}
 .rooflines{position:absolute;bottom:0;left:0;right:0;height:42%;z-index:0;opacity:.9;}
 .rooflines svg{width:100%;height:100%;}
 .hero-photo{position:absolute;right:0;bottom:0;width:clamp(520px,44vw,1100px);height:86%;z-index:1;
-  border-radius:26px 26px 0 0;overflow:hidden;box-shadow:var(--shadow-lg);will-change:transform;
+  border-radius:26px 26px 0 0;overflow:hidden;box-shadow:var(--shadow-lg);
   border:1px solid rgba(255,255,255,.12);}
 .hero-photo .ph.warm{background:linear-gradient(155deg,#4a5568,#232c37);}
 .hero-photo .ph::before{opacity:.5;}
@@ -432,8 +429,6 @@ h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:
 .tst-card{background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:clamp(30px,5vw,54px);
   display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;box-shadow:var(--shadow-sm);}
 .tst-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,2.3vw,1.85rem);line-height:1.35;color:var(--ink);letter-spacing:-.01em;}
-.tst-stars{display:flex;gap:3px;margin-bottom:20px;}
-.tst-stars svg{width:20px;height:20px;}
 .tst-person{display:flex;align-items:center;gap:14px;margin-top:24px;}
 .tst-ava{width:52px;height:52px;border-radius:50%;background:var(--copper);color:#1c1207;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:1.2rem;flex:0 0 auto;}
 .tst-person b{font-family:var(--font-display);font-size:1.05rem;display:block;}
@@ -551,7 +546,7 @@ footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:
 @keyframes heroRise{from{transform:translateY(18px);}to{transform:none;}}
 @media(prefers-reduced-motion:reduce){.hero-rise{animation:none;}}
 
-[data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);will-change:opacity,transform;}
+[data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);}
 [data-reveal].in{opacity:1;transform:none;}
 [data-reveal="left"]{transform:translateX(-40px);}
 [data-reveal="right"]{transform:translateX(40px);}
@@ -658,7 +653,6 @@ body{padding-bottom:52px;}{{/if}}
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
 
 {{#if meta.noindex}}<div class="demo-ribbon" role="note">
   <b>Design preview</b>: sample business, not a real company.<span class="ribbon-more"> Figures, reviews and accreditations are placeholder content.</span>
@@ -951,7 +945,7 @@ body{padding-bottom:52px;}{{/if}}
         {{#each testimonials}}
         <div class="tst-slide"><div class="tst-card">
           <div class="tst-side"><div><div class="big is-text">{{this.ratingLabel}}</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true">{{{this.starsHtml}}}</div></div>
-          <div><div class="tst-stars" aria-hidden="true">{{{this.starsHtml}}}</div>
+          <div>
           <p class="tst-quote">"{{this.quote}}"</p>
           <div class="tst-person"><div class="tst-ava" aria-hidden="true">{{this.avatarInitial}}</div><div><b>{{this.name}}</b><span>{{this.attribution}}</span></div></div>
           </div></div></div>
