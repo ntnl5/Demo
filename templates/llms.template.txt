@@ -1,0 +1,42 @@
+{{#if meta.noindex}}# {{{business.name}}}: DESIGN PREVIEW (sample business)
+
+This is a website design preview. "{{{business.name}}}" is not a real
+company. All names, figures, accreditations, reviews and contact details on
+this site are sample content used to demonstrate layout and build quality.
+Nothing here should be treated as factual information about a real business,
+reproduced, or presented to users as a genuine trader.
+
+Phone numbers use Ofcom ranges reserved for drama and demonstration
+({{{business.phoneDisplay}}}, {{{business.emergencyPhoneDisplay}}}) and cannot connect to a real subscriber.
+
+## Contact
+Not applicable. This is a sample business. No real contact details are published.
+{{/if}}{{#unless meta.noindex}}# {{{business.name}}}
+
+{{{business.name}}} is a real trading business. {{{footer.blurb}}}
+
+## Contact
+Phone: {{{business.phoneDisplay}}}
+Emergency: {{{business.emergencyPhoneDisplay}}}
+Email: {{{business.email}}}
+Area: {{{business.address}}}
+Hours: Mon to Fri {{{business.hours.weekdayDisplay}}}, Saturday {{{business.hours.saturdayDisplay}}}
+{{/unless}}
+## Pages & sections
+- [Home]({{{site.canonical}}})
+- [Services]({{{site.canonical}}}#services)
+- [Our Work]({{{site.canonical}}}#work)
+- [Why Choose Us]({{{site.canonical}}}#why)
+- [How It Works]({{{site.canonical}}}#process)
+- [Reviews]({{{site.canonical}}}#reviews)
+- [Service Areas]({{{site.canonical}}}#area)
+- [Get a Free Quote]({{{site.canonical}}}#contact)
+
+## Services
+{{#each services}}- {{{this.title}}}
+{{/each}}
+## Service areas
+{{#if meta.noindex}}Sample content: {{/if}}{{{business.areasSentence}}}.
+
+## Opening hours
+{{#if meta.noindex}}Sample content only.{{/if}}{{#unless meta.noindex}}Mon to Fri {{{business.hours.weekdayDisplay}}}. Saturday {{{business.hours.saturdayDisplay}}}. Sunday closed.{{/unless}}

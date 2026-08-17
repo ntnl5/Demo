@@ -1,0 +1,29 @@
+# Cloudflare Pages security headers.
+#
+# NOTE ON THE CSP BELOW. It differs deliberately from a "textbook" policy:
+#
+#   * script-src keeps 'unsafe-inline' because ALL of this site's JavaScript is
+#     in one inline <script> block, and there are inline handlers too (the font
+#     preload's onload, and onerror on the placeholder <img> tags). Dropping
+#     'unsafe-inline' would break the whole page. To remove it properly, move
+#     the JS to an external file and replace the inline handlers first.
+#   * style-src / font-src allow Google Fonts, which the page loads from
+#     fonts.googleapis.com and fonts.gstatic.com. A policy of
+#     "style-src 'self' 'unsafe-inline'" alone would block the stylesheet and
+#     the page would render in fallback fonts.
+#   * challenges.cloudflare.com is pre-allowed so enabling Turnstile later does
+#     not require a header change.
+#   * form-action is 'self' because the form currently has no endpoint. When a
+#     hosted provider is wired in, add its origin here or submissions will be
+#     blocked.
+#
+# Verify with https://securityheaders.com after deploying.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; form-action 'self'
+  X-Robots-Tag: noindex, nofollow

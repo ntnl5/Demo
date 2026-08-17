@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{business.name}}{{#if meta.noindex}} | Design preview (sample business){{/if}}</title>
+<meta name="description" content="{{meta.description}}" />
+
+<!-- meta.noindex in client.json drives the robots tag below and every demo marker on
+     the page. Never hardcode "index,follow" here. -->
+{{#if meta.noindex}}<meta name="robots" content="noindex, nofollow">{{/if}}
+<link rel="canonical" href="{{site.canonical}}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{business.name}}{{#if meta.noindex}} | Design preview{{/if}}" />
+<meta property="og:description" content="{{meta.ogDescription}}" />
+<meta property="og:url" content="{{site.canonical}}" />
+<meta property="og:image" content="{{site.ogImage}}" />
+<meta property="og:image:alt" content="{{meta.ogImageAlt}}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="{{brand.colors.paper}}" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="{{brand.colors.slate900}}" media="(prefers-color-scheme: dark)" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='{{brand.colors.accentEnc}}'/%3E%3Cpath d='M8 22 L20 11 L32 22' fill='none' stroke='{{brand.colors.logoMarkInkEnc}}' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M11 22 V30 H29 V22' fill='none' stroke='{{brand.colors.logoMarkInkEnc}}' stroke-width='2.6' stroke-linejoin='round' stroke-linecap='round'/%3E%3Cpath d='M17 30 V25 H23 V30' fill='none' stroke='{{brand.colors.logoMarkInkEnc}}' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E" />
+<!-- PNG fallback for Safari + browsers/hosts that ignore SVG data-URI favicons -->
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RoofingContractor",
+  "name": "{{{business.name}}}{{#if meta.noindex}} (sample business, design preview){{/if}}",
+  "description": "{{{meta.description}}}",
+  "image": "{{{site.ogImage}}}",
+  "url": "{{{site.canonical}}}",
+  "telephone": "{{{business.phoneIntl}}}",
+  "priceRange": "££",
+  "address": {
+    "@type": "PostalAddress",
+    {{#if business.streetAddress}}"streetAddress": "{{{business.streetAddress}}}",
+    {{/if}}
+    "addressLocality": "{{{business.address}}}",
+    "addressCountry": "GB"
+  },
+  "areaServed": [{{#each business.areasCovered}}"{{{this}}}"{{#unless @last}}, {{/unless}}{{/each}}],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "{{business.hours.weekdayOpen}}", "closes": "{{business.hours.weekdayClose}}" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "{{business.hours.saturdayOpen}}", "closes": "{{business.hours.saturdayClose}}" }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- Non-blocking: fetched as a low-priority preload, promoted to a stylesheet on load.
+     Both families are variable, so a weight *range* is one file. Asking for discrete
+     weights made Google emit 31 @font-face blocks for the same 7 files, and the browser
+     fetched each one three or four times. -->
+<link rel="preload" as="style" href="{{fonts.url}}" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="{{fonts.url}}" /></noscript>
+
+<style>
+/* ===================================================================
+   Single-file showpiece template
+   Design system: deep slate base, copper/amber accent, warm paper
+   Display: Bricolage Grotesque   Body: Hanken Grotesk
+   =================================================================== */
+
+:root{
+  --slate-900:{{brand.colors.slate900}};
+  --slate-850:{{brand.colors.slate850}};
+  --slate-800:{{brand.colors.slate800}};
+  --slate-700:{{brand.colors.slate700}};
+  --slate-600:{{brand.colors.slate600}};
+  --slate-500:{{brand.colors.slate500}};
+  --paper:{{brand.colors.paper}};
+  --paper-2:{{brand.colors.paper2}};
+  --paper-line:{{brand.colors.paperLine}};
+  --ink:{{brand.colors.ink}};
+  --ink-soft:{{brand.colors.inkSoft}};
+  --copper:{{brand.colors.accent}};
+  --copper-bright:{{brand.colors.accentBright}};
+  --copper-glow:{{brand.colors.accentGlow}};
+  --amber-ink:{{brand.colors.accentInk}};
+  --star:{{brand.colors.star}};
+  --ok:{{brand.colors.ok}};
+
+  --maxw:1200px;
+  --radius:16px;
+  --radius-lg:26px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --shadow-sm:0 2px 8px rgba(16,19,24,.08);
+  --shadow-md:0 18px 40px -18px rgba(16,19,24,.35);
+  --shadow-lg:0 40px 80px -30px rgba(16,19,24,.5);
+  --header-h:78px;
+  --font-display:'{{fonts.display.family}}','Display Fallback',system-ui,sans-serif;
+  --font-body:'{{fonts.body.family}}','Body Fallback',system-ui,sans-serif;
+}
+
+/* Metric-matched fallbacks, so the webfont swap barely shifts layout. */
+@font-face{font-family:'Display Fallback';src:local('Arial'),local('Helvetica Neue'),local('sans-serif');font-display:swap;{{{fonts.display.fallbackMetrics}}}}
+@font-face{font-family:'Body Fallback';src:local('Arial'),local('Helvetica Neue'),local('sans-serif');font-display:swap;{{{fonts.body.fallbackMetrics}}}}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  background:var(--slate-900);
+  color:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  line-height:1.55;
+}
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:700;line-height:1.02;margin:0;letter-spacing:-.02em;}
+p{margin:0;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+ul{margin:0;padding:0;list-style:none;}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+/* Section kicker: plain type above the headline, no container. */
+.eyebrow{
+  font-family:var(--font-body);font-weight:600;
+  font-size:clamp(.95rem,1.15vw,1.0625rem);
+  letter-spacing:-.005em;color:var(--copper-bright);
+  display:block;line-height:1.25;
+}
+.section{padding:clamp(64px,9vw,128px) 0;position:relative;}
+
+/* Skip rendering work for sections that are still off screen. This is a long page: nine
+   sections and around 850 elements, and laying all of it out before the first paint was
+   the largest remaining cost. contain-intrinsic-size keeps the scrollbar honest, and the
+   auto keyword makes the browser remember each section's real height once it has been
+   rendered, so nothing jumps on the way back up. Browsers without support simply render
+   as before. The hero is excluded: it is above the fold and must never be skipped. */
+.section{content-visibility:auto;contain-intrinsic-size:auto 900px;}
+
+/* grain texture overlay */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* --- Buttons --- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 26px;border-radius:999px;font-family:var(--font-body);font-weight:700;font-size:1rem;
+  letter-spacing:.005em;position:relative;overflow:hidden;transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s;
+  white-space:nowrap;
+}
+.btn svg{width:18px;height:18px;flex:0 0 auto;}
+.btn-primary{background:var(--copper);color:{{brand.colors.logoMarkInk}};box-shadow:0 4px 12px -6px rgba(0,0,0,.4);}
+.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 20%,rgba(255,255,255,.55) 50%,transparent 80%);transform:translateX(-120%);transition:transform .7s var(--ease);}
+.btn-primary:hover{background:var(--copper-bright);transform:translateY(-3px);box-shadow:0 8px 18px -8px rgba(0,0,0,.45);}
+.btn-primary:hover::after{transform:translateX(120%);}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--paper);border:1px solid rgba(255,255,255,.16);}
+.btn-ghost:hover{background:rgba(255,255,255,.12);transform:translateY(-3px);}
+.btn-dark{background:var(--slate-800);color:var(--paper);}
+.btn-dark:hover{background:var(--slate-700);transform:translateY(-3px);}
+.btn-lg{padding:18px 34px;font-size:1.08rem;}
+.btn-block{width:100%;}
+
+/* --- Header --- */
+header{position:fixed;top:0;left:0;right:0;z-index:100;transition:transform .4s var(--ease),background .4s var(--ease);}
+header.hidden{transform:translateY(-100%);}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:24px;height:var(--header-h);
+  transition:height .4s var(--ease);
+}
+header::before{content:"";position:absolute;inset:0;background:rgba(16,19,24,0);
+  border-bottom:1px solid transparent;transition:all .4s var(--ease);}
+header.scrolled::before{background:rgba(16,19,24,.94);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:0 10px 30px -18px rgba(0,0,0,.8);}
+header.scrolled .header-inner{height:64px;}
+.logo{display:flex;align-items:center;gap:12px;position:relative;z-index:2;flex:0 0 auto;}
+.logo-mark{width:40px;height:40px;flex:0 0 auto;}
+.logo-txt{display:flex;flex-direction:column;line-height:1;}
+.logo-txt b{font-family:var(--font-display);font-weight:800;font-size:1.12rem;letter-spacing:-.02em;}
+.logo-txt span{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--slate-500);margin-top:3px;}
+nav.desktop{display:flex;align-items:center;gap:6px;position:relative;z-index:2;}
+nav.desktop a{padding:9px 14px;border-radius:999px;font-weight:600;font-size:.92rem;color:#cfd4dc;transition:color .25s,background .25s;position:relative;}
+nav.desktop a:hover{color:var(--paper);background:rgba(255,255,255,.06);}
+.header-cta{display:flex;align-items:center;gap:14px;position:relative;z-index:2;flex:0 0 auto;}
+.header-phone{display:flex;flex-direction:column;line-height:1.1;text-align:right;}
+.header-phone span{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--slate-500);}
+.header-phone b{font-family:var(--font-display);font-size:1.02rem;color:var(--paper);}
+.header-phone b:hover{color:var(--copper-bright);}
+
+.burger{display:none;width:46px;height:46px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);position:relative;z-index:120;flex:0 0 auto;}
+.burger span{position:absolute;left:12px;right:12px;height:2px;background:var(--paper);border-radius:2px;transition:all .35s var(--ease);}
+.burger span:nth-child(1){top:16px;}
+.burger span:nth-child(2){top:22px;}
+.burger span:nth-child(3){top:28px;}
+body.menu-open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+body.menu-open .burger span:nth-child(2){opacity:0;}
+body.menu-open .burger span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+/* mobile menu */
+.mobile-menu{position:fixed;inset:0;z-index:110;background:linear-gradient(160deg,var(--slate-850),var(--slate-900));
+  transform:translateX(100%);transition:transform .5s var(--ease-out);display:flex;flex-direction:column;
+  padding:calc(var(--header-h) + 20px) 28px 40px;visibility:hidden;}
+body.menu-open .mobile-menu{transform:translateX(0);visibility:visible;}
+.mobile-menu a.m-link{font-family:var(--font-display);font-weight:600;font-size:1.9rem;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  transform:translateX(30px);opacity:0;transition:all .5s var(--ease-out);}
+body.menu-open .mobile-menu a.m-link{transform:translateX(0);opacity:1;}
+.mobile-menu a.m-link:nth-child(1){transition-delay:.08s;}
+.mobile-menu a.m-link:nth-child(2){transition-delay:.13s;}
+.mobile-menu a.m-link:nth-child(3){transition-delay:.18s;}
+.mobile-menu a.m-link:nth-child(4){transition-delay:.23s;}
+.mobile-menu a.m-link:nth-child(5){transition-delay:.28s;}
+.mobile-menu a.m-link:nth-child(6){transition-delay:.33s;}
+.mobile-menu .m-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;}
+
+/* --- Hero --- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding-top:var(--header-h);}
+.hero-bg{position:absolute;inset:-10% 0 -10% 0;z-index:0;}
+.hero-bg .sky{position:absolute;inset:0;background:
+  radial-gradient(120% 90% at 78% 8%, #2b333f 0%, #191e26 42%, #101318 78%);}
+.hero-bg .glow{display:none;}
+/* animated roofline silhouette */
+.rooflines{position:absolute;bottom:0;left:0;right:0;height:42%;z-index:0;opacity:.9;}
+.rooflines svg{width:100%;height:100%;}
+.hero-photo{position:absolute;right:0;bottom:0;width:clamp(520px,44vw,1100px);height:86%;z-index:1;
+  border-radius:26px 26px 0 0;overflow:hidden;box-shadow:var(--shadow-lg);will-change:transform;
+  border:1px solid rgba(255,255,255,.12);}
+.hero-photo .ph.warm{background:linear-gradient(155deg,#4a5568,#232c37);}
+.hero-photo .ph::before{opacity:.5;}
+.hero-photo .ph-label{left:50%;bottom:50%;transform:translate(-50%,50%);background:rgba(0,0,0,.28);}
+.hero-photo-badge{position:absolute;left:22px;bottom:24px;z-index:2;display:flex;align-items:center;gap:14px;
+  background:rgba(16,19,24,.82);border:1px solid rgba(255,255,255,.14);
+  border-radius:16px;padding:14px 18px;box-shadow:0 12px 30px -12px rgba(0,0,0,.6);}
+.hero-photo-badge .hpb-num{font-family:var(--font-display);font-weight:800;font-size:1.8rem;color:var(--copper-bright);line-height:1;}
+.hero-photo-badge .hpb-lbl{font-size:.78rem;color:#cdd3dc;line-height:1.3;font-weight:600;}
+.hero-inner{position:relative;z-index:3;width:100%;}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;}
+.hero-badge-row{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:26px;}
+/* Plain text, not pills. Inline flow so the emphasised part sits on the baseline. */
+.rating-pill{display:inline-block;font-size:.95rem;font-weight:500;color:#aab1bd;line-height:1.5;}
+.rating-pill b{color:var(--copper-bright);font-weight:600;margin-right:7px;}
+.rating-pill small{color:#8b93a0;font-size:.9em;}
+.since{display:inline-block;font-size:.95rem;font-weight:500;color:#aab1bd;line-height:1.5;letter-spacing:-.005em;}
+.since b{color:var(--copper-bright);font-weight:600;}
+h1.hero-title{font-size:clamp(2.7rem,7vw,5.6rem);font-weight:800;max-width:16ch;}
+h1.hero-title .accent{color:var(--copper-bright);position:relative;white-space:nowrap;}
+h1.hero-title .accent::after{content:"";position:absolute;left:0;right:0;bottom:.06em;height:.09em;background:var(--copper);border-radius:4px;opacity:.55;}
+.hero-sub{font-size:clamp(1.05rem,1.7vw,1.32rem);color:#cdd3dc;max-width:46ch;margin-top:22px;line-height:1.55;}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;}
+.scroll-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--slate-500);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;}
+.scroll-hint .mouse{width:22px;height:34px;border:2px solid var(--slate-600);border-radius:12px;position:relative;}
+.scroll-hint .mouse::after{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:7px;background:var(--copper-bright);border-radius:2px;animation:scrolldot 1.6s infinite;}
+@keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0);}30%{opacity:1;}60%{opacity:1;transform:translate(-50%,8px);}100%{opacity:0;transform:translate(-50%,10px);}}
+
+/* --- Placeholder Img --- */
+.ph{position:relative;width:100%;height:100%;overflow:hidden;background:linear-gradient(135deg,var(--slate-700),var(--slate-850));}
+.ph::before{content:"";position:absolute;inset:0;background:
+  repeating-linear-gradient(135deg,rgba(255,255,255,.03) 0 12px,rgba(255,255,255,0) 12px 24px);}
+.ph .ph-label{position:absolute;left:14px;bottom:12px;font-family:ui-monospace,'SF Mono',Menlo,monospace;
+  font-size:.68rem;letter-spacing:.04em;color:rgba(255,255,255,.55);background:rgba(0,0,0,.32);
+  padding:5px 9px;border-radius:6px;border:1px solid rgba(255,255,255,.12);z-index:1;}
+/* The photo sits over a gradient fallback; onerror hides it and the label shows the path. */
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2;}
+.ph.warm{background:linear-gradient(135deg,#8a5a2f,#3a2a1c);}
+.ph.slate{background:linear-gradient(135deg,#3a4655,#1c222b);}
+.ph.sky{background:linear-gradient(160deg,#4a5a6e,#26303c);}
+
+/* --- Trust Bar --- */
+.trustbar{background:var(--copper);color:#1c1207;padding:0;overflow:hidden;position:relative;border-top:1px solid rgba(0,0,0,.1);min-height:57px;}
+.trust-track{display:flex;gap:0;width:max-content;align-items:center;min-height:57px;will-change:transform;}
+.trust-item{display:flex;align-items:center;gap:12px;padding:16px 34px;font-family:var(--font-display);font-weight:700;font-size:1.02rem;white-space:nowrap;}
+.trust-item svg{width:20px;height:20px;opacity:.8;}
+.trust-sep{width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.35);align-self:center;}
+
+/* --- Sections On Paper --- */
+.paper{background:var(--paper);color:var(--ink);}
+/* Light sections need the darker ink: --copper-bright is ~2.3:1 on paper and fails AA. */
+.paper .eyebrow,
+.tst .eyebrow,
+.guarantee .eyebrow{color:var(--amber-ink);}
+.paper h2{color:var(--ink);}
+.sec-head{max-width:640px;margin-bottom:56px;}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.sec-head h2{font-size:clamp(2rem,4.4vw,3.4rem);margin:8px 0 16px;font-weight:800;}
+.sec-head p{font-size:1.1rem;color:var(--ink-soft);line-height:1.6;}
+.paper .sec-head p{color:var(--ink-soft);}
+
+/* --- Services --- */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.svc-card{position:relative;background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-lg);
+  padding:32px 30px 28px;overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease),border-color .4s;}
+.svc-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--copper);transform:scaleY(0);transform-origin:top;transition:transform .5s var(--ease);}
+.svc-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-md);border-color:transparent;}
+.svc-card:hover::before{transform:scaleY(1);}
+.svc-ico{width:56px;height:56px;border-radius:15px;background:linear-gradient(140deg,var(--paper-2),#fff);border:1px solid var(--paper-line);
+  display:flex;align-items:center;justify-content:center;margin-bottom:20px;transition:all .5s var(--ease);}
+.svc-ico svg{width:28px;height:28px;stroke:var(--copper);fill:none;stroke-width:1.7;transition:all .5s var(--ease);}
+.svc-card:hover .svc-ico{background:var(--copper);transform:rotate(-6deg) scale(1.05);}
+.svc-card:hover .svc-ico svg{stroke:#fff;}
+.svc-card h3{font-size:1.28rem;margin-bottom:8px;}
+.svc-card p{color:var(--ink-soft);font-size:.98rem;line-height:1.55;}
+.svc-more{display:inline-flex;align-items:center;gap:7px;margin-top:18px;color:var(--copper);font-weight:700;font-size:.9rem;
+  max-height:0;opacity:0;overflow:hidden;transition:all .45s var(--ease);text-decoration:none;}
+.svc-more svg{width:15px;height:15px;transition:transform .35s var(--ease);}
+/* Focus as well as hover: hover-only hides this from keyboard and touch (WCAG 2.1.1). */
+.svc-card:hover .svc-more,
+.svc-card:focus-within .svc-more{max-height:40px;opacity:1;}
+.svc-card:hover .svc-more svg,
+.svc-card:focus-within .svc-more svg{transform:translateX(4px);}
+.svc-more:hover,.svc-more:focus-visible{text-decoration:underline;}
+
+/* --- Our Work --- */
+.work{background:var(--slate-850);color:var(--paper);}
+.work .sec-head h2{color:var(--paper);}
+.work .sec-head p{color:#bcc3cd;}
+.work-block{margin-top:72px;}
+.work-block:first-of-type{margin-top:0;}
+.block-label{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.block-label .num{font-family:var(--font-display);font-weight:800;font-size:.9rem;color:#1c1207;background:var(--copper);
+  width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.block-label h3{font-size:clamp(1.4rem,2.6vw,2rem);}
+
+/* before / after */
+.ba{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);
+  user-select:none;touch-action:pan-y;cursor:ew-resize;background:#000;}
+.ba .layer{position:absolute;inset:0;}
+.ba .ph-label{display:none;} /* filename hints add clutter here; the Before/After pills already label the sides */
+.ba .after-layer{clip-path:inset(0 0 0 var(--split,50%));z-index:2;}
+.ba .ba-tag{position:absolute;top:16px;font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.14em;
+  text-transform:uppercase;padding:7px 13px;border-radius:999px;z-index:3;}
+.ba .tag-before{left:16px;background:rgba(0,0,0,.45);color:#fff;z-index:1;}
+.ba .tag-after{right:16px;background:var(--copper);color:#1c1207;}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--split,50%);width:3px;background:#fff;z-index:4;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(0,0,0,.25);}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+  background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;color:var(--slate-800);}
+.ba-knob svg{width:26px;height:26px;}
+.ba-hint{text-align:center;margin-top:16px;color:var(--slate-500);font-size:.85rem;letter-spacing:.02em;}
+
+/* the big roofs of the placeholders inside ba */
+
+/* gallery */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px;}
+.filter{padding:10px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.16);color:#c3c9d2;font-weight:600;font-size:.9rem;
+  transition:all .3s var(--ease);}
+.filter:hover{border-color:var(--copper);color:#fff;}
+.filter.active{background:var(--copper);color:#1c1207;border-color:var(--copper);}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.gitem{position:relative;aspect-ratio:1;border-radius:18px;overflow:hidden;cursor:pointer;
+  transition:transform .55s var(--ease),opacity .45s var(--ease),filter .5s;}
+.gitem.hide{transform:scale(.85);opacity:0;pointer-events:none;position:absolute;width:0;height:0;padding:0;margin:0;overflow:hidden;}
+.gitem::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 55%);opacity:0;transition:opacity .4s;}
+.gitem:hover::after{opacity:1;}
+.gitem .cap{position:absolute;left:14px;bottom:12px;z-index:2;transform:translateY(8px);opacity:0;transition:all .4s var(--ease);}
+.gitem:hover .cap{transform:translateY(0);opacity:1;}
+.gitem .cap b{font-family:var(--font-display);font-size:1rem;display:block;}
+.gitem .cap span{font-size:.76rem;color:var(--copper-glow);text-transform:uppercase;letter-spacing:.08em;font-weight:700;}
+.gitem .zoom{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);
+  display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.7);transition:all .4s var(--ease);}
+.gitem:hover .zoom{opacity:1;transform:scale(1);}
+.gitem .zoom svg{width:16px;height:16px;stroke:var(--slate-800);}
+.gitem.gspan2{grid-column:span 2;grid-row:span 2;aspect-ratio:1;}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(8,10,13,.95);
+  display:flex;align-items:center;justify-content:center;padding:5vw;opacity:0;visibility:hidden;transition:all .4s var(--ease);}
+.lightbox.open{opacity:1;visibility:visible;}
+.lb-frame{width:min(92vw,1000px);aspect-ratio:16/10;border-radius:20px;overflow:hidden;transform:scale(.94);transition:transform .5s var(--ease-out);box-shadow:var(--shadow-lg);position:relative;}
+.lightbox.open .lb-frame{transform:scale(1);}
+.lb-cap{position:absolute;left:0;right:0;bottom:0;padding:26px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);z-index:2;}
+.lb-cap b{font-family:var(--font-display);font-size:1.4rem;display:block;}
+.lb-cap span{color:var(--copper-glow);font-size:.85rem;text-transform:uppercase;letter-spacing:.1em;font-weight:700;}
+.lb-close{position:absolute;top:22px;right:22px;z-index:210;width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.lb-close:hover{background:rgba(255,255,255,.2);transform:rotate(90deg);}
+.lb-close svg{width:22px;height:22px;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:210;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.lb-nav:hover{background:var(--copper);color:#1c1207;}
+.lb-nav svg{width:24px;height:24px;}
+.lb-prev{left:2vw;}.lb-next{right:2vw;}
+
+/* --- Why / Stats --- */
+.why{background:var(--slate-900);position:relative;overflow:hidden;}
+/* auto-fit: the reviews stat only renders with a sourced rating, so the count varies. */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:24px;margin-top:20px;}
+.stat{padding:34px 26px;border-radius:var(--radius-lg);background:linear-gradient(160deg,var(--slate-800),var(--slate-850));
+  border:1px solid rgba(255,255,255,.07);text-align:left;position:relative;overflow:hidden;}
+.stat .num{font-family:var(--font-display);font-weight:800;font-size:clamp(2.6rem,5vw,3.6rem);color:var(--copper-bright);line-height:1;letter-spacing:-.03em;}
+.stat .num .suf{color:var(--paper);}
+/* Pinned to an absolute size: in em it would overflow the oversized .num and clip. */
+.stat .num .ph-flag{font-size:.95rem;white-space:normal;line-height:1.35;
+  vertical-align:middle;text-align:center;}
+.stat .lbl{margin-top:10px;color:#bcc3cd;font-size:.98rem;font-weight:500;}
+.why-two{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:80px;}
+.why-list{display:flex;flex-direction:column;gap:18px;margin-top:8px;}
+.why-li{display:flex;gap:16px;align-items:flex-start;}
+.why-li .tick{flex:0 0 auto;width:34px;height:34px;border-radius:10px;background:rgba(63,157,109,.14);border:1px solid rgba(63,157,109,.3);display:flex;align-items:center;justify-content:center;}
+.why-li .tick svg{width:18px;height:18px;stroke:var(--ok);fill:none;stroke-width:2.4;}
+.why-li b{font-family:var(--font-display);font-size:1.1rem;display:block;margin-bottom:3px;}
+.why-li p{color:#aab1bd;font-size:.95rem;}
+.why-photo{aspect-ratio:4/5;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);}
+
+/* --- How It Works --- */
+.steps{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:20px;}
+.steps::before{content:"";position:absolute;top:34px;left:8%;right:8%;height:2px;background:repeating-linear-gradient(90deg,var(--paper-line) 0 8px,transparent 8px 16px);z-index:0;}
+.step{position:relative;z-index:1;text-align:center;padding:0 6px;}
+.step-dot{width:68px;height:68px;border-radius:50%;background:#fff;border:2px solid var(--paper-line);margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:1.5rem;color:var(--copper);
+  transition:all .5s var(--ease);position:relative;}
+.step-dot svg{width:28px;height:28px;stroke:var(--copper);fill:none;stroke-width:1.7;}
+.step.on .step-dot{background:var(--copper);color:#fff;border-color:var(--copper);transform:scale(1.06);box-shadow:0 14px 30px -12px rgba(201,119,46,.7);}
+.step.on .step-dot svg{stroke:#fff;}
+.step h3{font-size:1.18rem;margin-bottom:8px;}
+.step p{color:var(--ink-soft);font-size:.94rem;}
+
+/* --- Emergency Band --- */
+.emergency{position:relative;overflow:hidden;background:var(--slate-900);color:#fff;}
+.emg-bg{position:absolute;inset:-15% 0;z-index:0;background:linear-gradient(105deg,{{brand.colors.emergencyDeep}},{{brand.colors.accent}} 120%);opacity:.92;will-change:transform;}
+.emg-bg::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(0,0,0,.12) 0 26px,transparent 26px 52px);}
+.emg-inner{position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:34px;align-items:center;}
+/* Same kicker as every other section label. */
+.emg-inner .pulse{display:block;font-family:var(--font-body);font-weight:600;
+  font-size:clamp(.95rem,1.15vw,1.0625rem);letter-spacing:-.005em;line-height:1.25;
+  color:rgba(255,255,255,.86);margin-bottom:14px;}
+.emg-inner h2{font-size:clamp(1.9rem,4vw,3.1rem);max-width:16ch;}
+.emg-inner p{color:rgba(255,255,255,.9);margin-top:12px;font-size:1.1rem;max-width:40ch;}
+.emg-call{text-align:center;}
+.emg-call .big-num{font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,3vw,2.3rem);color:#fff;display:block;margin-bottom:14px;}
+
+/* --- Testimonials --- */
+.tst{background:var(--paper);color:var(--ink);}
+.tst-viewport{overflow:hidden;position:relative;}
+.tst-track{display:flex;transition:transform .7s var(--ease-out);}
+.tst-slide{flex:0 0 100%;padding:6px;}
+.tst-card{background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:clamp(30px,5vw,54px);
+  display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;box-shadow:var(--shadow-sm);}
+.tst-quote{font-family:var(--font-display);font-weight:500;font-size:clamp(1.25rem,2.3vw,1.85rem);line-height:1.35;color:var(--ink);letter-spacing:-.01em;}
+.tst-stars{display:flex;gap:3px;margin-bottom:20px;}
+.tst-stars svg{width:20px;height:20px;}
+.tst-person{display:flex;align-items:center;gap:14px;margin-top:24px;}
+.tst-ava{width:52px;height:52px;border-radius:50%;background:var(--copper);color:#1c1207;display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:1.2rem;flex:0 0 auto;}
+.tst-person b{font-family:var(--font-display);font-size:1.05rem;display:block;}
+.tst-person span{color:var(--ink-soft);font-size:.88rem;}
+.tst-side{width:150px;flex:0 0 auto;text-align:center;border-right:1px solid var(--paper-line);padding-right:34px;}
+.tst-side .big{font-family:var(--font-display);font-weight:800;font-size:3.2rem;color:var(--copper);line-height:1;}
+/* The panel is sized for a short numeric score ("5.0"); a word overflows it. */
+.tst-side .big.is-text{font-size:1.3rem;letter-spacing:0;}
+.tst-side .sub{font-size:.8rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-top:6px;}
+.tst-side .ss{display:flex;gap:2px;justify-content:center;margin-top:12px;}
+.tst-side .ss svg{width:15px;height:15px;}
+.tst-ctrl{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:34px;}
+.tst-dots{display:flex;gap:8px;}
+.tst-dot{width:9px;height:9px;border-radius:50%;background:var(--paper-line);transition:all .3s;cursor:pointer;}
+.tst-dot.active{background:var(--copper);width:26px;border-radius:5px;}
+.tst-arrow{width:46px;height:46px;border-radius:50%;border:1px solid var(--paper-line);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.tst-arrow:hover{background:var(--copper);border-color:var(--copper);color:#fff;}
+.tst-arrow svg{width:20px;height:20px;}
+
+/* --- Service Area --- */
+.area{background:var(--slate-850);color:var(--paper);}
+.area-grid{display:grid;grid-template-columns:1fr;gap:50px;align-items:center;}
+.area .sec-head h2{color:var(--paper);}
+.area-list{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px;}
+.area-li{display:flex;align-items:center;gap:12px;padding:16px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;transition:all .3s;}
+.area-li:hover{border-color:var(--copper);background:rgba(226,145,58,.08);}
+.area-li svg{width:20px;height:20px;stroke:var(--copper-bright);fill:none;stroke-width:1.8;flex:0 0 auto;}
+.area-li b{font-family:var(--font-display);font-size:1.02rem;}
+
+/* --- Guarantee / Finance --- */
+.guarantee{background:var(--paper);color:var(--ink);}
+.gtee-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.gtee-card{background:#fff;border:1px solid var(--paper-line);border-radius:var(--radius-lg);padding:36px 30px;text-align:center;transition:all .5s var(--ease);}
+.gtee-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md);}
+.gtee-ico{width:66px;height:66px;border-radius:50%;background:var(--paper-2);margin:0 auto 22px;display:flex;align-items:center;justify-content:center;}
+.gtee-ico svg{width:32px;height:32px;stroke:var(--copper);fill:none;stroke-width:1.6;}
+.gtee-card h3{font-size:1.3rem;margin-bottom:10px;}
+.gtee-card p{color:var(--ink-soft);font-size:.96rem;line-height:1.55;}
+
+/* --- Final Cta + Form --- */
+.contact{background:var(--slate-900);color:var(--paper);position:relative;overflow:hidden;}
+.contact .glow2{display:none;}
+.contact-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;position:relative;z-index:2;align-items:start;}
+.contact-left h2{font-size:clamp(2rem,4.4vw,3.4rem);font-weight:800;}
+.contact-left .lead{color:#bcc3cd;font-size:1.15rem;margin-top:18px;max-width:42ch;line-height:1.6;}
+.contact-perks{margin-top:34px;display:flex;flex-direction:column;gap:14px;}
+.contact-perk{display:flex;align-items:center;gap:14px;font-size:1.02rem;}
+.contact-perk svg{width:22px;height:22px;stroke:var(--copper-bright);fill:none;stroke-width:2;flex:0 0 auto;}
+.contact-call{margin-top:34px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1);}
+.contact-call span{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--slate-500);font-weight:700;}
+.contact-call a{font-family:var(--font-display);font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);display:block;margin-top:6px;}
+.contact-call a:hover{color:var(--copper-bright);}
+
+.form-card{background:linear-gradient(165deg,var(--slate-800),var(--slate-850));border:1px solid rgba(255,255,255,.09);
+  border-radius:var(--radius-lg);padding:clamp(26px,4vw,40px);box-shadow:var(--shadow-lg);}
+.form-card h3{font-size:1.5rem;margin-bottom:6px;}
+.form-card .fsub{color:#bcc3cd;font-size:.95rem;margin-bottom:26px;}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.field{margin-bottom:16px;}
+.field-short{max-width:240px;}
+.field label{display:block;font-size:.82rem;font-weight:600;color:#c3c9d2;margin-bottom:7px;}
+.field label .req{color:var(--copper-bright);}
+.field input,.field select,.field textarea{width:100%;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.12);color:var(--paper);font-family:inherit;font-size:.98rem;transition:all .3s;}
+.field input::placeholder,.field textarea::placeholder{color:#8b93a0;}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--copper);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(201,119,46,.18);}
+.field select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%23c3c9d2' stroke-width='2'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:44px;}
+.field select option{color:#1a1d23;background:#fff;}
+.field textarea{resize:vertical;min-height:92px;}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;opacity:0;}
+.spam-check{margin:6px 0 18px;}
+.spam-note{margin-top:12px;font-size:.8rem;line-height:1.55;color:#8b93a0;}
+.spam-note b{color:#c3c9d2;font-weight:600;}
+.spam-note a{color:var(--copper-bright);text-decoration:underline;text-underline-offset:2px;}
+.form-note{font-size:.78rem;color:#9aa2ae;margin-top:14px;text-align:center;line-height:1.5;}
+.form-success{display:none;text-align:center;padding:20px 0;}
+.form-success.show{display:block;animation:fadeUp .6s var(--ease-out);}
+.form-success .ok-ico{width:72px;height:72px;border-radius:50%;background:rgba(63,157,109,.15);border:1px solid rgba(63,157,109,.4);margin:0 auto 20px;display:flex;align-items:center;justify-content:center;}
+.form-success .ok-ico svg{width:36px;height:36px;stroke:var(--ok);fill:none;stroke-width:2.4;}
+.form-success h3{margin-bottom:8px;}
+.form-success p{color:#bcc3cd;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* --- Footer --- */
+footer{background:var(--slate-850);color:#aab1bd;padding:70px 0 34px;border-top:1px solid rgba(255,255,255,.07);}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:44px;border-bottom:1px solid rgba(255,255,255,.08);}
+.foot-brand .logo{margin-bottom:18px;}
+.foot-brand p{font-size:.94rem;line-height:1.6;max-width:34ch;}
+.foot-socials{display:flex;gap:12px;margin-top:22px;}
+.foot-socials a{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.foot-socials a:hover{background:var(--copper);border-color:var(--copper);color:#1c1207;transform:translateY(-3px);}
+.foot-socials svg{width:19px;height:19px;}
+.foot-col h3{font-family:var(--font-display);font-size:1.05rem;color:var(--paper);margin-bottom:18px;}
+.foot-col ul li{margin-bottom:11px;}
+.foot-col ul li a{font-size:.94rem;transition:color .25s;}
+.foot-col ul li a:hover{color:var(--copper-bright);}
+.foot-nap{font-size:.94rem;line-height:1.7;}
+.foot-nap a{transition:color .25s;}
+.foot-nap a:hover{color:var(--copper-bright);}
+.foot-nap .big-phone{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--paper);display:block;margin:4px 0 2px;}
+.foot-accreds{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+.foot-accreds span{font-size:.72rem;font-weight:700;color:#8b93a0;border:1px solid rgba(255,255,255,.12);padding:5px 10px;border-radius:7px;}
+.foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:28px;font-size:.84rem;color:#9aa2ae;}
+.foot-bottom a:hover{color:var(--copper-bright);}
+
+/* --- Scroll Reveal --- */
+/* Above-fold hero entrance. Deliberately CSS-only and opacity-free: these elements are
+   what First Contentful Paint measures, so they must never start invisible or wait on
+   JavaScript. Only the transform animates. Everything below the fold uses [data-reveal]
+   instead, which is fine because it is not on screen yet. */
+.hero-rise{animation:heroRise .7s var(--ease-out) both;}
+.hero-rise:nth-child(2){animation-delay:.06s;}
+.hero-rise:nth-child(3){animation-delay:.12s;}
+.hero-rise:nth-child(4){animation-delay:.18s;}
+@keyframes heroRise{from{transform:translateY(18px);}to{transform:none;}}
+@media(prefers-reduced-motion:reduce){.hero-rise{animation:none;}}
+
+[data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);will-change:opacity,transform;}
+[data-reveal].in{opacity:1;transform:none;}
+[data-reveal="left"]{transform:translateX(-40px);}
+[data-reveal="right"]{transform:translateX(40px);}
+[data-reveal="scale"]{transform:scale(.92);}
+[data-reveal].in{transform:none;}
+[data-stagger]>*{opacity:0;transform:translateY(30px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out);}
+[data-stagger].in>*{opacity:1;transform:none;}
+
+/* --- Responsive --- */
+@media(max-width:1080px){
+  .services-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery{grid-template-columns:repeat(3,1fr);}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .steps{grid-template-columns:repeat(2,1fr);gap:40px 24px;}
+  .steps::before{display:none;}
+  .foot-grid{grid-template-columns:1fr 1fr;gap:34px;}
+  .hero-photo{width:44vw;opacity:.85;}
+}
+@media(max-width:1024px){
+  nav.desktop,.header-phone{display:none;}
+  .burger{display:block;}
+  .header-cta .btn-primary{display:none;}
+  .why-two,.contact-grid,.area-grid,.tst-card{grid-template-columns:1fr;}
+  .tst-side{border-right:none;border-bottom:1px solid var(--paper-line);padding-right:0;padding-bottom:24px;width:100%;display:flex;align-items:center;justify-content:center;gap:20px;}
+  .tst-side .ss{margin-top:0;}
+  .emg-inner{grid-template-columns:1fr;}
+  .hero-photo{display:none;}
+  .why-photo{max-width:420px;margin:0 auto;order:-1;}
+  /* hero flows naturally on mobile so nothing clips */
+  .hero{min-height:auto;align-items:flex-start;padding-top:calc(var(--header-h) + 36px);padding-bottom:56px;}
+  .scroll-hint{display:none;}
+}
+@media(max-width:560px){
+  .wrap{padding:0 18px;}
+  .services-grid,.gallery,.stats-grid,.steps,.gtee-grid,.f-row{grid-template-columns:1fr;}
+  .gitem.gspan2{grid-column:span 1;grid-row:span 1;}
+  .filters{gap:8px;}
+  .filter{padding:8px 14px;font-size:.82rem;}
+  .foot-grid{grid-template-columns:1fr;}
+  .hero-cta{flex-direction:column;align-items:stretch;}
+  .hero-cta .btn{width:100%;}
+  .tst-card{padding:26px;}
+  .area-list{grid-template-columns:1fr;}
+  /* accreditation row stacks cleanly instead of clipping */
+        .hero-badge-row{gap:10px;margin-bottom:22px;}
+  .trust-item{padding:14px 22px;font-size:.94rem;}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+  [data-reveal],[data-stagger]>*{opacity:1 !important;transform:none !important;}
+}
+/* ---- accessible form validation states ---- */
+.field input[aria-invalid="true"],.field select[aria-invalid="true"],.field textarea[aria-invalid="true"]{
+  border-color:#e2913a;box-shadow:0 0 0 3px rgba(226,145,58,.22);
+}
+.field-error{display:none;margin-top:6px;font-size:.8rem;font-weight:600;color:#f4ad55;}
+.field-error.show{display:block;}
+.form-status{margin:0 0 14px;font-size:.9rem;font-weight:700;color:#f4ad55;min-height:0;}
+.form-status:empty{margin:0;}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+
+/* Site-wide focus ring. Copper plus a dark halo, visible on both slate and paper. */
+:where(a,button,[role="slider"],[tabindex]:not([tabindex="-1"]),summary):focus-visible{
+  outline:3px solid var(--copper-bright);
+  outline-offset:2px;
+  border-radius:4px;
+}
+.ba-handle:focus-visible{outline-offset:0;}
+.ba-handle:focus-visible .ba-knob{box-shadow:0 0 0 4px rgba(201,119,46,.55);}
+
+/* Unverified values render as [BRACKETED] monospace. Never swap one for a plausible
+   default: see docs/ONBOARDING.md. */
+.ph-flag{display:inline-block;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.8em;font-weight:600;letter-spacing:0;text-transform:none;
+  padding:.1em .5em;border-radius:4px;white-space:nowrap;
+  border:1px dashed currentColor;opacity:.55;}
+
+/* ---------- footer statutory disclosures ---------- */
+/* No border here: .foot-grid already supplies the dividing rule above. */
+.foot-legal{padding-top:26px;}
+.foot-legal p{color:var(--slate-500);font-size:.82rem;line-height:1.7;margin:0 0 8px;}
+.foot-legal p:last-child{margin-bottom:0;}
+
+/* Shown only while meta.noindex is true; the markup is conditional, these rules are not. */
+.demo-ribbon{position:fixed;z-index:9999;bottom:0;left:0;right:0;
+  background:rgba(21,25,32,.94);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  color:#b9c0cb;text-align:center;
+  border-top:1px solid rgba(226,145,58,.42);
+  font-size:.78rem;font-weight:600;letter-spacing:.01em;
+  padding:8px 14px;line-height:1.35;
+  box-shadow:0 -2px 18px rgba(0,0,0,.22);}
+.demo-ribbon b{font-weight:800;color:var(--copper-bright);}
+/* Drop the second sentence on narrow screens so the ribbon stays short. */
+@media (max-width:640px){
+  .demo-ribbon{font-size:.7rem;padding:6px 10px;}
+  .ribbon-more{display:none;}
+}
+{{#if meta.noindex}}/* Reserves space for the fixed ribbon. Conditional, like the ribbon
+   itself: a live build has no ribbon and must not carry 52px of dead space. */
+body{padding-bottom:52px;}{{/if}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+{{#if meta.noindex}}<div class="demo-ribbon" role="note">
+  <b>Design preview</b>: sample business, not a real company.<span class="ribbon-more"> Figures, reviews and accreditations are placeholder content.</span>
+</div>{{/if}}
+
+<header id="header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo" aria-label="{{business.name}} home">
+      <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="38" height="38" rx="10" fill="{{brand.colors.accent}}"/>
+        <path d="M8 22 L20 11 L32 22" stroke="{{brand.colors.logoMarkInk}}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M11 22 V30 H29 V22" stroke="{{brand.colors.logoMarkInk}}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M17 30 V25 H23 V30" stroke="{{brand.colors.logoMarkInk}}" stroke-width="2.6" stroke-linejoin="round"/>
+      </svg>
+      <span class="logo-txt"><b>{{business.logoLine1}}</b><span>{{business.logoLine2}}</span></span>
+    </a>
+
+    <nav class="desktop" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#why">Why Us</a>
+      <a href="#process">Process</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#area">Areas</a>
+    </nav>
+
+    <div class="header-cta">
+      <a href="{{business.phoneHref}}" class="header-phone">
+        <span>Call the team</span>
+        <b>{{business.phoneDisplay}}</b>
+      </a>
+      <a href="#contact" class="btn btn-primary">Get a Free Quote</a>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" class="m-link">Services</a>
+  <a href="#work" class="m-link">Our Work</a>
+  <a href="#why" class="m-link">Why Us</a>
+  <a href="#process" class="m-link">Process</a>
+  <a href="#reviews" class="m-link">Reviews</a>
+  <a href="#contact" class="m-link">Contact</a>
+  <div class="m-foot">
+    <a href="#contact" class="btn btn-primary btn-block btn-lg">Get a Free Quote</a>
+    <!-- Emoji wrapped so screen readers don't announce "telephone receiver". -->
+    <a href="{{business.phoneHref}}" class="btn btn-ghost btn-block"><span aria-hidden="true">📞</span> {{business.phoneDisplay}}</a>
+  </div>
+</div>
+
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="sky"></div>
+    <div class="rooflines" id="rooflines">
+      <svg viewBox="0 0 1440 400" preserveAspectRatio="none" fill="none">
+        <path d="M0 400 V240 L120 180 L240 240 V400 Z" fill="#161b22"/>
+        <path d="M220 400 V210 L360 130 L500 210 V400 Z" fill="#1b212a"/>
+        <path d="M480 400 V250 L620 190 L760 250 V400 Z" fill="#141920"/>
+        <path d="M740 400 V200 L900 120 L1060 200 V400 Z" fill="#1b212a"/>
+        <path d="M1040 400 V240 L1180 175 L1320 240 V400 Z" fill="#161b22"/>
+        <path d="M1300 400 V210 L1440 140 V400 Z" fill="#1b212a"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-photo" aria-hidden="false">
+    <div class="ph warm"><img src="{{hero.image.src}}" alt="{{hero.image.alt}}" width="1400" height="1000" fetchpriority="high" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">{{hero.image.src}}</span></div>
+    <div class="hero-photo-badge">
+      <span class="hpb-num">{{stats.jobsCompletedFormatted}}+</span>
+      <span class="hpb-lbl">roofs completed<br>across Scotland</span>
+    </div>
+  </div>
+
+  <div class="wrap hero-inner">
+    <div class="hero-grid">
+      <div class="hero-badge-row hero-rise">
+        <!-- Only rendered with a sourced rating. See docs/ONBOARDING.md gate 4. -->
+        {{#if reviews}}
+        <div class="rating-pill">
+          <b>{{reviews.score}}&#9733;</b><small>{{reviews.source}}, verified {{reviews.capturedDate}}</small>
+        </div>
+        {{/if}}
+        <div class="since">{{business.address}}'s trusted roofers since <b>{{business.foundedYear}}</b></div>
+      </div>
+
+      <h1 class="hero-title hero-rise">{{hero.titleLine1}}<br>the <span class="accent">{{hero.titleAccent}}</span>.</h1>
+
+      <p class="hero-sub hero-rise">{{hero.subheading}}</p>
+
+      <div class="hero-cta hero-rise">
+        <a href="#contact" class="btn btn-primary btn-lg">
+          Get a Free Quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="{{business.phoneHref}}" class="btn btn-ghost btn-lg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Call {{business.phoneDisplay}}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" aria-hidden="true">
+    <div class="mouse"></div>
+    Scroll
+  </div>
+</section>
+
+<div class="trustbar" aria-label="Accreditations and guarantee">
+  <div class="trust-track" id="trustTrack"></div>
+</div>
+
+<section class="section paper" id="services">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <span class="eyebrow">What we do</span>
+      <h2>Every roofing job, one trusted team</h2>
+      <p>From a single slipped slate to a full re-roof, our team handles it end to end, with tidy sites, honest pricing and workmanship that's guaranteed.</p>
+    </div>
+
+    <!-- Service copy comes from client.json. Two things a build cannot check: "code-compliant"
+         is US phrasing (Scotland uses the Building Regulations and a building warrant), and a
+         stated lifespan needs the manufacturer's published figure, cited. -->
+    <div class="services-grid" data-stagger>
+      {{#each services}}
+      <article class="svc-card">
+        <div class="svc-ico"><svg viewBox="0 0 24 24">{{{this.iconSvg}}}</svg></div>
+        <h3>{{this.title}}</h3>
+        <p>{{this.description}}</p>
+        <a class="svc-more" href="#contact">Get a quote<span class="visually-hidden"> {{this.srLabel}}</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section work" id="work">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Our work</span>
+      <h2>See the difference we make</h2>
+      <!-- Placeholders. A client's site must use their own photos: docs/ONBOARDING.md gate 7. -->
+      <p>Drag, filter and explore the project gallery layout, then design your own roof below.</p>
+    </div>
+
+    <div class="work-block" data-reveal>
+      <div class="block-label"><h3>Before &amp; after: {{beforeAfter.title}}</h3></div>
+      <div class="ba" id="ba">
+        <div class="layer">
+          <div class="ph slate" style="height:100%"><img src="{{beforeAfter.before.src}}" alt="{{beforeAfter.before.alt}}" width="1200" height="800" loading="lazy" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">{{beforeAfter.before.src}}</span></div>
+          <span class="ba-tag tag-before">Before</span>
+        </div>
+        <div class="layer after-layer">
+          <div class="ph warm" style="height:100%;background:linear-gradient(135deg,#4a5a6e,#2b3742)"><img src="{{beforeAfter.after.src}}" alt="{{beforeAfter.after.alt}}" width="1200" height="800" loading="lazy" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">{{beforeAfter.after.src}}</span></div>
+          <span class="ba-tag tag-after">After</span>
+        </div>
+        <!-- A real slider, so it is keyboard-operable and not drag-only. Both images keep their
+           alt text and stay in the accessibility tree. -->
+        <div class="ba-handle" id="baHandle"
+             role="slider" tabindex="0"
+             aria-label="Reveal the finished roof"
+             aria-orientation="horizontal"
+             aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+             aria-valuetext="50% revealed">
+          <div class="ba-knob" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+      </div>
+      <p class="ba-hint">Drag the handle, or focus it and use the arrow keys, to reveal the finished roof</p>
+    </div>
+
+    <div class="work-block" data-reveal>
+      <div class="block-label"><h3>Project gallery</h3></div>
+      <!-- aria-pressed communicates which filter is active; the count below is a
+           live region so a screen-reader user hears how many projects remain. -->
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter" data-filter="repairs" aria-pressed="false">Repairs</button>
+        <button class="filter" data-filter="replacements" aria-pressed="false">Replacements</button>
+        <button class="filter" data-filter="flat" aria-pressed="false">Flat roofs</button>
+        <button class="filter" data-filter="storm" aria-pressed="false">Storm damage</button>
+      </div>
+      <p class="visually-hidden" id="filterCount" role="status" aria-live="polite"></p>
+      <div class="gallery" id="gallery"></div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section why" id="why">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Why {{business.name}}</span>
+      <h2>{{stats.yearsRoofing}} years of roofs that hold</h2>
+      <p>The numbers {{business.address}} homeowners trust us on.</p>
+    </div>
+
+    <!-- The figure in .val is the source of truth; JS animates up to it. With JS off, or
+         Reduce Motion, the band still reads correctly. -->
+    <div class="stats-grid" id="stats" data-stagger>
+      <div class="stat"><div class="num" data-animate-count><span class="val">{{stats.yearsRoofing}}</span><span class="suf">+</span></div><div class="lbl">Years roofing {{business.address}}</div></div>
+      <div class="stat"><div class="num" data-animate-count><span class="val">{{stats.jobsCompletedFormatted}}</span><span class="suf">+</span></div><div class="lbl">Roofs completed</div></div>
+      {{#if reviews}}
+      <div class="stat"><div class="num"><span class="val">{{reviews.score}}</span></div><div class="lbl">Verified customer reviews</div></div>
+      {{/if}}
+      <div class="stat"><div class="num" data-animate-count><span class="val">24</span><span class="suf">/7</span></div><div class="lbl">Emergency callout</div></div>
+    </div>
+
+    <div class="why-two">
+      <div data-reveal="left">
+        <span class="eyebrow">The {{business.name}} promise</span>
+        <h2 style="font-size:clamp(1.8rem,3.4vw,2.6rem);margin:8px 0 10px;">No surprises. Just a roof that does its job.</h2>
+        <div class="why-list">
+          {{#each usps.whyUs}}
+          <div class="why-li"><span class="tick"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>{{this.title}}</b><p>{{{this.description}}}</p></div></div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="why-photo" data-reveal="right">
+        <div class="ph warm" style="height:100%"><img src="{{team.image.src}}" alt="{{team.image.alt}}" width="1200" height="900" loading="lazy" decoding="async" onerror="this.style.display='none'" /><span class="ph-label">{{team.image.src}}</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section paper" id="process">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">How it works</span>
+      <h2>From first call to finished roof</h2>
+      <p>A simple, four-step process designed to be clear and stress-free.</p>
+    </div>
+    <div class="steps" id="steps">
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>1. Get in touch</h3>
+        <p>Call or send the form. Tell us what's going on and we'll book a visit fast, often same week.</p>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24"><rect x="6" y="9" width="12" height="7" rx="1"/><path d="M12 9V5M9 5h6M4 20h16" stroke-linecap="round"/></svg></div>
+        <h3>2. Free drone survey</h3>
+        <p>We inspect your whole roof by drone and hand you a clear report and a fixed written quote.</p>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24"><path d="M14 2l6 6-9 9-6 1 1-6 8-8Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 4l6 6" stroke-linecap="round"/></svg></div>
+        <h3>3. The work</h3>
+        <p>Our accredited crew arrives on schedule, protects your property and does the job properly.</p>
+      </div>
+      <div class="step">
+        <div class="step-dot"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>4. Sign-off &amp; guarantee</h3>
+        <p>We walk you through the finished work, clear the site and issue your 12-month guarantee.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section emergency" id="emergency">
+  <div class="emg-bg" id="emgBg" aria-hidden="true"></div>
+  <div class="wrap emg-inner">
+    <div data-reveal="left">
+      <span class="pulse">24/7 emergency callout</span>
+      <h2>Roof leaking right now? We'll be there.</h2>
+      <p>Storm damage, a burst valley or water coming through the ceiling? Call our emergency line and we'll make it safe, day or night.</p>
+    </div>
+    <div class="emg-call" data-reveal="right">
+      <span class="big-num">{{business.emergencyPhoneDisplay}}</span>
+      <a href="{{business.emergencyPhoneHref}}" class="btn btn-dark btn-lg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Call the emergency line
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section tst" id="reviews">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Reviews</span>
+      <h2>{{business.address}} homeowners, in their words</h2>
+      <!-- No platform names without a linkable profile and capture date. Gate 4. -->
+      {{#if meta.noindex}}<p>Sample reviews, shown to demonstrate the layout.</p>{{/if}}{{#unless meta.noindex}}{{#if reviews}}<p>Rated {{reviews.score}} on {{reviews.source}}, verified {{reviews.capturedDate}}.</p>{{/if}}{{/unless}}
+    </div>
+    <!-- Slides live in the markup, not injected by JS: this is a primary conversion element
+         and must survive a script failure. -->
+    <div class="tst-viewport" data-reveal>
+      <div class="tst-track" id="tstTrack">
+        {{#each testimonials}}
+        <div class="tst-slide"><div class="tst-card">
+          <div class="tst-side"><div><div class="big is-text">{{this.ratingLabel}}</div><div class="sub">Rating</div></div><div class="ss" aria-hidden="true">{{{this.starsHtml}}}</div></div>
+          <div><div class="tst-stars" aria-hidden="true">{{{this.starsHtml}}}</div>
+          <p class="tst-quote">"{{this.quote}}"</p>
+          <div class="tst-person"><div class="tst-ava" aria-hidden="true">{{this.avatarInitial}}</div><div><b>{{this.name}}</b><span>{{this.attribution}}</span></div></div>
+          </div></div></div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="tst-ctrl">
+      <button class="tst-arrow" id="tstPrev" aria-label="Previous review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="tst-dots" id="tstDots"></div>
+      <button class="tst-arrow" id="tstNext" aria-label="Next review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<section class="section area" id="area">
+  <div class="wrap">
+    <div class="area-grid">
+      <div data-reveal="left">
+        <span class="eyebrow">Where we work</span>
+        <h2 style="font-size:clamp(1.9rem,3.6vw,2.8rem);margin:8px 0 12px;">Proudly covering {{business.address}} &amp; beyond</h2>
+        <p style="color:#bcc3cd;font-size:1.08rem;">{{areas.intro}}</p>
+        <div class="area-list">
+          {{#each business.areasCovered}}<div class="area-li"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4"/></svg><b>{{this}}</b></div>
+          {{/each}}
+        </div>
+        <p style="color:#8b93a0;font-size:.9rem;margin-top:22px;">Not sure if we cover you? <a href="#contact" style="color:var(--copper-bright);font-weight:700;">Just ask →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section guarantee">
+  <div class="wrap">
+    <div class="sec-head center" data-reveal>
+      <span class="eyebrow">Peace of mind</span>
+      <h2>Guaranteed, insured &amp; affordable</h2>
+    </div>
+    <div class="gtee-grid" data-stagger>
+      <div class="gtee-card">
+        <div class="gtee-ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>12-Month Guarantee</h3>
+        <p>Every job comes with a written 12-month workmanship guarantee. If it's not right, we put it right, no quibbles. This guarantee is in addition to your statutory rights under the Consumer Rights Act 2015 and does not affect them.</p>
+      </div>
+      <div class="gtee-card">
+        <div class="gtee-ico"><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg></div>
+        <h3>Fully Insured</h3>
+        <p>Public liability cover on every project. <span class="ph-flag">[INSURER + POLICY NO. + EXPIRY]</span></p>
+      </div>
+      <!-- No finance block without an FCA reference number. docs/ONBOARDING.md gate 5. -->
+      <div class="gtee-card">
+        <div class="gtee-ico"><svg viewBox="0 0 24 24"><path d="M4 7h16v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 7l2-3h12l2 3" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 12h6" stroke-linecap="round"/></svg></div>
+        <h3>Clear Fixed Quotes</h3>
+        <p>A written, itemised quote before any work starts, so you know the full cost up front. No hidden extras and no pressure to decide on the day.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="glow2" aria-hidden="true"></div>
+  <div class="wrap contact-grid">
+    <div class="contact-left" data-reveal="left">
+      <span class="eyebrow">Free, no-obligation quote</span>
+      <h2 style="margin-top:16px;">Let's get your roof sorted</h2>
+      <p class="lead">Send a few details and we'll be in touch, usually within one working day, to arrange your free drone survey and fixed quote.</p>
+      <div class="contact-perks">
+        <div class="contact-perk"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg> Free drone roof survey &amp; written quote</div>
+        <div class="contact-perk"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg> No pressure, no obligation, no call-centre</div>
+        <div class="contact-perk"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg> Response within one working day</div>
+      </div>
+      <div class="contact-call">
+        <span>Prefer to talk? Call us</span>
+        <a href="{{business.phoneHref}}">{{business.phoneDisplay}}</a>
+      </div>
+    </div>
+
+    <div class="form-card" data-reveal="right">
+      <!-- action/method appear only once forms.endpoint is set. With no endpoint the form
+           validates and shows its success state locally, which is what a demo should do. -->
+      <form id="quoteForm" novalidate{{#if forms.endpoint}} action="{{forms.endpoint}}" method="POST"{{/if}}>
+        <h3>Get your free quote</h3>
+        <p class="fsub">Takes under a minute. No obligation.</p>
+
+        <div class="f-row">
+          <div class="field">
+            <label for="f-name">Name <span class="req">*</span></label>
+            <input type="text" id="f-name" name="name" placeholder="Your name" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone <span class="req">*</span></label>
+            <input type="tel" id="f-phone" name="phone" placeholder="Mobile or landline" required autocomplete="tel" />
+          </div>
+        </div>
+
+        <div class="field field-short">
+          <label for="f-postcode">Postcode <span class="req">*</span></label>
+          <input type="text" id="f-postcode" name="postcode" placeholder="e.g. G40 4HA" required autocomplete="postal-code" />
+        </div>
+
+        <div class="field">
+          <label for="f-message">What needs doing? <span class="req">*</span></label>
+          <textarea id="f-message" name="message" placeholder="A sentence or two about the job is plenty" required></textarea>
+        </div>
+
+        <div class="hp" aria-hidden="true">
+          <label for="f-company">Company (leave blank)</label>
+          <input type="text" id="f-company" name="company" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <!-- Turnstile. forms.turnstileSiteKey drives the widget; its script is loaded lazily
+             when this section nears the viewport. Demos share one widget, so each demo
+             hostname must be on it in Cloudflare. Gate 8 rejects test keys on --live. -->
+        {{#if forms.turnstileSiteKey}}
+        <div class="field spam-check">
+          <div class="cf-turnstile" data-sitekey="{{forms.turnstileSiteKey}}" data-theme="dark"></div>
+          <p class="spam-note">
+            <b>Why this is here.</b> This is a Cloudflare security check. It confirms
+            you're a person rather than an automated script, usually without you doing
+            anything at all. It keeps junk enquiries out of our inbox so real jobs get
+            answered quickly, and it doesn't track you or ask for any personal details.
+            See our <a href="/privacy.html">Privacy Policy</a>.
+          </p>
+        </div>
+        {{/if}}
+
+        <p class="form-status" id="formStatus" role="alert" aria-live="assertive"></p>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          Request my free quote
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <!-- Submissions are shared with the form provider as a processor, so this wording stays
+             narrow. Name the provider in the privacy notice. Gate 11. -->
+        <p class="form-note">We'll only use these details to respond to your enquiry. Our form provider processes submissions on our behalf. See our <a href="/privacy.html">Privacy Policy</a>.</p>
+      </form>
+
+      <!-- With no endpoint nothing is transmitted or stored, so the confirmation says so. -->
+      <div class="form-success" id="formSuccess">
+        <div class="ok-ico"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <h3>This is where the confirmation appears</h3>
+        {{#if meta.noindex}}<p>Validation and the success state are fully built. This is a design preview, so nothing was sent and no details were stored. On a live site this is where the client's confirmation message would show.</p>{{/if}}{{#unless meta.noindex}}<p>Thanks. We have your details and will be in touch, usually within one working day.</p>{{/unless}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo" aria-label="{{business.name}} home">
+          <svg class="logo-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="1" y="1" width="38" height="38" rx="10" fill="{{brand.colors.accent}}"/>
+            <path d="M8 22 L20 11 L32 22" stroke="{{brand.colors.logoMarkInk}}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M11 22 V30 H29 V22" stroke="{{brand.colors.logoMarkInk}}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M17 30 V25 H23 V30" stroke="{{brand.colors.logoMarkInk}}" stroke-width="2.6" stroke-linejoin="round"/>
+          </svg>
+          <span class="logo-txt"><b style="color:var(--paper)">{{business.logoLine1}}</b><span>{{business.logoLine2}}</span></span>
+        </a>
+        <p>{{footer.blurb}}</p>
+        <!-- Renders only when social[] has entries. Gate 13 rejects a placeholder href, which
+             would fail WCAG 2.4.4 and read as a broken site. -->
+        {{#if social}}
+        <div class="foot-socials">
+          {{#each social}}<a href="{{this.url}}" aria-label="{{this.label}}" rel="me noopener" target="_blank">{{{this.iconSvg}}}</a>
+          {{/each}}
+        </div>
+        {{/if}}
+      </div>
+
+      <div class="foot-col">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="#services">Roof repairs</a></li>
+          <li><a href="#services">Roof replacements</a></li>
+          <li><a href="#services">Slating &amp; tiling</a></li>
+          <li><a href="#services">Flat &amp; EPDM roofing</a></li>
+          <li><a href="#services">Chimney &amp; leadwork</a></li>
+          <li><a href="#emergency">Emergency callout</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h3>Opening hours</h3>
+        <ul>
+          <li>Mon to Fri &nbsp; {{business.hours.weekdayDisplay}}</li>
+          <li>Saturday &nbsp; {{business.hours.saturdayDisplay}}</li>
+          <li>Sunday &nbsp; Closed</li>
+          <li style="margin-top:14px;color:var(--copper-bright);font-weight:700;">24/7 emergency callout</li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h3>Get in touch</h3>
+        <div class="foot-nap">
+          {{{business.streetAddressHtml}}}<br>
+          {{business.address}}<br>
+          <a href="{{business.phoneHref}}" class="big-phone">{{business.phoneDisplay}}</a>
+          Emergency: <a href="{{business.emergencyPhoneHref}}">{{business.emergencyPhoneDisplay}}</a><br>
+          <!-- Plain mailto, deliberately not obfuscated. Turn Cloudflare Scrape Shield's email
+               obfuscation off for the zone: it bakes /cdn-cgi/ markup into the page and hides
+               the address from anyone without JS. -->
+          <a href="mailto:{{business.email}}">{{business.email}}</a>
+        </div>
+        <!-- Names only, never scheme logos: those are trade marks. docs/ONBOARDING.md gate 2. -->
+        <div class="foot-accreds">
+          {{#each accreditations}}<span>{{this.name}}</span>
+          {{/each}}
+          {{#unless accreditations}}<span class="ph-flag">[CLIENT ACCREDITATIONS]</span>{{/unless}}
+        </div>
+      </div>
+    </div>
+    <!-- Statutory trading disclosures, required for a company using "Ltd". Gate 1. -->
+    <div class="foot-legal">
+      <p>
+        {{{legal.registeredNameHtml}}}.
+        Registered in {{{legal.jurisdictionHtml}}},
+        company no. {{{legal.companyNumberHtml}}}.
+        Registered office: {{{legal.registeredOfficeHtml}}}.
+        VAT no. {{{legal.vatNumberHtml}}}.
+      </p>
+      <p>
+        The 12-month workmanship guarantee is in addition to your statutory rights
+        under the Consumer Rights Act 2015 and does not affect them.
+      </p>
+    </div>
+    <div class="foot-bottom">
+      <div>© {{legal.year}} {{business.name}}{{#if meta.noindex}} (sample business, design preview){{/if}}.</div>
+      <div style="display:flex;gap:20px;"><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a><a href="#contact">Get a quote</a></div>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="lb-frame" id="lbFrame"></div>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Scroll handlers run once per frame, not once per event. Reading a layout property
+     after a DOM write forces a synchronous layout, and doing that on every scroll event
+     is what Lighthouse reports as forced reflow. */
+  // Runs fn after the browser has painted. Layout reads during initial script execution
+  // force a synchronous layout on a page that has not been laid out yet, which is the
+  // most expensive place to do one. Nothing below needs its measurement before paint.
+  function afterPaint(fn){
+    requestAnimationFrame(function(){ requestAnimationFrame(fn); });
+  }
+
+  function onFrame(fn){
+    var queued=false;
+    return function(){
+      if(queued) return;
+      queued=true;
+      requestAnimationFrame(function(){ queued=false; fn(); });
+    };
+  }
+
+  /* One scroll pipeline for the whole page.
+
+     Scroll position is captured in the scroll listener itself, not inside the frame
+     callback. The listener runs right after the browser has scrolled, when layout is
+     already up to date, so reading it there is free. Reading it inside requestAnimationFrame
+     meant reading before the frame's layout, which forces a synchronous one.
+
+     Viewport height is cached and only refreshed on resize, so no frame reads it at all.
+
+     Each feature registers a reader that works from those cached numbers and returns a
+     function holding its writes. Every reader runs before any write, so no write can
+     invalidate a measurement taken later in the same frame. */
+  var vpY=0, vpH=window.innerHeight;
+  window.addEventListener('resize',function(){ vpH=window.innerHeight; },{passive:true});
+
+  var scrollReaders=[];
+  function runScrollFrame(){
+    var vp={ y:vpY, vh:vpH };
+    var writes=[];
+    for(var i=0;i<scrollReaders.length;i++){
+      var w=scrollReaders[i](vp);
+      if(w) writes.push(w);
+    }
+    for(var j=0;j<writes.length;j++) writes[j]();
+  }
+  var queueScrollFrame=onFrame(runScrollFrame);
+  window.addEventListener('scroll',function(){
+    vpY=window.scrollY;
+    queueScrollFrame();
+  },{passive:true});
+  afterPaint(function(){ vpY=window.scrollY; runScrollFrame(); });
+
+  /* ---------- header scroll ---------- */
+  var header=document.getElementById('header');
+  var lastY=null, hideThreshold=140;
+  scrollReaders.push(function(vp){
+    var y=vp.y;
+    var menuOpen=document.body.classList.contains('menu-open');
+    var scrolled=y>30;
+    // Hide on scroll down, reveal on scroll up. Never hide while the mobile menu is open.
+    // The first frame only records the position: a reload part-way down the page has no
+    // previous position to compare against and must not read as a downward scroll.
+    var hidden=lastY!==null && !menuOpen && y>lastY && y>hideThreshold;
+    lastY=y;
+    return function(){
+      header.classList.toggle('scrolled',scrolled);
+      if(!menuOpen) header.classList.toggle('hidden',hidden);
+    };
+  });
+
+  /* ---------- mobile menu ---------- */
+  var burger=document.getElementById('burger'), mm=document.getElementById('mobileMenu');
+  function toggleMenu(open){
+    document.body.classList.toggle('menu-open',open);
+    burger.setAttribute('aria-expanded',open?'true':'false');
+    document.body.style.overflow = open ? 'hidden' : ''; // lock background scroll while open
+  }
+  burger.addEventListener('click',function(){ toggleMenu(!document.body.classList.contains('menu-open')); });
+  mm.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',function(){ toggleMenu(false); }); });
+  // Tap empty space to dismiss.
+  mm.addEventListener('click',function(e){ if(e.target===mm || e.target.classList.contains('m-foot')) toggleMenu(false); });
+  // Escape closes the menu
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.body.classList.contains('menu-open')) toggleMenu(false); });
+
+  /* ---------- trust bar (marquee) ---------- */
+  /* No third-party scheme names or logos. Those are registered trade marks and a demo
+     label does not cure reproducing them. docs/ONBOARDING.md gate 2. */
+  var trustItems=[
+    {{#each usps.trustBar}}'{{{this}}}'{{#unless @last}},{{/unless}}{{/each}}
+  ];
+  var check='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var tt=document.getElementById('trustTrack');
+  var oneSet = trustItems.map(function(t){ return '<span class="trust-item">'+check+t+'</span><span class="trust-sep"></span>'; }).join('');
+  tt.innerHTML = oneSet + oneSet; // duplicate for seamless loop
+
+  /* JS-driven so Reduce Motion and touch both work. It does not pause on hover: the band
+     should read the same whether or not a pointer happens to rest on it. */
+  (function(){
+    var track=tt, viewport=tt.parentElement;
+    var pos=0, half=0, paused=false, dragging=false, lastX=0, prevTs=0, moved=false;
+    var SPEED=0.035; // px per ms ≈ 35px/s, calm and readable
+    function measure(){ half=(track.scrollWidth/2)||0; }
+    // The line above writes the track's innerHTML; reading scrollWidth straight after
+    // would force a layout mid-load. The marquee starts at 0 and frame() no-ops until
+    // half is known, so nothing needs it before paint.
+    afterPaint(measure);
+    // Re-measure once webfonts swap in: the track's width changes with them.
+    if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(measure); }
+    window.addEventListener('resize',measure,{passive:true});
+    function wrapPos(x){ if(half<=0) return 0; while(x<0) x+=half; while(x>=half) x-=half; return x; }
+    function apply(){ track.style.transform='translate3d('+(-pos)+'px,0,0)'; }
+    function frame(ts){
+      var dt=prevTs?Math.min(ts-prevTs,50):16; prevTs=ts;
+      if(!paused&&!dragging&&half>0){ pos=wrapPos(pos+SPEED*dt); apply(); }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+    function down(e){ dragging=true; moved=false; lastX=(e.touches?e.touches[0]:e).clientX; }
+    function move(e){ if(!dragging) return; var x=(e.touches?e.touches[0]:e).clientX; var d=x-lastX; if(Math.abs(d)>2) moved=true; pos=wrapPos(pos-d); lastX=x; apply(); }
+    function up(){ dragging=false; prevTs=0; }
+    viewport.addEventListener('touchstart',down,{passive:true});
+    viewport.addEventListener('touchmove',move,{passive:true});
+    viewport.addEventListener('touchend',up);
+    viewport.addEventListener('touchcancel',up);
+  })();
+
+  /* ---------- reveal on scroll ---------- */
+  var revEls=document.querySelectorAll('[data-reveal],[data-stagger]');
+  function revealEl(el){
+    if(el.classList.contains('in')) return;
+    if(el.hasAttribute('data-stagger')){
+      Array.prototype.forEach.call(el.children,function(c,i){ c.style.transitionDelay=(i*0.08)+'s'; });
+    }
+    el.classList.add('in');
+  }
+  if(reduce){
+    revEls.forEach(revealEl);
+  } else if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ revealEl(e.target); io.unobserve(e.target); } });
+    },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    revEls.forEach(function(el){ io.observe(el); });
+    /* The observer is the whole mechanism. There used to be a per-frame backstop here
+       that measured every element, plus passes on load and on timers.
+
+       Measuring is actively harmful now that sections carry content-visibility: asking
+       for the rect of an element inside an off-screen section forces the browser to lay
+       that section out, which is exactly the work content-visibility exists to skip. The
+       backstop was defeating the optimisation it shared a page with. */
+  } else {
+    revEls.forEach(revealEl);
+  }
+
+  /* ---------- parallax (hero glow + roofline + emergency band) ---------- */
+  var rooflines=document.getElementById('rooflines'), emgBg=document.getElementById('emgBg');
+  if(!reduce){
+    /* The band's document offset is cached so the parallax needs no layout read per
+       frame. Recomputing it used to happen on load, where webfonts are still swapping and
+       layout is dirty, so the measurement forced a synchronous layout. Those events now
+       only set a flag, and the measurement itself happens inside the pipeline's read
+       phase, batched with every other read of the frame. */
+    var emgParent=emgBg?emgBg.parentElement:null, emgTop=0, emgH=0, emgStale=true;
+    function markEmgStale(){ emgStale=true; }
+    if(emgParent){
+      window.addEventListener('resize',markEmgStale,{passive:true});
+      window.addEventListener('load',markEmgStale);
+      if(document.fonts&&document.fonts.ready) document.fonts.ready.then(markEmgStale);
+    }
+    scrollReaders.push(function(vp){
+      if(emgParent&&emgStale){
+        var er=emgParent.getBoundingClientRect();
+        emgTop=er.top+vp.y; emgH=er.height; emgStale=false;
+      }
+      return function(){
+        if(rooflines) rooflines.style.transform='translateY('+(vp.y*0.10)+'px)';
+        if(emgParent){
+          var top=emgTop-vp.y; // viewport-relative, from the cached offset
+          var prog=(vp.vh - top)/(vp.vh + emgH);
+          emgBg.style.transform='translateY('+((prog-0.5)*60)+'px)';
+        }
+      };
+    });
+  }
+
+  /* ---------- count-up stats ---------- */
+  function animateCount(el){
+    if(el.getAttribute('data-counted')) return;
+    var valEl=el.querySelector('.val');
+    if(!valEl) return;
+    // Target is read from the markup, which stays the source of truth. If it
+    // isn't a number, leave the text exactly as authored (e.g. a placeholder).
+    var target=parseFloat(valEl.textContent.replace(/,/g,''));
+    if(isNaN(target)) return;
+    el.setAttribute('data-counted','1');
+    var dec=(valEl.textContent.indexOf('.')>-1) ? 1 : 0;
+    function render(n){ valEl.textContent = dec? n.toFixed(dec) : Math.floor(n).toLocaleString('en-GB'); }
+    // Reduce Motion: the value is already correct in the DOM, so do nothing.
+    if(reduce) return;
+    var dur=1600, start=null;
+    function step(ts){
+      if(!start) start=ts;
+      var p=Math.min((ts-start)/dur,1);
+      render(target*(1-Math.pow(1-p,3)));
+      if(p<1) requestAnimationFrame(step);
+      else render(target);
+    }
+    render(0);
+    requestAnimationFrame(step);
+  }
+  var statNums=document.querySelectorAll('[data-animate-count]');
+  if('IntersectionObserver' in window){
+    var sio=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); sio.unobserve(e.target); } });
+    },{threshold:0.5});
+    statNums.forEach(function(el){ sio.observe(el); });
+    // Same reasoning as the reveal observer above: no per-frame measuring.
+  } else { statNums.forEach(animateCount); }
+
+  /* ---------- how-it-works step animation ---------- */
+  var steps=document.querySelectorAll('#steps .step');
+  if('IntersectionObserver' in window && !reduce){
+    var pio=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ var i=Array.prototype.indexOf.call(steps,e.target); setTimeout(function(){ e.target.classList.add('on'); }, i*160); pio.unobserve(e.target); } });
+    },{threshold:0.4});
+    steps.forEach(function(s){ pio.observe(s); });
+  } else { steps.forEach(function(s){ s.classList.add('on'); }); }
+
+  /* ---------- before / after slider ---------- */
+  var ba=document.getElementById('ba'), handle=document.getElementById('baHandle');
+  if(ba){
+    var dragging=false, split=50;
+    function applySplit(pct){
+      split=Math.max(2,Math.min(98,pct));
+      ba.style.setProperty('--split',split+'%');
+      if(handle){
+        var rounded=Math.round(split);
+        handle.setAttribute('aria-valuenow',rounded);
+        handle.setAttribute('aria-valuetext',rounded+'% revealed');
+      }
+    }
+    // Cached for the duration of a drag. setSplit used to call getBoundingClientRect on
+    // every pointermove and then write a custom property, so each move read a layout the
+    // previous move had just invalidated. The element cannot move mid-drag, so one read
+    // at drag start is enough. A null cache means read fresh, which is what the
+    // click-to-jump path below wants.
+    var baRect=null;
+    function setSplit(clientX){
+      var r=baRect||ba.getBoundingClientRect();
+      applySplit(((clientX-r.left)/r.width)*100);
+    }
+    // Keyboard support: arrows nudge, Home/End jump to either end.
+    if(handle){
+      handle.addEventListener('keydown',function(e){
+        var step = (e.shiftKey?10:4), next=null;
+        switch(e.key){
+          case 'ArrowLeft': case 'ArrowDown': next=split-step; break;
+          case 'ArrowRight': case 'ArrowUp':  next=split+step; break;
+          case 'Home': next=0; break;
+          case 'End':  next=100; break;
+          default: return;
+        }
+        applySplit(next);
+        e.preventDefault();
+      });
+    }
+    function down(e){ dragging=true; baRect=ba.getBoundingClientRect(); ba.style.cursor='grabbing'; setSplit((e.touches?e.touches[0]:e).clientX); e.preventDefault(); }
+    function move(e){ if(!dragging) return; setSplit((e.touches?e.touches[0]:e).clientX); }
+    function up(){ dragging=false; baRect=null; ba.style.cursor='ew-resize'; }
+    // A resize mid-drag would leave the cached rect stale.
+    window.addEventListener('resize',function(){ if(dragging) baRect=ba.getBoundingClientRect(); },{passive:true});
+    ba.addEventListener('mousedown',down); ba.addEventListener('touchstart',down,{passive:false});
+    window.addEventListener('mousemove',move); window.addEventListener('touchmove',move,{passive:false});
+    window.addEventListener('mouseup',up); window.addEventListener('touchend',up);
+    // click anywhere to jump
+    ba.addEventListener('click',function(e){ if(!dragging) setSplit(e.clientX); });
+  }
+
+  /* ---------- gallery ---------- */
+  var projects=[
+    {{#each gallery}}{t:'{{{this.title}}}',a:'{{{this.area}}}',cat:'{{{this.category}}}'{{#if this.span}},span:true{{/if}},cls:'{{{this.style}}}',img:'{{{this.src}}}'}{{#unless @last}},{{/unless}}{{/each}}
+  ];
+  var gallery=document.getElementById('gallery');
+  var lbData=[];
+  projects.forEach(function(p,i){
+    var d=document.createElement('div');
+    d.className='gitem'+(p.span?' gspan2':'');
+    d.setAttribute('data-cat',p.cat);
+    d.setAttribute('data-index',i);
+    d.innerHTML=
+      '<div class="ph '+p.cls+'" style="height:100%"><img src="'+p.img+'" alt="'+p.t+', '+p.a+'" width="1200" height="900" loading="lazy" decoding="async" onerror="this.style.display=&#39;none&#39;" /><span class="ph-label">'+p.img+'</span></div>'+
+      '<div class="zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4M11 8v6M8 11h6" stroke-linecap="round"/></svg></div>'+
+      '<div class="cap"><span>'+catLabel(p.cat)+'</span><b>'+p.t+'</b></div>';
+    gallery.appendChild(d);
+    lbData.push(p);
+  });
+  function catLabel(c){ return {repairs:'Repair',replacements:'Replacement',flat:'Flat roof',storm:'Storm damage'}[c]||c; }
+
+  var filters=document.getElementById('filters');
+  var filterCount=document.getElementById('filterCount');
+  filters.addEventListener('click',function(e){
+    var b=e.target.closest('.filter'); if(!b) return;
+    filters.querySelectorAll('.filter').forEach(function(f){
+      f.classList.remove('active');
+      f.setAttribute('aria-pressed','false');
+    });
+    b.classList.add('active');
+    b.setAttribute('aria-pressed','true');
+    var cat=b.getAttribute('data-filter');
+    var shown=0;
+    gallery.querySelectorAll('.gitem').forEach(function(it){
+      var show = cat==='all' || it.getAttribute('data-cat')===cat;
+      it.classList.toggle('hide',!show);
+      if(show) shown++;
+    });
+    // Announce the result count. A purely visual filter leaves screen-reader
+    // users with no feedback that anything changed.
+    if(filterCount){
+      filterCount.textContent = shown+(shown===1?' project':' projects')+' shown for '+b.textContent.trim()+'.';
+    }
+  });
+
+  /* ---------- lightbox ---------- */
+  var lightbox=document.getElementById('lightbox'), lbFrame=document.getElementById('lbFrame');
+  var lbClose=document.getElementById('lbClose'), lbPrev=document.getElementById('lbPrev'), lbNext=document.getElementById('lbNext');
+  var lbCur=0, lbVisible=[];
+  function openLightbox(idx){
+    lbVisible = Array.prototype.filter.call(gallery.querySelectorAll('.gitem'),function(it){ return !it.classList.contains('hide'); })
+      .map(function(it){ return parseInt(it.getAttribute('data-index'),10); });
+    lbCur = lbVisible.indexOf(idx); if(lbCur<0) lbCur=0;
+    renderLb(); lightbox.classList.add('open'); lightbox.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+  }
+  function renderLb(){
+    var p=lbData[lbVisible[lbCur]];
+    lbFrame.innerHTML='<div class="ph '+p.cls+'" style="height:100%"><img src="'+p.img+'" alt="'+p.t+', '+p.a+'" onerror="this.style.display=&#39;none&#39;" /><span class="ph-label">'+p.img+'</span></div>'+
+      '<div class="lb-cap"><span>'+catLabel(p.cat)+' · '+p.a+'</span><b>'+p.t+'</b></div>';
+  }
+  function closeLb(){ lightbox.classList.remove('open'); lightbox.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  function lbStep(d){ lbCur=(lbCur+d+lbVisible.length)%lbVisible.length; renderLb(); }
+  gallery.addEventListener('click',function(e){ var it=e.target.closest('.gitem'); if(!it) return; openLightbox(parseInt(it.getAttribute('data-index'),10)); });
+  lbClose.addEventListener('click',closeLb);
+  lbPrev.addEventListener('click',function(){ lbStep(-1); });
+  lbNext.addEventListener('click',function(){ lbStep(1); });
+  lightbox.addEventListener('click',function(e){ if(e.target===lightbox) closeLb(); });
+  document.addEventListener('keydown',function(e){
+    if(!lightbox.classList.contains('open')) return;
+    if(e.key==='Escape') closeLb(); if(e.key==='ArrowLeft') lbStep(-1); if(e.key==='ArrowRight') lbStep(1);
+  });
+
+
+  /* ---------- testimonials carousel ---------- */
+  var tstTrack=document.getElementById('tstTrack'), tstDots=document.getElementById('tstDots');
+  // Slides come from the markup. See the comment on .tst-track.
+  var tstSlides=tstTrack.querySelectorAll('.tst-slide');
+  var tstCount=tstSlides.length;
+  // Fill the decorative star rows that the markup leaves empty.
+  var dotHtml='';
+  for(var di=0; di<tstCount; di++){
+    dotHtml+='<button class="tst-dot'+(di===0?' active':'')+'" data-i="'+di+'" aria-label="Go to review '+(di+1)+'"></button>';
+  }
+  tstDots.innerHTML=dotHtml;
+  var tstCur=0, tstTimer=null;
+  function goTst(i){
+    tstCur=(i+tstCount)%tstCount;
+    tstTrack.style.transform='translateX(-'+(tstCur*100)+'%)';
+    tstDots.querySelectorAll('.tst-dot').forEach(function(d,j){ d.classList.toggle('active',j===tstCur); });
+  }
+  function startTst(){ if(reduce) return; stopTst(); tstTimer=setInterval(function(){ goTst(tstCur+1); },5500); }
+  function stopTst(){ if(tstTimer) clearInterval(tstTimer); }
+  document.getElementById('tstPrev').addEventListener('click',function(){ goTst(tstCur-1); startTst(); });
+  document.getElementById('tstNext').addEventListener('click',function(){ goTst(tstCur+1); startTst(); });
+  tstDots.addEventListener('click',function(e){ var d=e.target.closest('.tst-dot'); if(!d) return; goTst(parseInt(d.getAttribute('data-i'),10)); startTst(); });
+  var tstVp=document.querySelector('.tst-viewport');
+  tstVp.addEventListener('mouseenter',stopTst); tstVp.addEventListener('mouseleave',startTst);
+  startTst();
+
+  /* ---------- contact form ---------- */
+  var form=document.getElementById('quoteForm'), success=document.getElementById('formSuccess');
+  var formStatus=document.getElementById('formStatus');
+
+  // Turnstile check. The widget writes its token into a hidden input inside the form,
+  // so turnstile.getResponse() being empty means the visitor has not passed it yet.
+  //
+  // This deliberately fails OPEN when the Turnstile script itself did not load, because
+  // a blocked script would otherwise leave a visitor permanently unable to submit with no
+  // way to tell why. Client-side is not the security boundary in any case: the endpoint
+  // must verify the token server-side, which is what actually stops a bot that simply
+  // never loads the widget. See docs/ONBOARDING.md gate 11.
+  /* Turnstile is roughly a megabyte of third-party JavaScript. Loading it in <head> put
+     all of it on the initial critical path for a form near the bottom of the page, which
+     cost about a second of First Contentful Paint on a throttled connection. It now loads
+     when the form approaches the viewport, or the moment someone touches a field. */
+  var turnstileSlot=form.querySelector('.cf-turnstile');
+  var turnstileFailed=false;
+  if(turnstileSlot){
+    var tsRequested=false;
+    var loadTurnstile=function(){
+      if(tsRequested) return;
+      tsRequested=true;
+      var sc=document.createElement('script');
+      sc.src='https://challenges.cloudflare.com/turnstile/v0/api.js';
+      sc.async=true; sc.defer=true;
+      sc.onerror=function(){ turnstileFailed=true; };
+      document.head.appendChild(sc);
+    };
+    form.addEventListener('focusin',loadTurnstile,{once:true});
+    if('IntersectionObserver' in window){
+      var tsIo=new IntersectionObserver(function(entries){
+        if(entries[0].isIntersecting){ loadTurnstile(); tsIo.disconnect(); }
+      },{rootMargin:'600px'});
+      tsIo.observe(turnstileSlot);
+    } else {
+      loadTurnstile();
+    }
+  }
+
+  function turnstilePassed(){
+    // No widget means Turnstile is not configured for this client.
+    if(!turnstileSlot) return true;
+    // Fails open if the script itself could not load, rather than trapping a visitor who
+    // cannot submit and cannot see why. The endpoint verifies the token server-side, which
+    // is what actually stops a bot that never loads the widget.
+    if(turnstileFailed) return true;
+    // The hidden input the widget writes its token into. Checked rather than
+    // turnstile.getResponse(), because the global is not reliably exposed by submit time
+    // and this input is what gets POSTed.
+    var field=form.querySelector('input[name="cf-turnstile-response"]');
+    return !!(field && field.value);
+  }
+
+  // required fields + friendly, specific error messages
+  var required=[
+    {id:'f-name',    msg:'Please enter your name.'},
+    {id:'f-phone',   msg:'Please enter a phone number we can reach you on.'},
+    {id:'f-postcode',msg:'Please enter your postcode.'},
+    {id:'f-message', msg:'Please tell us briefly what needs doing.'}
+  ];
+
+  // create one error element per required field, wired for screen readers
+  required.forEach(function(r){
+    var f=document.getElementById(r.id);
+    var err=document.createElement('span');
+    err.className='field-error';
+    err.id=r.id+'-error';
+    f.parentNode.appendChild(err);
+    var described=f.getAttribute('aria-describedby');
+    f.setAttribute('aria-describedby', described ? described+' '+err.id : err.id);
+    // clear the error as soon as the user starts fixing it
+    f.addEventListener('input',function(){ clearError(f,err); });
+  });
+
+  function showError(f,err,message){
+    err.textContent=message; err.classList.add('show');
+    f.setAttribute('aria-invalid','true');
+  }
+  function clearError(f,err){
+    err.textContent=''; err.classList.remove('show');
+    f.removeAttribute('aria-invalid');
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    // honeypot: if filled, silently drop (bot)
+    if(form.querySelector('#f-company').value){ return; }
+
+    var firstInvalid=null, invalidCount=0;
+    required.forEach(function(r){
+      var f=document.getElementById(r.id);
+      var err=document.getElementById(r.id+'-error');
+      var val=f.value.trim();
+      // required, plus a light sanity check that a phone has enough digits
+      var bad = !val || (r.id==='f-phone' && (val.replace(/\D/g,'').length < 7));
+      if(bad){
+        var message = (r.id==='f-phone' && val)
+          ? 'That doesn\u2019t look like a full phone number.'
+          : r.msg;
+        showError(f,err, message);
+        invalidCount++; if(!firstInvalid) firstInvalid=f;
+      } else {
+        clearError(f,err);
+      }
+    });
+
+    if(invalidCount>0){
+      formStatus.textContent = invalidCount===1
+        ? 'Please fix the highlighted field before submitting.'
+        : 'Please fix the '+invalidCount+' highlighted fields before submitting.';
+      if(firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    // Checked after the fields, so a visitor is not told about the security check while
+    // they still have empty boxes to fill in.
+    if(!turnstilePassed()){
+      formStatus.textContent='Please complete the security check above before submitting.';
+      var w=form.querySelector('.cf-turnstile');
+      if(w && w.scrollIntoView) w.scrollIntoView({block:'center'});
+      return;
+    }
+
+    formStatus.textContent='';
+    /* In production: POST to forms.endpoint and verify the Turnstile token server-side
+       before treating a submission as real. */
+    form.style.display='none';
+    success.classList.add('show');
+    // move focus to the confirmation so screen-reader users are told it worked
+    var okHeading=success.querySelector('h3');
+    if(okHeading){ okHeading.setAttribute('tabindex','-1'); okHeading.focus(); }
+  });
+
+  /* ---------- smooth-scroll offset for sticky header ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=a.getAttribute('href'); if(id==='#'||id.length<2) return;
+      var target=document.querySelector(id); if(!target) return;
+      e.preventDefault();
+      var top=target.getBoundingClientRect().top+window.scrollY-64;
+      window.scrollTo({top:top,behavior:reduce?'auto':'smooth'});
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{{#if meta.noindex}}# DEMO PHASE. This build is a design preview for a sample business.
+# Crawling is disallowed site-wide so a fictional company cannot compete
+# in local search against real Glasgow roofers.
+#
+# This file is generated from meta.noindex in clients/{{slug}}/client.json.
+# Do not hand-edit it in dist/. Set meta.noindex to false and rebuild with
+# --live, and the Allow block below is emitted instead.
+
+User-agent: *
+Disallow: /
+{{/if}}{{#unless meta.noindex}}# LIVE. Generated from meta.noindex in clients/{{slug}}/client.json.
+
+User-agent: *
+Allow: /
+Sitemap: {{site.baseUrl}}/sitemap.xml
+{{/unless}}

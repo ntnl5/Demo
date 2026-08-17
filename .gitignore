@@ -1,0 +1,6 @@
+# Build output. Every dist/<slug>/ is reproducible from clients/<slug>/client.json
+# plus templates/. Never edit dist/ by hand and never commit it.
+dist/
+
+# macOS finder metadata
+.DS_Store
