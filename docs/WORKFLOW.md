@@ -66,7 +66,7 @@ The launch checklist is in [`ONBOARDING.md`](ONBOARDING.md).
 
 ## What protects you
 
-The build **fails and writes nothing** when a claim lacks its evidence. Thirteen gates,
+The build **fails and writes nothing** when a claim lacks its evidence. Fourteen gates,
 listed in [`REBRAND-KIT.md`](REBRAND-KIT.md). The ones that matter most:
 
 - An accreditation, testimonial or review figure with no recorded source
@@ -91,7 +91,7 @@ A failed build leaves no half-written output, so an unfinished site cannot reach
 | `clients/<slug>/EDITING-THIS-FILE.md` | Field-by-field guide for that file |
 | `clients/<slug>/assets/` | That client's images. Every image path on the site is a JSON key |
 | `templates/` | The frozen, audited markup. Never edited per client |
-| `tools/build.mjs` | The whole build: template engine, derived values, thirteen gates. No dependencies, Node 18+ |
+| `tools/build.mjs` | The whole build: template engine, derived values, fourteen gates. No dependencies, Node 18+ |
 | `dist/<slug>/` | Build output. Gitignored, never hand-edited |
 | [`REBRAND-KIT.md`](REBRAND-KIT.md) | Token syntax, derived values, what each gate catches, Turnstile widget strategy |
 | [`ONBOARDING.md`](ONBOARDING.md) | **The twelve client gates and the launch checklist** |

@@ -32,7 +32,7 @@ for whoever publishes it, and the practical risk in a template business is not i
 claim deliberately. It is a plausible-looking placeholder surviving into a live site
 because nobody noticed.
 
-So the build is the enforcement. Thirteen gates run before anything is written, and a
+So the build is the enforcement. Fourteen gates run before anything is written, and a
 failed build produces no output at all:
 
 | | |
@@ -64,14 +64,14 @@ readers. Content does not depend on JavaScript to become visible.
 
 **Performance.** Above-fold content paints without waiting on JavaScript. Scroll handlers
 are coalesced to one animation frame and split into read and write phases, so measuring
-never forces a synchronous layout. Roughly 28KB gzipped for the whole page.
+never forces a synchronous layout. The whole page is 96KB, 22KB gzipped.
 
 ## Layout
 
 ```
 templates/          the page templates. Never edited per client
 clients/<slug>/     client.json + their photos. The only thing edited per client
-tools/build.mjs     template engine, derived values, thirteen gates
+tools/build.mjs     template engine, derived values, fourteen gates
 tools/test.mjs      gate tests
 docs/               workflow, editing guide, client onboarding
 ```

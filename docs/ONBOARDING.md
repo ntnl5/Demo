@@ -4,7 +4,7 @@ Twelve things to collect before a client's site goes live. Each one is a **hard
 gate**: if the evidence isn't on file, the section doesn't get published.
 
 These are the *evidence* gates: what to collect from a client, and how to ask for
-it. They are not the same numbering as the thirteen *build* gates in
+it. They are not the same numbering as the fourteen *build* gates in
 `REBRAND-KIT.md`, which are the automated checks that refuse to compile a site
 missing that evidence. This document is the conversation; that one is the
 enforcement.
